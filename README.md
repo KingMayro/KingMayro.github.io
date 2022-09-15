@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Happy 10th Sudomemo!</title>
+<title>amongustime</title>
 <link rel="tab icon" href="images/graysonicon.png">
 <head>
 <body>
@@ -15,7 +15,7 @@ p {
 }
 </style> 
 
-<h1>extremely early happy 10th sudomemo</h1>
+<h1>among us test website</h1>
 
 <p>Test text</p>
 <img src="images/TGrayson.png" alt="among" width=327 height=407>
