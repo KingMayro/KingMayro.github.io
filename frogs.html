@@ -3,13 +3,13 @@
 	
 	<head>
 	
-    <meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.00">
+    <meta name="viewport" content="width=100%, initial-scale=0.75, maximum-scale=1.00">
 	
     <title>Browser Flipnote Frogs</title>
 	<link rel="tab icon" href="https://kingmayro.github.io/Frog.png">
 	<link rel="icon" href="https://kingmayro.github.io/Frog.ico">
 	
-	<meta property="og:title" content="King Mayro - Browser Flipnote Frogs"/>
+	<meta property="og:title" content="Browser Flipnote Frogs - King Mayro"/>
 	<meta property="og:url" content="https://kingmayro.github.io/frogs"/>
 	<meta property="og:image" content="https://kingmayro.github.io/frogembed.png"/>
 	<meta name="twitter:card" content="summary_large_image">
@@ -238,6 +238,18 @@
             const img = new Image();
             img.src = src;
         });
+		
+		function reloadImages() {
+    const images = document.querySelectorAll('.frog');
+    images.forEach(image => {
+        const src = image.src;
+        image.src = null; // Clearing the src attribute
+        setTimeout(() => {
+            image.src = src; // Setting the src attribute back to its original value
+        }, 0); // Using setTimeout to ensure the src is set after the previous line has executed
+    });
+}
+
 
         // some epic rng shit
         const numberOfFrogs = Math.random() < 0.1 ? 3 : 2;
