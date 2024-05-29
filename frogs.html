@@ -89,7 +89,7 @@
 		}
 		
 		.footertext {
-		padding:20px 0px 0px 10px;
+		padding:20px 20px 0px 10px;
 		}
 		
 		
@@ -220,6 +220,15 @@
 
 
     <script>
+	//need this for safari. gotta love it
+	    function reloadImages() {
+        document.querySelectorAll('img').forEach(img => {
+            const src = img.src;
+            img.src = '';
+            img.src = src;
+        });
+    }
+	
         const frogContainers = document.querySelectorAll('.frog-container');
         const frames = {
             facingRight: ['browserfrog/TurnRight.gif', 'browserfrog/CroakRight.gif', 'browserfrog/JumpRight.gif', 'browserfrog/Right.png'],
