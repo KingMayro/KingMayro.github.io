@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+	<html lang="en">
+	
 	<head>
+	
     <meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.00">
+	
     <title>Browser Flipnote Frogs</title>
 	<link rel="tab icon" href="images/frog.png">
 	<link rel="icon" href="images/frog.ico">
+	
     <style>
 	
 		@font-face {
@@ -162,7 +166,7 @@
 		}
 		
     </style>
-</head>
+	</head>
 <body>
 
 	<div class=footerthing><p style="white-space:pre-wrap;"class=footertext>Website font and Flipnote Frog graphics by King Mayro,  Flipnote Studio by Nintendo</p></div>
@@ -220,30 +224,28 @@
         };
 
         let currentStates = ['browserfrog/Idle.png', 'browserfrog/Idle.png', 'browserfrog/Idle.png'];
-        let facings = ['viewer', 'viewer', 'viewer']; // Keeps track of the frog's current facing direction
-        let currentFrameStarts = [Date.now(), Date.now(), Date.now()]; // Track the start time of the current frame
+        let facings = ['viewer', 'viewer', 'viewer']; // Keep track of the froggies current facing direction
+        let currentFrameStarts = [Date.now(), Date.now(), Date.now()];
         let verticalDraggingEnabled = true;
 
-        // Preload images
         Object.values(frames).flat().forEach(src => {
             const img = new Image();
             img.src = src;
         });
 
-        // Determine how many frogs to show
+        // some epic rng shit
         const numberOfFrogs = Math.random() < 0.1 ? 3 : 2;
 
-        // Set frogs at the same vertical height near the bottom of the screen but different horizontal positions on page load
-        const verticalPosition = window.innerHeight - 137; // Bottom of the window minus the frog height
+        const verticalPosition = window.innerHeight - 137;
         frogContainers.forEach((container, index) => {
             if (index < numberOfFrogs) {
                 let horizontalPosition;
                 do {
-                    horizontalPosition = Math.random() * (window.innerWidth - 150); // Random horizontal position
-                } while (isTooCloseToOtherFrog(horizontalPosition, index)); // Ensure the frog is not too close to the other frog
+                    horizontalPosition = Math.random() * (window.innerWidth - 150);
+                } while (isTooCloseToOtherFrog(horizontalPosition, index)); // make sure one froggy is not too close to another
                 container.style.left = `${horizontalPosition}px`;
-                container.style.top = `${verticalPosition}px`; // Set the vertical position
-                container.style.display = 'block'; // Make the frog visible
+                container.style.top = `${verticalPosition}px`;
+                container.style.display = 'block';
                 container.addEventListener('mousedown', (event) => {
                     startDrag(event, container);
                 });
@@ -253,7 +255,7 @@
 		
 
         function isTooCloseToOtherFrog(position, currentIndex) {
-            const minDistance = 150; // Minimum distance between frogs
+            const minDistance = 150;
             for (let i = 0; i < currentIndex; i++) {
                 const rect = frogContainers[i].getBoundingClientRect();
                 const distance = Math.abs(position - rect.left);
@@ -282,10 +284,10 @@
         }
 
         function moveFrog(index) {
-            const actions = ['faceRight', 'faceLeft', 'doViewerAction', 'faceRight', 'faceLeft']; // Increased probabilities for facing right or left
+            const actions = ['faceRight', 'faceLeft', 'doViewerAction', 'faceRight', 'faceLeft'];
             const action = getRandomElement(actions);
 
-            setTimeout(() => { // Adding a delay before taking action
+            setTimeout(() => {
                 if (action === 'faceRight' && facings[index] !== 'right') {
                     if (facings[index] === 'left') {
                         transitionTo(index, 'browserfrog/LeftReturn.gif');
@@ -346,7 +348,7 @@
                     transitionTo(index, viewerAction);
                 }
 
-                // Allow frog to continue facing viewer or stay in current frame for up to 10 seconds
+                
                 if (facings[index] === 'viewer' && action === 'doViewerAction') {
                     const currentTime = Date.now();
                     if (currentTime - currentFrameStarts[index] > 10000) {
@@ -357,7 +359,7 @@
                 } else {
                     currentFrameStarts[index] = Date.now();
                 }
-            }, Math.random() * 3000); // Random delay up to 2 seconds
+            }, Math.random() * 3000);
         }
 
         function jumpFrog(index, pixels, direction) {
@@ -386,18 +388,18 @@
 
   function startDrag(event, container) {
     const containerRect = container.getBoundingClientRect();
-    const offsetX = event.clientX - containerRect.left; // Center the mouse horizontally on the frog
-    const offsetY = event.clientY - (containerRect.top + containerRect.height / 2); // Center the mouse vertically on the frog
-    let originalTop = parseInt(container.style.top) || containerRect.top; // Store the original vertical position
+    const offsetX = event.clientX - containerRect.left;
+    const offsetY = event.clientY - (containerRect.top + containerRect.height / 2);
+    let originalTop = parseInt(container.style.top) || containerRect.top;
 
     function handleDragMove(event) {
         const newX = event.clientX - offsetX;
         let newY = event.clientY - offsetY;
 
         if (!verticalDraggingEnabled) {
-            newY = originalTop; // Return the frog to its original vertical position
+            newY = originalTop;
         } else {
-            originalTop = newY; // Update the original vertical position if vertical dragging is enabled
+            originalTop = newY;
         }
 
         const maxX = window.innerWidth - containerRect.width;
