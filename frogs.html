@@ -3,7 +3,7 @@
 	
 	<head>
 	
-    <meta name="viewport" content="width=100%, initial-scale=0.75, maximum-scale=1.00">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
     <title>Browser Flipnote Frogs</title>
 	<link rel="tab icon" href="https://kingmayro.github.io/Frog.png">
@@ -220,23 +220,37 @@
 
 
     <script>
-	//need this for safari. gotta love it
-	    function reloadImages() {
-        document.querySelectorAll('img').forEach(img => {
-            const src = img.src;
-            img.src = '';
-            img.src = src;
-        });
+    function getRandomQueryParam() {
+        return Math.random().toString(36).substr(2, 8);
     }
-	
-        const frogContainers = document.querySelectorAll('.frog-container');
-        const frames = {
-            facingRight: ['browserfrog/TurnRight.gif', 'browserfrog/CroakRight.gif', 'browserfrog/JumpRight.gif', 'browserfrog/Right.png'],
-            facingLeft: ['browserfrog/TurnLeft.gif', 'browserfrog/CroakLeft.gif', 'browserfrog/JumpLeft.gif', 'browserfrog/Left.png'],
-            returnRight: ['browserfrog/RightReturn.gif'],
-            returnLeft: ['browserfrog/LeftReturn.gif'],
-            facingViewer: ['browserfrog/Croak.gif', 'browserfrog/TalkMore.gif', 'browserfrog/Blink.gif', 'browserfrog/Idle.png', 'browserfrog/Tongue.gif', 'browserfrog/FrogLoad.gif']
-        };
+
+
+    function reloadGIF(img) {
+        const src = img.src;
+        const indexOfQueryParam = src.indexOf('?');
+        const updatedSrc = indexOfQueryParam === -1 ? `${src}?v=${getRandomQueryParam()}` : `${src}&v=${getRandomQueryParam()}`;
+        img.src = updatedSrc;
+    }
+
+
+    function transitionTo(index, state) {
+
+        const frogElement = frogContainers[index].querySelector('.frog');
+        if (state.endsWith('.gif')) {
+            reloadGIF(frogElement);
+        }
+
+    }
+
+    const frogContainers = document.querySelectorAll('.frog-container');
+    const frames = {
+        facingRight: ['TurnRight.gif', 'CroakRight.gif', 'JumpRight.gif', 'Right.png'],
+        facingLeft: ['TurnLeft.gif', 'CroakLeft.gif', 'JumpLeft.gif', 'Left.png'],
+        returnRight: ['RightReturn.gif'],
+        returnLeft: ['LeftReturn.gif'],
+        facingViewer: ['Talk.gif', 'TalkMore.gif', 'Blink.gif', 'Idle.png', 'Tongue.gif', 'FrogLoad.gif']
+    };
+
 
         let currentStates = ['browserfrog/Idle.png', 'browserfrog/Idle.png', 'browserfrog/Idle.png'];
         let facings = ['viewer', 'viewer', 'viewer']; // Keep track of the froggies current facing direction
