@@ -34,7 +34,6 @@
 		color: #cd532d;
 		overflow: hidden;
 		}
-		
 	
         main {
             display: flex;
@@ -292,102 +291,100 @@
 
 
 <script>
+
+        function showMessageBox() {
+            const messageBox = document.getElementById("messageBox");
+            messageBox.classList.add("show");
+        }
+
+        function hideMessageBox() {
+            const messageBox = document.getElementById("messageBox");
+            messageBox.classList.remove("show");
+        }
+
+
+
+	//I may merge this into the main version because this system of handling is a little smoother than I thought
     const frogContainers = document.querySelectorAll('.frog-container');
     const frames = {
-        facingRight: ['Right.png'],
-        facingLeft: ['Left.png'],
-        facingViewer: ['Idle.png']
+        facingRight: ['iosfrog/Right.png'],
+        facingLeft: ['iosfrog/Left.png'],
+        facingViewer: ['iosfrog/Idle.png']
     };
 
     const animations = {
         TurnLeft: [
-            {src: "Idle.png", duration: 100},
-            {src: "MidLeft.png", duration: 100},
-            {src: "Left.png", duration: 100}
+            {src: "iosfrog/Idle.png", duration: 100},
+            {src: "iosfrog/MidLeft.png", duration: 100},
+            {src: "iosfrog/Left.png", duration: 100}
         ],
         TurnRight: [
-            {src: "Idle.png", duration: 100},
-            {src: "MidRight.png", duration: 100},
-            {src: "Right.png", duration: 100}
+            {src: "iosfrog/Idle.png", duration: 100},
+            {src: "iosfrog/MidRight.png", duration: 100},
+            {src: "iosfrog/Right.png", duration: 100}
         ],
         LeftReturn: [
-            {src: "Left.png", duration: 100},
-            {src: "MidLeft.png", duration: 100},
-            {src: "Idle.png", duration: 100}
+            {src: "iosfrog/Left.png", duration: 100},
+            {src: "iosfrog/MidLeft.png", duration: 100},
+            {src: "iosfrog/Idle.png", duration: 100}
         ],
         RightReturn: [
-            {src: "Right.png", duration: 100},
-            {src: "MidRight.png", duration: 100},
-            {src: "Idle.png", duration: 100}
+            {src: "iosfrog/Right.png", duration: 100},
+            {src: "iosfrog/MidRight.png", duration: 100},
+            {src: "iosfrog/Idle.png", duration: 100}
         ],
         CroakLeft: [
-            {src: "Left.png", duration: 100},
-            {src: "MidCroakLeft.png", duration: 100},
-            {src: "MaxCroakLeft.png", duration: 100},
-            {src: "MidCroakLeft.png", duration: 100},
-            {src: "Left.png", duration: 100}
+            {src: "iosfrog/Left.png", duration: 100},
+            {src: "iosfrog/MidCroakLeft.png", duration: 100},
+            {src: "iosfrog/MaxCroakLeft.png", duration: 100},
+            {src: "iosfrog/MidCroakLeft.png", duration: 100},
+            {src: "iosfrog/Left.png", duration: 100}
         ],
         CroakRight: [
-            {src: "Right.png", duration: 100},
-            {src: "MidCroakRight.png", duration: 100},
-            {src: "MaxCroakRight.png", duration: 100},
-            {src: "MidCroakRight.png", duration: 100},
-            {src: "Right.png", duration: 100}
+            {src: "iosfrog/Right.png", duration: 100},
+            {src: "iosfrog/MidCroakRight.png", duration: 100},
+            {src: "iosfrog/MaxCroakRight.png", duration: 100},
+            {src: "iosfrog/MidCroakRight.png", duration: 100},
+            {src: "iosfrog/Right.png", duration: 100}
         ],
         JumpLeft: [
-            {src: "Left.png", duration: 100},
-            {src: "JumpUpLeft.png", duration: 100},
-            {src: "FallDownLeft.png", duration: 100},
-            {src: "Left.png", duration: 100}
+            {src: "iosfrog/Left.png", duration: 100},
+            {src: "iosfrog/JumpUpLeft.png", duration: 100},
+            {src: "iosfrog/FallDownLeft.png", duration: 100},
+            {src: "iosfrog/Left.png", duration: 100}
         ],
         JumpRight: [
-            {src: "Right.png", duration: 100},
-            {src: "JumpUpRight.png", duration: 100},
-            {src: "FallDownRight.png", duration: 100},
-            {src: "Right.png", duration: 100}
+            {src: "iosfrog/Right.png", duration: 100},
+            {src: "iosfrog/JumpUpRight.png", duration: 100},
+            {src: "iosfrog/FallDownRight.png", duration: 100},
+            {src: "iosfrog/Right.png", duration: 100}
         ],
         Blink: [
-            {src: "Idle.png", duration: 100},
-            {src: "Blink.png", duration: 100},
-            {src: "Idle.png", duration: 100}
+            {src: "iosfrog/Idle.png", duration: 100},
+            {src: "iosfrog/Blink.png", duration: 100},
+            {src: "iosfrog/Idle.png", duration: 100}
         ],
         Croak: [
-            {src: "Idle.png", duration: 100},
-            {src: "MidCroak.png", duration: 100},
-            {src: "MaxCroak.png", duration: 100},
-            {src: "MidCroak.png", duration: 100},
-            {src: "Idle.png", duration: 100}
+            {src: "iosfrog/Idle.png", duration: 100},
+            {src: "iosfrog/MidCroak.png", duration: 100},
+            {src: "iosfrog/MaxCroak.png", duration: 100},
+            {src: "iosfrog/MidCroak.png", duration: 100},
+            {src: "iosfrog/Idle.png", duration: 100}
         ],
         Tongue: [
-            {src: "Idle.png", duration: 70},
-            {src: "LipUp.png", duration: 70},
-            {src: "TongueBounce.png", duration: 70},
-            {src: "Tongue.png", duration: 70}
-        ],
-        Ribbit: [
-            {src: "Idle.png", duration: 100},
-            {src: "Smile.png", duration: 50},
-            {src: "MaxRibbit.png", duration: 100},
-            {src: "MidRibbit.png", duration: 100},
-            {src: "MinRibbit.png", duration: 100},
-            {src: "Idle.png", duration: 100}
+            {src: "iosfrog/Idle.png", duration: 70},
+            {src: "iosfrog/LipUp.png", duration: 70},
+            {src: "iosfrog/TongueBounce.png", duration: 70},
+            {src: "iosfrog/Tongue.png", duration: 70}
         ]
     };
 
-    const sounds = {
-        Ribbit: new Audio('Ribbit.ogg'),
-        Tongue: new Audio('Tongue.ogg'),
-        Mute: new Audio('Mute.ogg'),
-        Unmute: new Audio('Unmute.ogg')
-    };
-
-    let currentStates = ['Idle.png', 'Idle.png', 'Idle.png'];
+    let currentStates = ['iosfrog/Idle.png', 'iosfrog/Idle.png', 'iosfrog/Idle.png'];
     let facings = ['viewer', 'viewer', 'viewer'];
     let currentFrameStarts = [Date.now(), Date.now(), Date.now()];
     let verticalDraggingEnabled = true;
-    let isMuted = false;
 
-    // Preload images and sounds
+    // Preload images
     Object.values(animations).flat().forEach(frame => {
         const img = new Image();
         img.src = frame.src;
@@ -395,7 +392,7 @@
 
     const numberOfFrogs = Math.random() < 0.4 ? 3 : 2;
 
-    const verticalPosition = window.innerHeight - 137;
+    const verticalPosition = window.innerHeight - 129;
     frogContainers.forEach((container, index) => {
         if (index < numberOfFrogs) {
             let horizontalPosition;
@@ -451,12 +448,6 @@
         };
 
         nextFrame();
-    }
-
-    function playSound(action) {
-        if (!isMuted && sounds[action]) {
-            sounds[action].play();
-        }
     }
 
     function moveFrog(index) {
@@ -525,32 +516,28 @@
             if (facings[index] === 'right') {
                 transitionTo(index, animations.RightReturn);
                 setTimeout(() => {
-                    facings[index] = 'viewer';
                     performViewerAction(index);
+                    facings[index] = 'viewer';
                 }, 300);
             } else if (facings[index] === 'left') {
                 transitionTo(index, animations.LeftReturn);
                 setTimeout(() => {
-                    facings[index] = 'viewer';
                     performViewerAction(index);
+                    facings[index] = 'viewer';
                 }, 300);
             } else {
                 performViewerAction(index);
             }
         }
 
-        setTimeout(() => moveFrog(index), Math.random() * 4000 + 4000);
+        setTimeout(() => moveFrog(index), Math.random() * 3000 + 2000);
     }
 
     function performViewerAction(index) {
-        const actions = ['Blink', 'Croak', 'Tongue', 'Ribbit', 'FrogLoad.gif', 'TalkMore.gif'];
-        const action = getRandomElement(actions);
+        const viewerActions = ['Blink', 'Croak', 'Tongue', 'browserfrog/FrogLoad.gif', 'browserfrog/TalkMore.gif'];
+        const action = getRandomElement(viewerActions);
 
-        if (action === 'Ribbit' || action === 'Tongue') {
-            playSound(action);
-        }
-
-        if (action === 'FrogLoad.gif' || action === 'TalkMore.gif') {
+        if (action === 'browserfrog/FrogLoad.gif' || action === 'browserfrog/TalkMore.gif') {
             const newFrogElement = document.createElement('img');
             newFrogElement.src = action;
             newFrogElement.className = 'frog';
@@ -635,36 +622,8 @@
         }
 
         window.addEventListener('resize', checkZoomLevel);
-
-
-    function toggleMute() {
-        isMuted = !isMuted;
-        const muteButton = document.getElementById('muteButton');
-        if (isMuted) {
-            muteButton.src = 'browserfrog/Mute.png';
-            playSound('Mute');
-        } else {
-            muteButton.src = 'browserfrog/Unmute.png';
-            playSound('Unmute');
-        }
-    }
-
-    window.onload = () => {
-        const muteButton = document.createElement('img');
-        muteButton.id = 'muteButton';
-        muteButton.src = 'browserfrog/Unmute.png';
-        muteButton.style.position = 'absolute';
-        muteButton.style.bottom = '20px';
-        muteButton.style.right = '20px';
-        muteButton.style.cursor = 'pointer';
-        muteButton.addEventListener('click', toggleMute);
-        document.body.appendChild(muteButton);
-
-        for (let i = 0; i < numberOfFrogs; i++) {
-            moveFrog(i);
-        }
-    };
+	
+	
 </script>
-
 </body>
 </html>
