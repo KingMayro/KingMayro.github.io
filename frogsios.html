@@ -292,6 +292,13 @@
 
 <script>
 
+
+
+
+
+
+
+
         function showMessageBox() {
             const messageBox = document.getElementById("messageBox");
             messageBox.classList.add("show");
@@ -390,15 +397,17 @@
         img.src = frame.src;
     });
 
-    const numberOfFrogs = Math.random() < 0.4 ? 3 : 2;
+    const numberOfFrogs = Math.random() < 0.1 ? 3 : 2;
 
-    const verticalPosition = window.innerHeight - 129;
+   const verticalPosition = Math.max(window.innerHeight - 129, 0);
     frogContainers.forEach((container, index) => {
         if (index < numberOfFrogs) {
             let horizontalPosition;
+            let attempts = 0;
             do {
-                horizontalPosition = Math.random() * (window.innerWidth - 150);
-            } while (isTooCloseToOtherFrog(horizontalPosition, index));
+                horizontalPosition = Math.random() * Math.max(window.innerWidth - 150, 0);
+                attempts++;
+            } while (isTooCloseToOtherFrog(horizontalPosition, index) && attempts < 100);
             container.style.left = `${horizontalPosition}px`;
             container.style.top = `${verticalPosition}px`;
             container.style.display = 'block';
@@ -407,6 +416,7 @@
             });
         }
     });
+
 
     function isTooCloseToOtherFrog(position, currentIndex) {
         const minDistance = 150;
@@ -570,33 +580,64 @@
         }, 10);
     }
 
-    function startTouchDrag(event, container) {
-        const touch = event.touches[0];
-        const offsetX = touch.clientX - container.offsetLeft;
-        const offsetY = touch.clientY - container.offsetTop;
+function startDrag(event, container) {
+    const containerRect = container.getBoundingClientRect();
+    const initialX = event.clientX || event.touches[0].clientX;
+    const initialY = event.clientY || event.touches[0].clientY;
+    const offsetX = initialX - containerRect.left;
+    const offsetY = initialY - (containerRect.top + containerRect.height / 2);
+    let originalTop = parseInt(container.style.top) || containerRect.top;
 
-        function touchDrag(event) {
-            const touch = event.touches[0];
-            container.style.left = `${touch.clientX - offsetX}px`;
-            if (verticalDraggingEnabled) {
-                container.style.top = `${touch.clientY - offsetY}px`;
-            }
+    function handleDragMove(event) {
+        const moveX = event.clientX || event.touches[0].clientX;
+        const moveY = event.clientY || event.touches[0].clientY;
+
+        const newX = moveX - offsetX;
+        let newY = moveY - offsetY;
+
+        if (!verticalDraggingEnabled) {
+            newY = originalTop;
+        } else {
+            originalTop = newY;
         }
 
-        function stopTouchDrag() {
-            document.removeEventListener('touchmove', touchDrag);
-            document.removeEventListener('touchend', stopTouchDrag);
-        }
+        const maxX = window.innerWidth - containerRect.width;
+        const maxY = window.innerHeight - containerRect.height;
+        const clampedX = Math.min(Math.max(newX, 0), maxX);
+        const clampedY = Math.min(Math.max(newY, 0), maxY);
 
-        document.addEventListener('touchmove', touchDrag);
-        document.addEventListener('touchend', stopTouchDrag);
+        container.style.left = clampedX + 'px';
+        container.style.top = clampedY + 'px';
+
+        event.preventDefault();
     }
 
-    frogContainers.forEach((container, index) => {
-        container.addEventListener('touchstart', (event) => {
-            startTouchDrag(event, container);
-        });
+    function handleDragEnd() {
+        document.removeEventListener('mousemove', handleDragMove);
+        document.removeEventListener('mouseup', handleDragEnd);
+        document.removeEventListener('touchmove', handleDragMove);
+        document.removeEventListener('touchend', handleDragEnd);
+    }
+
+    document.addEventListener('mousemove', handleDragMove);
+    document.addEventListener('mouseup', handleDragEnd);
+    document.addEventListener('touchmove', handleDragMove);
+    document.addEventListener('touchend', handleDragEnd);
+
+    event.preventDefault();
+}
+
+
+frogContainers.forEach((container) => {
+    container.addEventListener('mousedown', (event) => {
+        startDrag(event, container);
     });
+    container.addEventListener('touchstart', (event) => {
+        startDrag(event, container);
+    });
+});
+
+
 
     window.onload = () => {
         for (let i = 0; i < numberOfFrogs; i++) {
