@@ -462,26 +462,27 @@
             }, Math.random() * 3000);
         }
 
-        function jumpFrog(index, pixels, direction) {
-            let movedPixels = 0;
-            const interval = setInterval(() => {
-                if (movedPixels < pixels) {
-                    const currentLeft = parseInt(frogContainers[index].style.left, 10) || window.innerWidth / 2;
-                    if (direction === 'right' && currentLeft < window.innerWidth - 150) {
-                        frogContainers[index].style.left = (currentLeft + 3) + 'px';
-                    } else if (direction === 'left' && currentLeft > 0) {
-                        frogContainers[index].style.left = (currentLeft - 3) + 'px';
-                    }
-                    movedPixels++;
-                } else {
-                    clearInterval(interval);
-                    const viewerAction = getRandomElement(frames.facingViewer);
-                    transitionTo(index, viewerAction);
-                    facings[index] = 'viewer';
-                }
-            }, 30);
+function jumpFrog(index, pixels, direction) {
+    let movedPixels = 0;
+    const interval = setInterval(() => {
+        if (movedPixels < pixels) {
+            const currentLeft = parseInt(frogContainers[index].style.left, 10) || window.innerWidth / 2;
+            let newLeft;
+            if (direction === 'right') {
+                newLeft = Math.min(currentLeft + 3, window.innerWidth - 165); // Limit right movement
+            } else if (direction === 'left') {
+                newLeft = Math.max(currentLeft - 3, 0); // Limit left movement
+            }
+            frogContainers[index].style.left = newLeft + 'px';
+            movedPixels++;
+        } else {
+            clearInterval(interval);
+            const viewerAction = getRandomElement(frames.facingViewer);
+            transitionTo(index, viewerAction);
+            facings[index] = 'viewer';
         }
-
+    }, 30);
+}
         frogContainers.forEach((_, index) => {
             setInterval(() => moveFrog(index), Math.random() * 3000 + 2000); // Random interval between 2-5 seconds
         });
