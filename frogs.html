@@ -197,7 +197,7 @@
 			
 			.verticalbutton {
 			width: auto;
-			height: 46.5px;
+			height: 46px;
 			}
 			
 			.frog-container {
@@ -262,7 +262,7 @@
 
     <div class="message-box" id="messageBox">
         <span class="close-btn" onclick="hideMessageBox()" style="white-space:pre-wrap;">X</span>
-        <p>The frog animations do not work properly on Safari on iOS. I don't how the frogs work on other mobile browsers.</p>
+        <p>The frog animations do not work properly on iOS browsers. An iOS version of the site that fixes this issue by using different rendering can be found by adding "ios" to the end of the current URL.</p>
     </div>
 	
 	
@@ -290,6 +290,16 @@
 
 
     <script>
+	
+		(function() {
+	var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  
+	// check for ios so I can serve an iOS supported version. 
+		if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+		window.location.href = "https://kingmayro.github.io/frogsios";
+		}
+	})();
+
 	
         function showMessageBox() {
             const messageBox = document.getElementById("messageBox");
