@@ -93,6 +93,33 @@
 		}
 		
 		
+		.message-box {
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #cd532d;
+        padding: 10px 20px;
+        display: none;
+		border-radius: 5px;
+		color:white;
+        }
+		
+        .message-box.show {
+        display: block;
+        }
+		
+        .message-box p {
+        margin: 20px;
+        }
+		
+        .close-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+        }
+		
+		
 		@media screen and (max-width: 1156px) {
 		
 			
@@ -126,6 +153,10 @@
             width: 145px;
             height: 118px;
 			}
+			
+			.message-box {
+			font-size:15px;
+			}
 
 		
 		}
@@ -140,13 +171,44 @@
 			
 			.verticalbutton {
 			width: auto;
-			height: 45px;
+			height: 40px;
 			}
 			
 			.frog-container {
             width: 100px;
             height: 80px;
 			}
+			
+			.message-box {
+			left: 50%;
+			width:300px;
+			}
+
+		
+		}
+		
+			@media screen and (max-width: 650px) {
+				
+			.footerthing{
+			height: 77px;
+			text-align:center;
+			font-size:10px;
+			}
+			
+			.verticalbutton {
+			width: auto;
+			height: 46.5px;
+			}
+			
+			.frog-container {
+            width: 100px;
+            height: 80px;
+			}
+			
+			.message-box {
+			font-size:10px;
+			}
+
 		
 		}
 		
@@ -195,9 +257,18 @@
 
 	<div>
     <button id="toggleVerticalDragging"><img class=verticalbutton src="browserfrog/ToggleVertical.png"></img></button>
+	    
+		<button onclick="showMessageBox()"><img class=verticalbutton src="browserfrog/Warning.png"></img></button>
+
+    <div class="message-box" id="messageBox">
+        <span class="close-btn" onclick="hideMessageBox()" style="white-space:pre-wrap;">X</span>
+        <p>The frog animations do not work properly on Safari on iOS. I don't how the frogs work on other mobile browsers.</p>
+    </div>
+	
+	
 	<a href="https://famicomcd.github.io/" style="float:right;padding-left:5px;"><img class=verticalbutton src="browserfrog/FamicomCD.png"></img></a>		
 	<a href="https://youtube.com/KingMayro" style="float:right;padding-left:5px;"><img class=verticalbutton src="browserfrog/YouTube.png"></img></a>
-	<a href="https://github.com/KingMayro" style="float:right;"><img class=verticalbutton src="browserfrog/Github.png"></img></a>
+	<a href="https://github.com/KingMayro" style="float:right;padding-left:5px;"><img class=verticalbutton src="browserfrog/Github.png"></img></a>
 	</div>
     <button id="refreshButton" style="display:none;" onclick="location.reload()"><img class=verticalbutton src="browserfrog/Refresh.png"></img></button>
 
@@ -218,39 +289,27 @@
 
 
 
-
     <script>
-    function getRandomQueryParam() {
-        return Math.random().toString(36).substr(2, 8);
-    }
-
-
-    function reloadGIF(img) {
-        const src = img.src;
-        const indexOfQueryParam = src.indexOf('?');
-        const updatedSrc = indexOfQueryParam === -1 ? `${src}?v=${getRandomQueryParam()}` : `${src}&v=${getRandomQueryParam()}`;
-        img.src = updatedSrc;
-    }
-
-
-    function transitionTo(index, state) {
-
-        const frogElement = frogContainers[index].querySelector('.frog');
-        if (state.endsWith('.gif')) {
-            reloadGIF(frogElement);
+	
+        function showMessageBox() {
+            const messageBox = document.getElementById("messageBox");
+            messageBox.classList.add("show");
         }
 
-    }
-
-    const frogContainers = document.querySelectorAll('.frog-container');
-    const frames = {
-        facingRight: ['TurnRight.gif', 'CroakRight.gif', 'JumpRight.gif', 'Right.png'],
-        facingLeft: ['TurnLeft.gif', 'CroakLeft.gif', 'JumpLeft.gif', 'Left.png'],
-        returnRight: ['RightReturn.gif'],
-        returnLeft: ['LeftReturn.gif'],
-        facingViewer: ['Talk.gif', 'TalkMore.gif', 'Blink.gif', 'Idle.png', 'Tongue.gif', 'FrogLoad.gif']
-    };
-
+        function hideMessageBox() {
+            const messageBox = document.getElementById("messageBox");
+            messageBox.classList.remove("show");
+        }
+	
+	
+        const frogContainers = document.querySelectorAll('.frog-container');
+        const frames = {
+            facingRight: ['browserfrog/TurnRight.gif', 'browserfrog/CroakRight.gif', 'browserfrog/JumpRight.gif', 'browserfrog/Right.png'],
+            facingLeft: ['browserfrog/TurnLeft.gif', 'browserfrog/CroakLeft.gif', 'browserfrog/JumpLeft.gif', 'browserfrog/Left.png'],
+            returnRight: ['browserfrog/RightReturn.gif'],
+            returnLeft: ['browserfrog/LeftReturn.gif'],
+            facingViewer: ['browserfrog/Croak.gif', 'browserfrog/TalkMore.gif', 'browserfrog/Blink.gif', 'browserfrog/Idle.png', 'browserfrog/Tongue.gif', 'browserfrog/FrogLoad.gif']
+        };
 
         let currentStates = ['browserfrog/Idle.png', 'browserfrog/Idle.png', 'browserfrog/Idle.png'];
         let facings = ['viewer', 'viewer', 'viewer']; // Keep track of the froggies current facing direction
