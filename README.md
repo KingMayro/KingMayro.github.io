@@ -4,4 +4,6 @@
 <head>
 <body>
 
-<h1>hi welcome</h1>
+<img src="https://kingmayro.github.io/image/indexembed.png" style="width:600px;height:auto;">
+
+<p>hi, this is my personal site. It has some cool stuff on it like my projects :]</p>
