@@ -734,18 +734,18 @@ body.dark-mode .message-box {
 		
 		
 		
+let lastZoomLevel = window.devicePixelRatio;
 
-        let lastZoomLevel = window.devicePixelRatio;
+function checkZoomLevel() {
+    if (window.devicePixelRatio !== lastZoomLevel) {
+        document.getElementById('refreshButton').style.display = 'block';
+        lastZoomLevel = window.devicePixelRatio;
+    }
+}
 
-        function checkZoomLevel() {
-            if (window.devicePixelRatio !== lastZoomLevel) {
-                document.getElementById('refreshButton').style.display = 'block';
-                lastZoomLevel = window.devicePixelRatio;
-            }
-        }
+window.addEventListener('resize', checkZoomLevel);
+window.addEventListener('orientationchange', checkZoomLevel);
 
-        window.addEventListener('resize', checkZoomLevel);
-		
 		
 		
 		
