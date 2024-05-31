@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+	<html lang="en">
+	
+	<head>
+	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+    <title>Browser Flipnote Frogs</title>
+	<link rel="tab icon" href="https://kingmayro.github.io/Frog.png">
+	<link rel="icon" href="https://kingmayro.github.io/Frog.ico">
+	
+	<meta property="og:title" content="Browser Flipnote Frogs - King Mayro"/>
+	<meta property="og:url" content="https://kingmayro.github.io/frogs"/>
+	<meta property="og:image" content="https://kingmayro.github.io/frogembed.png"/>
+	<meta name="twitter:card" content="summary_large_image">
+	<meta data-react-helmet="true" name="theme-color" content="#cd532d"/>
+	
+    <style>
+	
+		@font-face {
+		font-family: "Moving Flipbook Gallery";
+		src: url("browserfrog/Moving Notepad Large UI Font.otf");
+		}
+	
+		body {
+		margin:0;
+		image-rendering: -moz-crisp-edges;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+        -ms-interpolation-mode: nearest-neighbor;
+		image-rendering: pixelated;
+		background-image: url('browserfrog/notepad.png');
+		font-family:"Moving Flipbook Gallery";
+		color: #cd532d;
+		}
+	
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            overflow: hidden;
+            margin: 0;
+        }
+        .frog-container {
+            position: absolute;
+            width: 165px;
+            height: 132px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .frog {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            user-select: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-select: none;
+            -moz-user-drag: none; 
+            -ms-user-select: none; 
+            user-drag: none; 
+        }
+		
+		    
+		button {
+		all: unset;
+		cursor: pointer;
+		}
+		
+		.verticalbutton {
+		width: auto;
+        height: 65px;
+		}
+		
+		.verticalbutton:active {
+		filter: brightness(77%);
+		}
+		
+		.footerthing{
+		position:fixed;
+		bottom:0;
+		background-color:white;
+		width:100%;
+		height: 87px;
+		text-align:center;
+		font-size:14px;
+		}
+		
+		.footertext {
+		padding:20px 20px 0px 10px;
+		}
+		
+		
+		.message-box {
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #cd532d;
+        padding: 10px 20px;
+        display: none;
+		border-radius: 5px;
+		color:white;
+        }
+		
+        .message-box.show {
+        display: block;
+        }
+		
+        .message-box p {
+        margin: 20px;
+        }
+		
+        .close-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+        }
+		
+		
+		@media screen and (max-width: 1156px) {
+		
+			
+			.footerthing{
+			font-size:12px;
+			}
+			
+		
+		}
+		
+		
+		
+		
+		@media screen and (max-width: 1006px) {
+		
+			body {
+			
+				background-image: url('browserfrog/notepadsmall.png');
+			}
+				
+			.footerthing{
+			font-size:11px;
+			}
+			
+			.verticalbutton {
+			width: auto;
+			height: 55px;
+			}
+			
+			.frog-container {
+            width: 145px;
+            height: 118px;
+			}
+			
+			.message-box {
+			font-size:15px;
+			}
+
+		
+		}
+		
+		@media screen and (max-width: 750px) {
+				
+			.footerthing{
+			height: 77px;
+			text-align:center;
+			font-size:10px;
+			}
+			
+			.verticalbutton {
+			width: auto;
+			height: 40px;
+			}
+			
+			.frog-container {
+            width: 100px;
+            height: 80px;
+			}
+			
+			.message-box {
+			left: 50%;
+			width:300px;
+			}
+
+		
+		}
+		
+			@media screen and (max-width: 650px) {
+				
+			.footerthing{
+			height: 77px;
+			text-align:center;
+			font-size:10px;
+			}
+			
+			.verticalbutton {
+			width: auto;
+			height: 46px;
+			}
+			
+			.frog-container {
+            width: 100px;
+            height: 80px;
+			}
+			
+			.message-box {
+			font-size:10px;
+			}
+
+		
+		}
+		
+		
+		@media screen and (max-width: 320px) {
+				
+			.footerthing{
+			height: 67px;
+			text-align:center;
+			font-size:6px;
+			}
+			
+			.verticalbutton {
+			width: auto;
+			height: 30px;
+			}
+			
+			.frog-container {
+            width: 80px;
+            height: 60px;
+			}
+		
+		}
+		
+    </style>
+	</head>
+<body>
+
+	<div class=footerthing><p style="white-space:pre-wrap;" class=footertext>Website font and Flipnote Frog graphics by King Mayro,  Flipnote Studio by Nintendo</p></div>
+
+	<div class=main>
+	
+    <div class="frog-container" id="frog-container-1">
+        <img class="frog" src="browserfrog/Idle.png" alt="Frog">
+    </div>
+
+    <div class="frog-container" id="frog-container-2">
+        <img class="frog" src="browserfrog/Idle.png" alt="Frog">
+    </div>
+
+    <div class="frog-container" id="frog-container-3" style="display:none;">
+        <img class="frog" src="browserfrog/Idle.png" alt="Frog">
+    </div>
+		
+    </div>
+
+	<div>
+    <button id="toggleVerticalDragging"><img class=verticalbutton src="browserfrog/ToggleVertical.png"></img></button>
+	    
+		<button onclick="showMessageBox()"><img class=verticalbutton src="browserfrog/Warning.png"></img></button>
+
+    <div class="message-box" id="messageBox">
+        <span class="close-btn" onclick="hideMessageBox()" style="white-space:pre-wrap;">X</span>
+        <p>The frog animations do not work properly on iOS browsers. An iOS version of the site that fixes this issue by using different rendering can be found by adding "ios" to the end of the current URL.</p>
+    </div>
+	
+	
+	<a href="https://famicomcd.github.io/" style="float:right;padding-left:5px;"><img class=verticalbutton src="browserfrog/FamicomCD.png"></img></a>		
+	<a href="https://youtube.com/KingMayro" style="float:right;padding-left:5px;"><img class=verticalbutton src="browserfrog/YouTube.png"></img></a>
+	<a href="https://github.com/KingMayro" style="float:right;padding-left:5px;"><img class=verticalbutton src="browserfrog/Github.png"></img></a>
+	</div>
+    <button id="refreshButton" style="display:none;" onclick="location.reload()"><img class=verticalbutton src="browserfrog/Refresh.png"></img></button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+	
+		(function() {
+	var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  
+	// check for ios so I can serve an iOS supported version. 
+		if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+		window.location.href = "https://kingmayro.github.io/frogsios";
+		}
+	})();
+
+	
+        function showMessageBox() {
+            const messageBox = document.getElementById("messageBox");
+            messageBox.classList.add("show");
+        }
+
+        function hideMessageBox() {
+            const messageBox = document.getElementById("messageBox");
+            messageBox.classList.remove("show");
+        }
+	
+	
+        const frogContainers = document.querySelectorAll('.frog-container');
+        const frames = {
+            facingRight: ['browserfrog/TurnRight.gif', 'browserfrog/CroakRight.gif', 'browserfrog/JumpRight.gif', 'browserfrog/Right.png'],
+            facingLeft: ['browserfrog/TurnLeft.gif', 'browserfrog/CroakLeft.gif', 'browserfrog/JumpLeft.gif', 'browserfrog/Left.png'],
+            returnRight: ['browserfrog/RightReturn.gif'],
+            returnLeft: ['browserfrog/LeftReturn.gif'],
+            facingViewer: ['browserfrog/Croak.gif', 'browserfrog/TalkMore.gif', 'browserfrog/Blink.gif', 'browserfrog/Idle.png', 'browserfrog/Tongue.gif', 'browserfrog/FrogLoad.gif']
+        };
+
+        let currentStates = ['browserfrog/Idle.png', 'browserfrog/Idle.png', 'browserfrog/Idle.png'];
+        let facings = ['viewer', 'viewer', 'viewer']; // Keep track of the froggies current facing direction
+        let currentFrameStarts = [Date.now(), Date.now(), Date.now()];
+        let verticalDraggingEnabled = true;
+
+        Object.values(frames).flat().forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+		
+		function reloadImages() {
+    const images = document.querySelectorAll('.frog');
+    images.forEach(image => {
+        const src = image.src;
+        image.src = null; // Clearing the src attribute
+        setTimeout(() => {
+            image.src = src; // Setting the src attribute back to its original value
+        }, 0); // Using setTimeout to ensure the src is set after the previous line has executed
+    });
+}
+
+
+        // some epic rng shit
+        const numberOfFrogs = Math.random() < 0.1 ? 3 : 2;
+
+        const verticalPosition = window.innerHeight - 137;
+        frogContainers.forEach((container, index) => {
+            if (index < numberOfFrogs) {
+                let horizontalPosition;
+                do {
+                    horizontalPosition = Math.random() * (window.innerWidth - 150);
+                } while (isTooCloseToOtherFrog(horizontalPosition, index)); // make sure one froggy is not too close to another
+                container.style.left = `${horizontalPosition}px`;
+                container.style.top = `${verticalPosition}px`;
+                container.style.display = 'block';
+                container.addEventListener('mousedown', (event) => {
+                    startDrag(event, container);
+                });
+            }
+        });
+		
+		
+
+        function isTooCloseToOtherFrog(position, currentIndex) {
+            const minDistance = 150;
+            for (let i = 0; i < currentIndex; i++) {
+                const rect = frogContainers[i].getBoundingClientRect();
+                const distance = Math.abs(position - rect.left);
+                if (distance < minDistance) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function getRandomElement(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function transitionTo(index, state) {
+            currentStates[index] = state;
+            const newFrogElement = document.createElement('img');
+            newFrogElement.src = `${state}`;
+            newFrogElement.className = 'frog';
+            newFrogElement.onload = () => {
+                const oldFrogElement = frogContainers[index].querySelector('.frog');
+                frogContainers[index].removeChild(oldFrogElement);
+                newFrogElement.classList.add('frog');
+                frogContainers[index].appendChild(newFrogElement);
+            };
+        }
+
+        function moveFrog(index) {
+            const actions = ['faceRight', 'faceLeft', 'doViewerAction', 'faceRight', 'faceLeft'];
+            const action = getRandomElement(actions);
+
+            setTimeout(() => {
+                if (action === 'faceRight' && facings[index] !== 'right') {
+                    if (facings[index] === 'left') {
+                        transitionTo(index, 'browserfrog/LeftReturn.gif');
+                        setTimeout(() => {
+                            const viewerAction = getRandomElement(frames.facingViewer);
+                            transitionTo(index, viewerAction);
+                            facings[index] = 'viewer';
+                        }, 500);
+                    } else {
+                        transitionTo(index, 'browserfrog/TurnRight.gif');
+                        facings[index] = 'right';
+                        setTimeout(() => {
+                            const rightActions = ['browserfrog/CroakRight.gif', 'browserfrog/JumpRight.gif'];
+                            const nextAction = getRandomElement(rightActions);
+                            transitionTo(index, nextAction);
+                            if (nextAction === 'browserfrog/JumpRight.gif') {
+                                jumpFrog(index, 10, 'right');
+                            }
+                        }, 1000);
+                    }
+                }
+
+                if (action === 'faceLeft' && facings[index] !== 'left') {
+                    if (facings[index] === 'right') {
+                        transitionTo(index, 'browserfrog/RightReturn.gif');
+                        setTimeout(() => {
+                            const viewerAction = getRandomElement(frames.facingViewer);
+                            transitionTo(index, viewerAction);
+                            facings[index] = 'viewer';
+                        }, 500);
+                    } else {
+                        transitionTo(index, 'browserfrog/TurnLeft.gif');
+                        facings[index] = 'left';
+                        setTimeout(() => {
+                            const leftActions = ['browserfrog/CroakLeft.gif', 'browserfrog/JumpLeft.gif'];
+                            const nextAction = getRandomElement(leftActions);
+                            transitionTo(index, nextAction);
+                            if (nextAction === 'browserfrog/JumpLeft.gif') {
+                                jumpFrog(index, 10, 'left');
+                            }
+                        }, 1000);
+                    }
+                }
+
+                if (action === 'doViewerAction' && facings[index] !== 'viewer') {
+                    if (facings[index] === 'right') {
+                        transitionTo(index, 'browserfrog/RightReturn.gif');
+                    } else if (facings[index] === 'left') {
+                        transitionTo(index, 'browserfrog/LeftReturn.gif');
+                    }
+                    setTimeout(() => {
+                        const viewerAction = getRandomElement(frames.facingViewer);
+                        transitionTo(index, viewerAction);
+                        facings[index] = 'viewer';
+                    }, 500);
+                } else if (action === 'doViewerAction') {
+                    const viewerAction = getRandomElement(frames.facingViewer);
+                    transitionTo(index, viewerAction);
+                }
+
+                
+                if (facings[index] === 'viewer' && action === 'doViewerAction') {
+                    const currentTime = Date.now();
+                    if (currentTime - currentFrameStarts[index] > 10000) {
+                        const newViewerAction = getRandomElement(frames.facingViewer);
+                        transitionTo(index, newViewerAction);
+                        currentFrameStarts[index] = currentTime;
+                    }
+                } else {
+                    currentFrameStarts[index] = Date.now();
+                }
+            }, Math.random() * 3000);
+        }
+
+function jumpFrog(index, pixels, direction) {
+    let movedPixels = 0;
+    const interval = setInterval(() => {
+        if (movedPixels < pixels) {
+            const currentLeft = parseInt(frogContainers[index].style.left, 10) || window.innerWidth / 2;
+            let newLeft;
+            if (direction === 'right') {
+                newLeft = Math.min(currentLeft + 3, window.innerWidth - 165); // Limit right movement
+            } else if (direction === 'left') {
+                newLeft = Math.max(currentLeft - 3, 0); // Limit left movement
+            }
+            frogContainers[index].style.left = newLeft + 'px';
+            movedPixels++;
+        } else {
+            clearInterval(interval);
+            const viewerAction = getRandomElement(frames.facingViewer);
+            transitionTo(index, viewerAction);
+            facings[index] = 'viewer';
+        }
+    }, 30);
+}
+        frogContainers.forEach((_, index) => {
+            setInterval(() => moveFrog(index), Math.random() * 3000 + 2000); // Random interval between 2-5 seconds
+        });
+
+  function startDrag(event, container) {
+    const containerRect = container.getBoundingClientRect();
+    const offsetX = event.clientX - containerRect.left;
+    const offsetY = event.clientY - (containerRect.top + containerRect.height / 2);
+    let originalTop = parseInt(container.style.top) || containerRect.top;
+
+    function handleDragMove(event) {
+        const newX = event.clientX - offsetX;
+        let newY = event.clientY - offsetY;
+
+        if (!verticalDraggingEnabled) {
+            newY = originalTop;
+        } else {
+            originalTop = newY;
+        }
+
+        const maxX = window.innerWidth - containerRect.width;
+        const maxY = window.innerHeight - containerRect.height;
+        const clampedX = Math.min(Math.max(newX, 0), maxX);
+        const clampedY = Math.min(Math.max(newY, 0), maxY);
+
+        container.style.left = clampedX + 'px';
+        container.style.top = clampedY + 'px';
+
+        event.preventDefault();
+    }
+
+    function handleDragEnd() {
+        document.removeEventListener('mousemove', handleDragMove);
+        document.removeEventListener('mouseup', handleDragEnd);
+    }
+
+    document.addEventListener('mousemove', handleDragMove);
+    document.addEventListener('mouseup', handleDragEnd);
+
+    event.preventDefault();
+}
+
+
+        document.getElementById('toggleVerticalDragging').addEventListener('click', () => {
+            verticalDraggingEnabled = !verticalDraggingEnabled;
+            frogContainers.forEach((container, index) => {
+                container.style.top = `${verticalPosition}px`;
+            });
+        });
+	
+	
+	        let lastZoomLevel = window.devicePixelRatio;
+
+        function checkZoomLevel() {
+            if (window.devicePixelRatio !== lastZoomLevel) {
+                document.getElementById('refreshButton').style.display = 'block';
+                lastZoomLevel = window.devicePixelRatio;
+            }
+        }
+
+        window.addEventListener('resize', checkZoomLevel);
+		
+</script>
+</body>
+</html>
