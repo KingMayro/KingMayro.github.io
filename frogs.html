@@ -20,7 +20,7 @@
 	
 		@font-face {
 		font-family: "Moving Flipbook Gallery";
-		src: url("browserfrog/Moving Notepad Large UI Font.otf");
+		src: url("browserfrog/fonts/Moving Notepad Large UI Font.otf");
 		}
 	
 		body {
@@ -141,6 +141,19 @@
         cursor: pointer;
         }
 		
+body.dark-mode {
+    background-image: url('browserfrog/notepadDark.png');
+}
+
+body.dark-mode .footerthing {
+    background-color: #00070b !important;
+}
+
+body.dark-mode .message-box {
+    background-color: #4abc23 !important;
+}
+
+		
 		
 		@media screen and (max-width: 1156px) {
 		
@@ -161,6 +174,10 @@
 			
 				background-image: url('browserfrog/notepadsmall.png');
 			}
+			
+			body.dark-mode {
+			background-image: url('browserfrog/notepadsmallDark.png');
+			}	
 				
 			.footerthing{
 			font-size:11px;
@@ -204,7 +221,7 @@
 			
 			.verticalbutton {
 			width: auto;
-			height: 50px;
+			height: 45px;
 			}
 			
 			.frog-container {
@@ -239,7 +256,7 @@
 			
 			.verticalbutton {
 			width: auto;
-			height: 46px;
+			height: 54px;
 			}
 			
 			.message-box {
@@ -256,7 +273,7 @@
 			
 			.verticalbutton {
 			width: auto;
-			height: 42px;
+			height: 47px;
 			}
 		
 		}
@@ -269,7 +286,7 @@
 			
 			.verticalbutton {
 			width: auto;
-			height: 35px;
+			height: 41px;
 			}
 			
 			.frog-container {
@@ -302,7 +319,8 @@
     </div>
 
 	<div>
-    <button id="toggleVerticalDragging"><img class=verticalbutton src="browserfrog/ToggleVertical.png"></img></button>
+    <button id="toggleVerticalDragging"><img class=verticalbutton src="browserfrog/buttons/ToggleVertical.png"></img></button>
+	<button id="darkModeToggle"><img class=verticalbutton src="browserfrog/buttons/ToggleDark.png"></img></button>	
 
 
    <div class="message-box" id="messageBox">
@@ -324,11 +342,11 @@
 		
 		
 				<div class=socialicons>
-					<a href="https://github.com/KingMayro"><img src="browserfrog/Github.png" alt="Github" style="width:50px; height:auto;"></a>
+					<a href="https://github.com/KingMayro"><img src="browserfrog/buttons/Github.png" alt="Github" style="width:50px; height:auto;"></a>
 					<div style="padding-right:9px"> </div>  
-					<a href="https://www.youtube.com/@KingMayro"><img src="browserfrog/YouTube.png" alt="YouTube" style="width:50px;height:auto;"></a>
+					<a href="https://www.youtube.com/@KingMayro"><img src="browserfrog/buttons/YouTube.png" alt="YouTube" style="width:50px;height:auto;"></a>
 					<div style="padding-left:8px"> </div> 
-					<a href="https://famicomcd.github.io/"><img src="browserfrog/FamicomCD.png" alt="FamicomCD" style="width:50px; height:auto;"></a>
+					<a href="https://famicomcd.github.io/"><img src="browserfrog/buttons/FamicomCD.png" alt="FamicomCD" style="width:50px; height:auto;"></a>
 				</div>
 			</div> 
 		</div>
@@ -340,18 +358,22 @@
     </div>
 
 
-	<a href="https://kingmayro.github.io/" style="float:right;padding-left:5px;"><img class=verticalbutton src="browserfrog/Home.png"></img></a>	
-	<button onclick="showMessageBox()" style="float:right;padding-left:5px;"><img class=verticalbutton src="browserfrog/Info.png"></img></button>		
-	<a href="https://youtube.com/KingMayro" style="float:right;padding-left:5px;"><img class=verticalbutton src="browserfrog/YouTube.png"></img></a>
-	<a href="https://github.com/KingMayro" style="float:right;padding-left:5px;"><img class=verticalbutton src="browserfrog/Github.png"></img></a>
+	<a href="https://kingmayro.github.io/" style="float:right;padding-left:5px;"><img class=verticalbutton src="browserfrog/buttons/Home.png"></img></a>	
+	<button onclick="showMessageBox()" style="float:right;padding-left:5px;"><img class=verticalbutton src="browserfrog/buttons/Info.png"></img></button>		
+
 	</div>
-    <button id="refreshButton" style="display:none;" onclick="location.reload()"><img class=verticalbutton src="browserfrog/Refresh.png"></img></button>
+    <button id="refreshButton" style="display:none;" onclick="location.reload()"><img class=verticalbutton src="browserfrog/buttons/Refresh.png"></img></button>
 
  
 
 
 
-<script>
+
+
+    <script>
+
+	
+	
 
         function showMessageBox() {
             const messageBox = document.getElementById("messageBox");
@@ -363,177 +385,183 @@
             messageBox.classList.remove("show");
         }
 
-
-
-	//I may merge this into the main version because this system of handling is a little smoother than I thought
-	//update: I merged it into the main version
-    const frogContainers = document.querySelectorAll('.frog-container');
-    const frames = {
-        facingRight: ['browserfrog/Right.png'],
-        facingLeft: ['browserfrog/Left.png'],
-        facingViewer: ['browserfrog/Idle.png']
-    };
-
-    const animations = {
-        TurnLeft: [
-            {src: "browserfrog/Idle.png", duration: 100},
-            {src: "browserfrog/MidLeft.png", duration: 100},
-            {src: "browserfrog/Left.png", duration: 100}
-        ],
-        TurnRight: [
-            {src: "browserfrog/Idle.png", duration: 100},
-            {src: "browserfrog/MidRight.png", duration: 100},
-            {src: "browserfrog/Right.png", duration: 100}
-        ],
-        LeftReturn: [
-            {src: "browserfrog/Left.png", duration: 100},
-            {src: "browserfrog/MidLeft.png", duration: 100},
-            {src: "browserfrog/Idle.png", duration: 100}
-        ],
-        RightReturn: [
-            {src: "browserfrog/Right.png", duration: 100},
-            {src: "browserfrog/MidRight.png", duration: 100},
-            {src: "browserfrog/Idle.png", duration: 100}
-        ],
-        CroakLeft: [
-            {src: "browserfrog/Left.png", duration: 100},
-            {src: "browserfrog/MidCroakLeft.png", duration: 100},
-            {src: "browserfrog/MaxCroakLeft.png", duration: 100},
-            {src: "browserfrog/MidCroakLeft.png", duration: 100},
-            {src: "browserfrog/Left.png", duration: 100}
-        ],
-        CroakRight: [
-            {src: "browserfrog/Right.png", duration: 100},
-            {src: "browserfrog/MidCroakRight.png", duration: 100},
-            {src: "browserfrog/MaxCroakRight.png", duration: 100},
-            {src: "browserfrog/MidCroakRight.png", duration: 100},
-            {src: "browserfrog/Right.png", duration: 100}
-        ],
-        JumpLeft: [
-            {src: "browserfrog/Left.png", duration: 50},
-            {src: "browserfrog/JumpUpLeft.png", duration: 100},
-            {src: "browserfrog/FallDownLeft.png", duration: 100},
-            {src: "browserfrog/Left.png", duration: 100}
-        ],
-        JumpRight: [
-            {src: "browserfrog/Right.png", duration: 25},
-            {src: "browserfrog/JumpUpRight.png", duration: 100},
-            {src: "browserfrog/FallDownRight.png", duration: 100},
-            {src: "browserfrog/Right.png", duration: 100}
-        ],
-        Blink: [
-            {src: "browserfrog/Idle.png", duration: 100},
-            {src: "browserfrog/Blink.png", duration: 100},
-            {src: "browserfrog/Idle.png", duration: 100}
-        ],
-        Croak: [
-            {src: "browserfrog/Idle.png", duration: 100},
-            {src: "browserfrog/MidCroak.png", duration: 100},
-            {src: "browserfrog/MaxCroak.png", duration: 100},
-            {src: "browserfrog/MidCroak.png", duration: 100},
-            {src: "browserfrog/Idle.png", duration: 100}
-        ],
-        Tongue: [
-            {src: "browserfrog/Idle.png", duration: 70},
-            {src: "browserfrog/LipUp.png", duration: 70},
-            {src: "browserfrog/TongueBounce.png", duration: 70},
-            {src: "browserfrog/Tongue.png", duration: 70}
-        ],
-		Smile: [
-            {src: "browserfrog/Smile.png", duration: 100},
-        ],
-		Ribbit: [
-            {src: "browserfrog/Idle.png", duration: 100},
-            {src: "browserfrog/Smile.png", duration: 50},
-            {src: "browserfrog/WideRibbit.png", duration: 100},
-            {src: "browserfrog/MidRibbit.png", duration: 100},
-			{src: "browserfrog/SmallRibbit.png", duration: 50},
-            {src: "browserfrog/Idle.png", duration: 100}
-        ]
-    };
-
-    let currentStates = ['browserfrog/Idle.png', 'browserfrog/Idle.png', 'browserfrog/Idle.png'];
-    let facings = ['viewer', 'viewer', 'viewer'];
-    let currentFrameStarts = [Date.now(), Date.now(), Date.now()];
-    let verticalDraggingEnabled = true;
-
-
-    Object.values(animations).flat().forEach(frame => {
-        const img = new Image();
-        img.src = frame.src;
-    });
-
-    const numberOfFrogs = Math.random() < 0.1 ? 3 : 2;
-
-   const verticalPosition = Math.max(window.innerHeight - 129, 0);
-    frogContainers.forEach((container, index) => {
-        if (index < numberOfFrogs) {
-            let horizontalPosition;
-            let attempts = 0;
-            do {
-                horizontalPosition = Math.random() * Math.max(window.innerWidth - 150, 0);
-                attempts++;
-            } while (isTooCloseToOtherFrog(horizontalPosition, index) && attempts < 100);
-            container.style.left = `${horizontalPosition}px`;
-            container.style.top = `${verticalPosition}px`;
-            container.style.display = 'block';
-            container.addEventListener('mousedown', (event) => {
-                startDrag(event, container);
-            });
-        }
-    });
-
-
-    function isTooCloseToOtherFrog(position, currentIndex) {
-        const minDistance = 150;
-        for (let i = 0; i < currentIndex; i++) {
-            const rect = frogContainers[i].getBoundingClientRect();
-            const distance = Math.abs(position - rect.left);
-            if (distance < minDistance) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    function getRandomElement(arr) {
-        return arr[Math.floor(Math.random() * arr.length)];
-    }
-
-    function transitionTo(index, animation) {
-        currentStates[index] = animation[0].src;
-        let frameIndex = 0;
-
-        const nextFrame = () => {
-            const frame = animation[frameIndex];
-            const newFrogElement = document.createElement('img');
-            newFrogElement.src = frame.src;
-            newFrogElement.className = 'frog';
-            newFrogElement.onload = () => {
-                const oldFrogElement = frogContainers[index].querySelector('.frog');
-                if (oldFrogElement) {
-                    frogContainers[index].removeChild(oldFrogElement);
-                }
-                frogContainers[index].appendChild(newFrogElement);
-            };
-
-            if (frameIndex < animation.length - 1) {
-                frameIndex++;
-                setTimeout(nextFrame, frame.duration);
-            }
+        const frogContainers = document.querySelectorAll('.frog-container');
+        const frames = {
+            facingRight: ['browserfrog/Right.png'],
+            facingLeft: ['browserfrog/Left.png'],
+            facingViewer: ['browserfrog/Idle.png']
         };
 
-        nextFrame();
-    }
+        const animations = {
+            TurnLeft: [
+                {src: "browserfrog/Idle.png", duration: 100},
+                {src: "browserfrog/MidLeft.png", duration: 100},
+                {src: "browserfrog/Left.png", duration: 100}
+            ],
+            TurnRight: [
+                {src: "browserfrog/Idle.png", duration: 100},
+                {src: "browserfrog/MidRight.png", duration: 100},
+                {src: "browserfrog/Right.png", duration: 100}
+            ],
+            LeftReturn: [
+                {src: "browserfrog/Left.png", duration: 100},
+                {src: "browserfrog/MidLeft.png", duration: 100},
+                {src: "browserfrog/Idle.png", duration: 100}
+            ],
+            RightReturn: [
+                {src: "browserfrog/Right.png", duration: 100},
+                {src: "browserfrog/MidRight.png", duration: 100},
+                {src: "browserfrog/Idle.png", duration: 100}
+            ],
+            CroakLeft: [
+                {src: "browserfrog/Left.png", duration: 100},
+                {src: "browserfrog/MidCroakLeft.png", duration: 100},
+                {src: "browserfrog/MaxCroakLeft.png", duration: 100},
+                {src: "browserfrog/MidCroakLeft.png", duration: 100},
+                {src: "browserfrog/Left.png", duration: 100}
+            ],
+            CroakRight: [
+                {src: "browserfrog/Right.png", duration: 100},
+                {src: "browserfrog/MidCroakRight.png", duration: 100},
+                {src: "browserfrog/MaxCroakRight.png", duration: 100},
+                {src: "browserfrog/MidCroakRight.png", duration: 100},
+                {src: "browserfrog/Right.png", duration: 100}
+            ],
+            JumpLeft: [
+                {src: "browserfrog/Left.png", duration: 50},
+                {src: "browserfrog/JumpUpLeft.png", duration: 100},
+                {src: "browserfrog/FallDownLeft.png", duration: 100},
+                {src: "browserfrog/Left.png", duration: 100}
+            ],
+            JumpRight: [
+                {src: "browserfrog/Right.png", duration: 25},
+                {src: "browserfrog/JumpUpRight.png", duration: 100},
+                {src: "browserfrog/FallDownRight.png", duration: 100},
+                {src: "browserfrog/Right.png", duration: 100}
+            ],
+            Blink: [
+                {src: "browserfrog/Idle.png", duration: 100},
+                {src: "browserfrog/Blink.png", duration: 100},
+                {src: "browserfrog/Idle.png", duration: 100}
+            ],
+            Croak: [
+                {src: "browserfrog/Idle.png", duration: 100},
+                {src: "browserfrog/MidCroak.png", duration: 100},
+                {src: "browserfrog/MaxCroak.png", duration: 100},
+                {src: "browserfrog/MidCroak.png", duration: 100},
+                {src: "browserfrog/Idle.png", duration: 100}
+            ],
+            Tongue: [
+                {src: "browserfrog/Idle.png", duration: 70},
+                {src: "browserfrog/LipUp.png", duration: 70},
+                {src: "browserfrog/TongueBounce.png", duration: 70},
+                {src: "browserfrog/Tongue.png", duration: 70}
+            ],
+            Smile: [
+                {src: "browserfrog/Smile.png", duration: 100},
+            ],
+            Ribbit: [
+                {src: "browserfrog/Idle.png", duration: 100},
+                {src: "browserfrog/Smile.png", duration: 50},
+                {src: "browserfrog/WideRibbit.png", duration: 100},
+                {src: "browserfrog/MidRibbit.png", duration: 100},
+                {src: "browserfrog/SmallRibbit.png", duration: 50},
+                {src: "browserfrog/Idle.png", duration: 100}
+            ]
+        };
 
-    function moveFrog(index) {
-        const actions = ['faceRight', 'faceLeft', 'doViewerAction'];
-        const action = getRandomElement(actions);
+        let currentStates = ['browserfrog/Idle.png', 'browserfrog/Idle.png', 'browserfrog/Idle.png'];
+        let facings = ['viewer', 'viewer', 'viewer'];
+        let currentFrameStarts = [Date.now(), Date.now(), Date.now()];
+        let verticalDraggingEnabled = true;
 
-        if (action === 'faceRight' && facings[index] !== 'right') {
-            if (facings[index] === 'left') {
-                transitionTo(index, animations.LeftReturn);
-                setTimeout(() => {
+        Object.values(animations).flat().forEach(frame => {
+            const img = new Image();
+            img.src = frame.src;
+        });
+
+        const numberOfFrogs = Math.random() < 0.1 ? 3 : 2;
+
+        const verticalPosition = Math.max(window.innerHeight - 129, 0);
+        frogContainers.forEach((container, index) => {
+            if (index < numberOfFrogs) {
+                let horizontalPosition;
+                let attempts = 0;
+                do {
+                    horizontalPosition = Math.random() * Math.max(window.innerWidth - 150, 0);
+                    attempts++;
+                } while (isTooCloseToOtherFrog(horizontalPosition, index) && attempts < 100);
+                container.style.left = `${horizontalPosition}px`;
+                container.style.top = `${verticalPosition}px`;
+                container.style.display = 'block';
+                container.addEventListener('mousedown', (event) => {
+                    startDrag(event, container);
+                });
+                        }
+        });
+
+        function isTooCloseToOtherFrog(position, currentIndex) {
+            const minDistance = 150;
+            for (let i = 0; i < currentIndex; i++) {
+                const rect = frogContainers[i].getBoundingClientRect();
+                const distance = Math.abs(position - rect.left);
+                if (distance < minDistance) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function getRandomElement(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function transitionTo(index, animation) {
+            currentStates[index] = animation[0].src;
+            let frameIndex = 0;
+
+            const nextFrame = () => {
+                const frame = animation[frameIndex];
+                const newFrogElement = document.createElement('img');
+                newFrogElement.src = isDarkMode ? frame.src.replace('.png', 'Dark.png') : frame.src;
+                newFrogElement.className = 'frog';
+                newFrogElement.onload = () => {
+                    const oldFrogElement = frogContainers[index].querySelector('.frog');
+                    if (oldFrogElement) {
+                        frogContainers[index].removeChild(oldFrogElement);
+                    }
+                    frogContainers[index].appendChild(newFrogElement);
+                };
+
+                if (frameIndex < animation.length - 1) {
+                    frameIndex++;
+                    setTimeout(nextFrame, frame.duration);
+                }
+            };
+
+            nextFrame();
+        }
+
+        function moveFrog(index) {
+            const actions = ['faceRight', 'faceLeft', 'doViewerAction'];
+            const action = getRandomElement(actions);
+
+            if (action === 'faceRight' && facings[index] !== 'right') {
+                if (facings[index] === 'left') {
+                    transitionTo(index, animations.LeftReturn);
+                    setTimeout(() => {
+                        transitionTo(index, animations.TurnRight);
+                        facings[index] = 'right';
+                        setTimeout(() => {
+                            const rightActions = ['CroakRight', 'JumpRight'];
+                            const nextAction = getRandomElement(rightActions);
+                            transitionTo(index, animations[nextAction]);
+                            if (nextAction === 'JumpRight') {
+                                jumpFrog(index, 10, 'right');
+                            }
+                        }, 300);
+                    }, 300);
+                } else {
                     transitionTo(index, animations.TurnRight);
                     facings[index] = 'right';
                     setTimeout(() => {
@@ -544,25 +572,25 @@
                             jumpFrog(index, 10, 'right');
                         }
                     }, 300);
-                }, 300);
-            } else {
-                transitionTo(index, animations.TurnRight);
-                facings[index] = 'right';
-                setTimeout(() => {
-                    const rightActions = ['CroakRight', 'JumpRight'];
-                    const nextAction = getRandomElement(rightActions);
-                    transitionTo(index, animations[nextAction]);
-                    if (nextAction === 'JumpRight') {
-                        jumpFrog(index, 10, 'right');
-                    }
-                }, 300);
+                }
             }
-        }
 
-        if (action === 'faceLeft' && facings[index] !== 'left') {
-            if (facings[index] === 'right') {
-                transitionTo(index, animations.RightReturn);
-                setTimeout(() => {
+            if (action === 'faceLeft' && facings[index] !== 'left') {
+                if (facings[index] === 'right') {
+                    transitionTo(index, animations.RightReturn);
+                    setTimeout(() => {
+                        transitionTo(index, animations.TurnLeft);
+                        facings[index] = 'left';
+                        setTimeout(() => {
+                            const leftActions = ['CroakLeft', 'JumpLeft'];
+                            const nextAction = getRandomElement(leftActions);
+                            transitionTo(index, animations[nextAction]);
+                            if (nextAction === 'JumpLeft') {
+                                jumpFrog(index, 10, 'left');
+                            }
+                        }, 300);
+                    }, 300);
+                } else {
                     transitionTo(index, animations.TurnLeft);
                     facings[index] = 'left';
                     setTimeout(() => {
@@ -573,153 +601,141 @@
                             jumpFrog(index, 10, 'left');
                         }
                     }, 300);
-                }, 300);
-            } else {
-                transitionTo(index, animations.TurnLeft);
-                facings[index] = 'left';
-                setTimeout(() => {
-                    const leftActions = ['CroakLeft', 'JumpLeft'];
-                    const nextAction = getRandomElement(leftActions);
-                    transitionTo(index, animations[nextAction]);
-                    if (nextAction === 'JumpLeft') {
-                        jumpFrog(index, 10, 'left');
-                    }
-                }, 300);
-            }
-        }
-
-        if (action === 'doViewerAction') {
-            if (facings[index] === 'right') {
-                transitionTo(index, animations.RightReturn);
-                setTimeout(() => {
-                    performViewerAction(index);
-                    facings[index] = 'viewer';
-                }, 300);
-            } else if (facings[index] === 'left') {
-                transitionTo(index, animations.LeftReturn);
-                setTimeout(() => {
-                    performViewerAction(index);
-                    facings[index] = 'viewer';
-                }, 300);
-            } else {
-                performViewerAction(index);
-            }
-        }
-
-        setTimeout(() => moveFrog(index), Math.random() * 3000 + 2000);
-    }
-
-    function performViewerAction(index) {
-        const viewerActions = ['Blink', 'Croak', 'Tongue', 'Smile', 'Ribbit', 'browserfrog/FrogLoad.gif', 'browserfrog/TalkMore.gif'];
-        const action = getRandomElement(viewerActions);
-
-        if (action === 'browserfrog/FrogLoad.gif' || action === 'browserfrog/TalkMore.gif') {
-            const newFrogElement = document.createElement('img');
-            newFrogElement.src = action;
-            newFrogElement.className = 'frog';
-            newFrogElement.onload = () => {
-                const oldFrogElement = frogContainers[index].querySelector('.frog');
-                if (oldFrogElement) {
-                    frogContainers[index].removeChild(oldFrogElement);
                 }
-                frogContainers[index].appendChild(newFrogElement);
-            };
-        } else {
-            transitionTo(index, animations[action]);
-        }
-    }
+            }
 
-    function jumpFrog(index, pixels, direction) {
-        let movedPixels = 0;
-        const interval = setInterval(() => {
-            if (movedPixels < pixels) {
-                const currentLeft = parseInt(frogContainers[index].style.left, 10);
-                if (direction === 'right') {
-                    frogContainers[index].style.left = `${currentLeft + 3}px`;
+            if (action === 'doViewerAction') {
+                if (facings[index] === 'right') {
+                    transitionTo(index, animations.RightReturn);
+                    setTimeout(() => {
+                        performViewerAction(index);
+                        facings[index] = 'viewer';
+                    }, 300);
+                } else if (facings[index] === 'left') {
+                    transitionTo(index, animations.LeftReturn);
+                    setTimeout(() => {
+                        performViewerAction(index);
+                        facings[index] = 'viewer';
+                    }, 300);
                 } else {
-                    frogContainers[index].style.left = `${currentLeft - 3}px`;
+                    performViewerAction(index);
                 }
-                movedPixels++;
-            } else {
-                clearInterval(interval);
             }
-        }, 10);
-    }
 
-function startDrag(event, container) {
-    const containerRect = container.getBoundingClientRect();
-    const initialX = event.clientX || event.touches[0].clientX;
-    const initialY = event.clientY || event.touches[0].clientY;
-    const offsetX = initialX - containerRect.left;
-    const offsetY = initialY - (containerRect.top + containerRect.height / 2);
-    let originalTop = parseInt(container.style.top) || containerRect.top;
-
-    function handleDragMove(event) {
-        const moveX = event.clientX || event.touches[0].clientX;
-        const moveY = event.clientY || event.touches[0].clientY;
-
-        const newX = moveX - offsetX;
-        let newY = moveY - offsetY;
-
-        if (!verticalDraggingEnabled) {
-            newY = originalTop;
-        } else {
-            originalTop = newY;
+            setTimeout(() => moveFrog(index), Math.random() * 3000 + 2000);
         }
 
-        const maxX = window.innerWidth - containerRect.width;
-        const maxY = window.innerHeight - containerRect.height;
-        const clampedX = Math.min(Math.max(newX, 0), maxX);
-        const clampedY = Math.min(Math.max(newY, 0), maxY);
+        function performViewerAction(index) {
+            const viewerActions = ['Blink', 'Croak', 'Tongue', 'Smile', 'Ribbit', 'browserfrog/FrogLoad.gif', 'browserfrog/TalkMore.gif'];
+            const action = getRandomElement(viewerActions);
 
-        container.style.left = clampedX + 'px';
-        container.style.top = clampedY + 'px';
-
-        event.preventDefault();
-    }
-
-    function handleDragEnd() {
-        document.removeEventListener('mousemove', handleDragMove);
-        document.removeEventListener('mouseup', handleDragEnd);
-        document.removeEventListener('touchmove', handleDragMove);
-        document.removeEventListener('touchend', handleDragEnd);
-    }
-
-    document.addEventListener('mousemove', handleDragMove);
-    document.addEventListener('mouseup', handleDragEnd);
-    document.addEventListener('touchmove', handleDragMove);
-    document.addEventListener('touchend', handleDragEnd);
-
-    event.preventDefault();
-}
-
-
-frogContainers.forEach((container) => {
-    container.addEventListener('mousedown', (event) => {
-        startDrag(event, container);
-    });
-    container.addEventListener('touchstart', (event) => {
-        startDrag(event, container);
-    });
-});
-
-
-
-    window.onload = () => {
-        for (let i = 0; i < numberOfFrogs; i++) {
-            moveFrog(i);
+            if (action === 'browserfrog/FrogLoad.gif' || action === 'browserfrog/TalkMore.gif') {
+                const newFrogElement = document.createElement('img');
+                newFrogElement.src = action.replace('.gif', isDarkMode ? 'Dark.gif' : '.gif');
+                newFrogElement.className = 'frog';
+                newFrogElement.onload = () => {
+                    const oldFrogElement = frogContainers[index].querySelector('.frog');
+                    if (oldFrogElement) {
+                        frogContainers[index].removeChild(oldFrogElement);
+                    }
+                    frogContainers[index].appendChild(newFrogElement);
+                };
+            } else {
+                transitionTo(index, animations[action]);
+            }
         }
-    };
-	
-	        document.getElementById('toggleVerticalDragging').addEventListener('click', () => {
+
+        function jumpFrog(index, pixels, direction) {
+            let movedPixels = 0;
+            const interval = setInterval(() => {
+                if (movedPixels < pixels) {
+                    const currentLeft = parseInt(frogContainers[index].style.left, 10);
+                    if (direction === 'right') {
+                        frogContainers[index].style.left = `${currentLeft + 3}px`;
+                    } else {
+                        frogContainers[index].style.left = `${currentLeft - 3}px`;
+                    }
+                    movedPixels++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 10);
+        }
+
+        function startDrag(event, container) {
+            const containerRect = container.getBoundingClientRect();
+            const initialX = event.clientX || event.touches[0].clientX;
+            const initialY = event.clientY || event.touches[0].clientY;
+            const offsetX = initialX - containerRect.left;
+            const offsetY = initialY - (containerRect.top + containerRect.height / 2);
+            let originalTop = parseInt(container.style.top) || containerRect.top;
+
+            function handleDragMove(event) {
+                const moveX = event.clientX || event.touches[0].clientX;
+                const moveY = event.clientY || event.touches[0].clientY;
+
+                const newX = moveX - offsetX;
+                let newY = moveY - offsetY;
+
+                if (!verticalDraggingEnabled) {
+                    newY = originalTop;
+                } else {
+                    originalTop = newY;
+                }
+
+                const maxX = window.innerWidth - containerRect.width;
+                const maxY = window.innerHeight - containerRect.height;
+                const clampedX = Math.min(Math.max(newX, 0), maxX);
+                const clampedY = Math.min(Math.max(newY, 0), maxY);
+
+                container.style.left = clampedX + 'px';
+                container.style.top = clampedY + 'px';
+
+                event.preventDefault();
+            }
+
+            function handleDragEnd() {
+                document.removeEventListener('mousemove', handleDragMove);
+                document.removeEventListener('mouseup', handleDragEnd);
+                document.removeEventListener('touchmove', handleDragMove);
+                document.removeEventListener('touchend', handleDragEnd);
+            }
+
+            document.addEventListener('mousemove', handleDragMove);
+            document.addEventListener('mouseup', handleDragEnd);
+            document.addEventListener('touchmove', handleDragMove);
+            document.addEventListener('touchend', handleDragEnd);
+
+            event.preventDefault();
+        }
+
+        frogContainers.forEach((container) => {
+            container.addEventListener('mousedown', (event) => {
+                startDrag(event, container);
+            });
+            container.addEventListener('touchstart', (event) => {
+                startDrag(event, container);
+            });
+        });
+
+        window.onload = () => {
+            for (let i = 0; i < numberOfFrogs; i++) {
+                moveFrog(i);
+            }
+            applyDarkMode();
+        };
+
+        document.getElementById('toggleVerticalDragging').addEventListener('click', () => {
             verticalDraggingEnabled = !verticalDraggingEnabled;
             frogContainers.forEach((container, index) => {
                 container.style.top = `${verticalPosition}px`;
             });
         });
-	
-	
-	        let lastZoomLevel = window.devicePixelRatio;
+		
+		
+		
+
+        let lastZoomLevel = window.devicePixelRatio;
 
         function checkZoomLevel() {
             if (window.devicePixelRatio !== lastZoomLevel) {
@@ -729,8 +745,67 @@ frogContainers.forEach((container) => {
         }
 
         window.addEventListener('resize', checkZoomLevel);
-	
-	
-</script>
+		
+		
+		
+		
+
+let isDarkMode = localStorage.getItem('isDarkMode') === 'true';
+const darkModeToggle = document.getElementById('darkModeToggle');
+
+function applyDarkMode() {
+    document.body.classList.toggle('dark-mode', isDarkMode);
+
+    const images = document.querySelectorAll('img');
+    images.forEach(image => {
+        const originalSrc = image.dataset.originalSrc || image.src;
+        let newSrc = originalSrc;
+        if (isDarkMode) {
+            if (originalSrc.includes('Dark')) {
+                newSrc = originalSrc;
+            } else {
+                newSrc = originalSrc.replace('.png', 'Dark.png');
+            }
+        } else {
+            if (originalSrc.includes('Dark')) {
+                newSrc = originalSrc.replace('Dark.png', '.png');
+            } else {
+                newSrc = originalSrc;
+            }
+        }
+        image.src = newSrc;
+        if (isDarkMode) {
+            image.dataset.originalSrc = originalSrc;
+        } else {
+            image.removeAttribute('data-original-src');
+        }
+    });
+}
+
+darkModeToggle.addEventListener('click', () => {
+    isDarkMode = !isDarkMode;
+    localStorage.setItem('isDarkMode', isDarkMode);
+    applyDarkMode();
+});
+
+applyDarkMode();
+
+		
+		
+		
+		
+		
+		
+        window.onload = () => {
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+            }
+            for (let i = 0; i < numberOfFrogs; i++) {
+                moveFrog(i);
+            }
+        };
+		
+
+    </script>
 </body>
 </html>
