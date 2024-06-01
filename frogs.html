@@ -97,8 +97,6 @@
 
 		.name {
 		font-size:20px;
-		padding-top:30px;
-		padding-left:30px;
 		float: left;
 		margin-bottom:0;
 		}
@@ -106,6 +104,7 @@
 		.socialicons {
 		display: inline-flex;
 		float: left;
+		padding-top:50px;
 		padding-left:50px;
 		}
 		
@@ -128,6 +127,31 @@
         margin: 20px;
         }
 		
+		.message-bubble {
+        position: absolute;
+        top: -90px;
+        left: 50%; 
+        transform: translateX(-50%);
+        background-color: white;
+		border-radius: 5px;		
+        padding: 10px;
+        z-index: 1; 
+        width: 500px; 
+		word-wrap: break-word;
+		text-align:center;
+		font-size:14px;		
+		}
+		
+		.buttonsleft {
+		float:left;
+		display:flex;
+		}
+		
+		.buttonsright {
+		float:right;
+		display:flex;
+		}
+		
         .close-btn {
         position: absolute;
         top: 5px;
@@ -138,6 +162,7 @@
 		body.dark-mode {
 		background-image: url('browserfrog/notepadDark.png');
 		background-color: #00070b !important;
+		color: #4abc23 !important;
 		}
 
 		body.dark-mode .footerthing {
@@ -148,9 +173,29 @@
 		background-color: #4abc23 !important;
 		}
 
+		body.dark-mode .message-bubble {
+		background-color: #00070b !important;
+		}
+
+
+
+		@media screen and (max-width: 1006px) {
+
+		.buttonsleft {
+		float:left;
+		display:block;
+		}
+		
+		.buttonsright {
+		float:right;
+		display:block;
+		}
+
+
+		}
 
 		
-		@media screen and (max-width: 1006px) {
+		@media screen and (max-width: 1135px) {
 		
 			body {
 			
@@ -163,7 +208,7 @@
 			
 			.verticalbutton {
 			width: auto;
-			height: 55px;
+			height: 50px;
 			}
 			
 			.frog-container {
@@ -198,6 +243,14 @@
 			padding-top:20px;
 			padding-left:20px;
 			}
+			
+
+			
+			.message-bubble {
+			width: 400px; 
+			word-wrap: break-word;
+			text-align:center;
+			}
 
 		
 		}
@@ -214,6 +267,13 @@
             width: 110px;
             height: 85px;
 			}
+			
+			.message-box {
+			border-radius: 0;
+			margin-left: 0;
+			margin-right: 0;
+			font-size:10px;
+			}
 
 		
 		}
@@ -227,7 +287,7 @@
 			
 			.verticalbutton {
 			width: auto;
-			height: 45px;
+			height: 40px;
 			}
 			
 			.frog-container {
@@ -238,6 +298,13 @@
 			.icons {
 			width: 120px;
 			height: auto;
+			}
+			
+			.message-bubble {
+			width: 300px; 
+			word-wrap: break-word;
+			text-align:center;
+			font-size:10px;
 			}
 
 		
@@ -254,23 +321,35 @@
 			.message-box {
 			font-size:11px;
 			}
+			
+			.socialicons {
+			display: flex;
+			padding-top:0px;
+			padding-left:0px;
+			}
+			
+			.name {
+			font-size:15px;
+			padding-top:0px;
+			padding-left:0px;
+			}
 
 		
 		}
 		
 		
 		
-		@media screen and (max-width: 400px) {
+		@media screen and (max-width: 446px) {
 
 			
 			.verticalbutton {
 			width: auto;
-			height: 45px;
+			height: 41px;
 			}
 		
 		}
 		
-				@media screen and (max-width: 330px) {
+				@media screen and (max-width: 379px) {
 				
 			.footerthing{
 			height: 111px;
@@ -278,7 +357,7 @@
 			
 			.verticalbutton {
 			width: auto;
-			height: 40px;
+			height: 34px;
 			}
 			
 			.frog-container {
@@ -314,51 +393,50 @@
 
 	<div>
 
-		<button id="toggleVerticalDragging"><img class=verticalbutton src="browserfrog/buttons/ToggleVertical.png"></button>
-		<button id="darkModeToggle"><img class=verticalbutton src="browserfrog/buttons/ToggleTheme.png"></button>	
-		<button id="spawnItemButton"><img class=verticalbutton src="browserfrog/buttons/AddFood.png"></button>
-
+		<div class=buttonsleft>
+		<div id="toggleVerticalDragging" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/buttons/ToggleVertical.png"></div>
+		<div id="darkModeToggle" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/buttons/ToggleTheme.png"></div>	
+		<div id="sendMessageButton" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/buttons/FrogMessage.png"></div>
+		<div id="spawnItemButton" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/buttons/AddFood.png"></div>
+		</div>
 
    <div class="message-box" id="messageBox">
         <span class="close-btn" onclick="hideMessageBox()" style="white-space:pre-wrap;">X</span>
         <p>A small little project to ''recreate'' the Flipnote frogs from the title screen of Flipnote Studio for the most part. <br><br>Created by :</p>
 
+		<!-- Would've made this way cleaner if my code didn't want the screen to flash on page load.-->
 	 <div>
 			<div style="padding-left:10px;">
  
-					<div style=text-align:center;>
- 
-						<img class=icons src="image/KingMayro.webp">
-	
-						<div style="display: flex;">
-							<p class=name>King Mayro</p>
-						</div>
 
-					</div>
-		
+						<img class=icons src="image/KingMayro.webp">
 		
 				<div class=socialicons>
-					<a href="https://github.com/KingMayro"><img src="browserfrog/buttons/Github.png" alt="Github" style="width:50px; height:auto;"></a>
-					<div style="padding-right:9px"> </div>  
-					<a href="https://www.youtube.com/@KingMayro"><img src="browserfrog/buttons/YouTube.png" alt="YouTube" style="width:50px;height:auto;"></a>
-					<div style="padding-left:8px"> </div> 
-					<a href="https://famicomcd.github.io/"><img src="browserfrog/buttons/FamicomCD.png" alt="FamicomCD" style="width:50px; height:auto;"></a>
+				
+					<p class=name>King Mayro</p>
+				
+					<a href="https://github.com/KingMayro"><img src="browserfrog/buttons/Github.png" alt="Github" style="width:40px;padding-top:20px;height:auto;"></a>
+					  
+					<a href="https://www.youtube.com/@KingMayro"><img src="browserfrog/buttons/YouTube.png" alt="YouTube" style="width:40px;height:auto;padding-left:9px;padding-top:20px;"></a>
+					
+					<a href="https://famicomcd.github.io/"><img src="browserfrog/buttons/FamicomCD.png" alt="FamicomCD" style="width:40px;height:auto;padding-left:8px;padding-top:20px;"></a>
 				</div>
 			</div> 
 		</div>
 
-			<div style="padding-top:90px;">
+			<div style="padding-top:190px;">
 			<p>Frog Graphics, General graphics, and font by King Mayro <br>Flipnote Studio by Nintendo
 			</div>
 			
     </div>
 
-
-	<a href="https://kingmayro.github.io/" style="float:right;padding-left:5px;"><img class=verticalbutton src="browserfrog/buttons/Home.png"></img></a>	
-	<div onclick="showMessageBox()" style="float:right;padding-left:5px;"><img class=verticalbutton src="browserfrog/buttons/Info.png"></img></div>		
+	<div class=buttonsright>
+		<div onclick="showMessageBox()" style="padding-left:5px;"><img class=verticalbutton src="browserfrog/buttons/Info.png"></img></div>	
+	<a href="https://kingmayro.github.io/" style="padding-left:5px;"><img class=verticalbutton src="browserfrog/buttons/Home.png"></img></a>	
+	</div>
 
 	</div>
-    <button id="refreshButton" style="display:none;" onclick="location.reload()"><img class=verticalbutton src="browserfrog/buttons/Refresh.png"></img></button>
+    <div id="refreshButton" style="display:none;" onclick="location.reload()"><img class=verticalbutton src="browserfrog/buttons/Refresh.png"></img></div>
 
 
 
@@ -619,7 +697,7 @@
                 }
             }
 
-            setTimeout(() => moveFrog(index), Math.random() * 3000 + 2000);
+            setTimeout(() => moveFrog(index), Math.random() * 2000 + 2000);
         }
 
         function performViewerAction(index) {
@@ -734,7 +812,7 @@
 		
 		
 		
-const items = ['browserfrog/Misc/Bread.png', 'browserfrog/Misc/Cake.png', 'browserfrog/Misc/Banana.png'];
+const items = ['browserfrog/Misc/Bread.png', 'browserfrog/Misc/Cake.png', 'browserfrog/Misc/Banana.png', 'browserfrog/Misc/Watermelon.png'];
 
 const specialItems = ['browserfrog/Misc/BlackDSi.png','browserfrog/Misc/WhiteDSi.png','browserfrog/Misc/BlueDSi.png','browserfrog/Misc/RedDSi.png','browserfrog/Misc/MagentaDSi.png','browserfrog/Misc/YellowDSi.png','browserfrog/Misc/PinkDSi.png','browserfrog/Misc/GreenDSi.png','browserfrog/Misc/FrogDoll.png']; 
 
@@ -745,9 +823,9 @@ function spawnRandomItem() {
     randomItem.classList.add('random-item');
     randomItem.src = randomItemName;
     randomItem.style.position = 'absolute';
-    randomItem.style.width = '100px';
-    randomItem.style.height = '100px';
-    randomItem.style.left = `${Math.random() * (window.innerWidth - 50)}px`;
+    randomItem.style.width = window.innerWidth < 1000 ? '50px' : '100px'; 
+    randomItem.style.height = window.innerWidth < 1000 ? '50px' : '100px'; 
+    randomItem.style.left = `${Math.random() * (window.innerWidth - (window.innerWidth < 700 ? 50 : 100))}px`; 
     randomItem.style.top = `${Math.random() * (window.innerHeight - 50)}px`;
     document.body.appendChild(randomItem);
 
@@ -755,6 +833,8 @@ function spawnRandomItem() {
     let originalTop = parseInt(randomItem.style.top) || randomItem.offsetTop;
     let originalLeft = parseInt(randomItem.style.left) || randomItem.offsetLeft;
     let dragging = false;
+
+
 
     randomItem.addEventListener('mousedown', startDrag);
     randomItem.addEventListener('touchstart', startDrag);
@@ -924,6 +1004,29 @@ function isAnimationInProgress(frog) {
 
 
 
+    const sendMessageButton = document.getElementById('sendMessageButton');
+    sendMessageButton.addEventListener('click', sendMessage);
+
+    function sendMessage() {
+        let message = prompt('Ribbit Ribbit! (100 Char. limit)');
+        if (message) {
+            message = message.substring(0, 100);
+            const randomFrogIndex = Math.floor(Math.random() * numberOfFrogs);
+            const frogContainer = frogContainers[randomFrogIndex];
+            const messageBubble = createMessageBubble(message);
+            frogContainer.appendChild(messageBubble);
+            setTimeout(() => {
+                messageBubble.remove();
+            }, 5000); // Remove message bubble after 5 seconds
+        }
+    }
+
+    function createMessageBubble(message) {
+        const messageBubble = document.createElement('div');
+        messageBubble.classList.add('message-bubble');
+        messageBubble.textContent = message;
+        return messageBubble;
+    }
 
 
 		
