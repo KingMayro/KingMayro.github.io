@@ -430,6 +430,8 @@
 
 	<div class=footerthing></div>
 
+   <div id="jsCheck">This browser does not support enough JavaScript to run this page</div>
+
 	<div class=main>
 	
 		<div class="frog-container" id="frog-container-1">
@@ -500,38 +502,13 @@
 
     <script>
 	
-	function checkFrogCode() {
-    try {
-        // Check if required functions and variables are defined
-        if (typeof showMessageBox === 'function' &&
-            typeof hideMessageBox === 'function' &&
-            typeof transitionTo === 'function' &&
-            typeof moveFrog === 'function' &&
-            typeof applyDarkMode === 'function' &&
-            typeof spawnRandomItem === 'function' &&
-            typeof sendMessage === 'function' &&
-            frogContainers &&
-            frames &&
-            animations) {
-            return true;
-        } else {
-            return false;
-        }
-    } catch (error) {
-        return false;
+	document.addEventListener('DOMContentLoaded', function() {
+    const jsCheckElement = document.getElementById('jsCheck');
+    if (jsCheckElement) {
+        jsCheckElement.style.display = 'none';
     }
-}
-
-window.onload = () => {
-    if (!checkFrogCode()) {
-        document.body.innerHTML = '<div class="error-message">This browser does not support enough JavaScript to run this page.</div>';
-    } else {
-        for (let i = 0; i < numberOfFrogs; i++) {
-            moveFrog(i);
-        }
-        applyDarkMode();
-    }
-};
+	
+	
 	
         function showMessageBox() {
             const messageBox = document.getElementById("messageBox");
