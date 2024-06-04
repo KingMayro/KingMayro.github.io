@@ -430,7 +430,7 @@
 
 	<div class=footerthing></div>
 
-   <div id="jsCheck" style="background-color:white;">This browser does not support enough JavaScript to run this page properly, sorry.</div>
+   <noscript>This browser does not support enough JavaScript to run this page properly, sorry.</noscript>
 
 	<div class=main>
 	
@@ -501,14 +501,6 @@
 
 
     <script>
-	
-	document.addEventListener('DOMContentLoaded', function() {
-    const jsCheckElement = document.getElementById('jsCheck');
-    if (jsCheckElement) {
-        jsCheckElement.style.display = 'none';
-    }
-	
-	
 	
         function showMessageBox() {
             const messageBox = document.getElementById("messageBox");
@@ -1130,9 +1122,6 @@ function checkScreenSize() {
 window.addEventListener('resize', checkScreenSize);
 
 
-
-
-
 let isDarkMode = localStorage.getItem('isDarkMode') === 'true';
 const darkModeToggle = document.getElementById('darkModeToggle');
 
@@ -1164,6 +1153,8 @@ function applyDarkMode() {
         }
     });
 }
+
+
 
 
 darkModeToggle.addEventListener('click', () => {
