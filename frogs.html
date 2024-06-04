@@ -152,6 +152,10 @@
 		display:flex;
 		}
 		
+		.credittext {
+		padding-top:190px;
+		}
+		
         .close-btn {
         position: absolute;
         top: 5px;
@@ -217,6 +221,10 @@
 			width: 100px;
 			height: auto;
 			}
+			
+			.credittext {
+			padding-top:135px;
+			}
 
 			.name {
 			font-size:15px;
@@ -230,7 +238,6 @@
 			
 			.name {
 			font-size:18px;
-			padding-top:20px;
 			padding-left:20px;
 			}
 			
@@ -273,7 +280,7 @@
 		}
 			
 		
-		@media screen and (max-width: 780px) {
+		@media screen and (max-width: 795px) {
 				
 			.footerthing{
 			height: 99px;
@@ -287,11 +294,6 @@
 			.frog-container {
             width: 100px;
             height: 80px;
-			}
-			
-			.icons {
-			width: 120px;
-			height: auto;
 			}
 			
 			.message-bubble {
@@ -318,7 +320,7 @@
 			
 			.verticalbutton {
 			width: auto;
-			height: 49px;
+			height: 53px;
 			}
 			
 			.message-box {
@@ -335,11 +337,34 @@
 			font-size:15px;
 			padding-top:0px;
 			padding-left:0px;
+			display:flex;
+			}
+			
+			.icons {
+			width: 70px;
+			height: auto;
+			}
+			
+			.credittext {
+			padding-top:65px;
+			}
+			
+			.refreshButton{
+			float:left;
+			display:none;
 			}
 
 		
 		}
 		
+		@media screen and (max-width: 476px) {
+			
+			.verticalbutton {
+			width: auto;
+			height: 49px;
+			}
+			
+		}
 		
 		
 		@media screen and (max-width: 446px) {
@@ -349,10 +374,21 @@
 			width: auto;
 			height: 41px;
 			}
+			
+			.icons {
+			width: 100px;
+			height: auto;
+			margin-left:35%;
+			}
+			
+			.credittext {
+			padding-top:155px;
+			}
+
 		
 		}
 		
-				@media screen and (max-width: 379px) {
+		@media screen and (max-width: 381px) {
 				
 			.footerthing{
 			height: 111px;
@@ -367,7 +403,25 @@
             width: 60px;
             height: 50px;
 			}
+			
+			.socialicons {
+			display: block;
+			float: left;
+			}			
+			
+			.othericons {
+			display: none;
+			}
 		
+		}
+		
+		@media screen and (max-width: 310px) {
+			
+			.verticalbutton {
+			width: auto;
+			height: 30px;
+			}
+			
 		}
 		
     </style>
@@ -420,14 +474,14 @@
 				
 					<a href="https://github.com/KingMayro"><img src="browserfrog/buttons/Github.png" alt="Github" style="width:40px;padding-top:20px;height:auto;"></a>
 					  
-					<a href="https://www.youtube.com/@KingMayro"><img src="browserfrog/buttons/YouTube.png" alt="YouTube" style="width:40px;height:auto;padding-left:9px;padding-top:20px;"></a>
+					<a class=othericons href="https://www.youtube.com/@KingMayro"><img src="browserfrog/buttons/YouTube.png" alt="YouTube" style="width:40px;height:auto;padding-left:9px;padding-top:20px;"></a>
 					
-					<a href="https://famicomcd.github.io/"><img src="browserfrog/buttons/FamicomCD.png" alt="FamicomCD" style="width:40px;height:auto;padding-left:8px;padding-top:20px;"></a>
+					<a class=othericons href="https://famicomcd.github.io/"><img src="browserfrog/buttons/FamicomCD.png" alt="FamicomCD" style="width:40px;height:auto;padding-left:8px;padding-top:20px;"></a>
 				</div>
 			</div> 
 		</div>
 
-			<div style="padding-top:190px;">
+			<div class=credittext>
 			<p>Frog Graphics, General graphics, and font by King Mayro <br>Flipnote Studio by Nintendo
 			</div>
 			
@@ -445,6 +499,40 @@
 
 
     <script>
+	
+	function checkFrogCode() {
+    try {
+        // Check if required functions and variables are defined
+        if (typeof showMessageBox === 'function' &&
+            typeof hideMessageBox === 'function' &&
+            typeof transitionTo === 'function' &&
+            typeof moveFrog === 'function' &&
+            typeof applyDarkMode === 'function' &&
+            typeof spawnRandomItem === 'function' &&
+            typeof sendMessage === 'function' &&
+            frogContainers &&
+            frames &&
+            animations) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        return false;
+    }
+}
+
+window.onload = () => {
+    if (!checkFrogCode()) {
+        document.body.innerHTML = '<div class="error-message">This browser does not support enough JavaScript to run this page.</div>';
+    } else {
+        for (let i = 0; i < numberOfFrogs; i++) {
+            moveFrog(i);
+        }
+        applyDarkMode();
+    }
+};
+	
         function showMessageBox() {
             const messageBox = document.getElementById("messageBox");
             messageBox.classList.add("show");
@@ -550,6 +638,7 @@
 			Sleep: [
                 {src: "browserfrog/Sleep1.png", duration: 700},
                 {src: "browserfrog/Sleep2.png", duration: 700},
+                {src: "browserfrog/Sleep3.png", duration: 700},
             ]
         };
 
@@ -913,6 +1002,7 @@ function spawnRandomItem() {
 const spawnItemButton = document.getElementById('spawnItemButton');
 spawnItemButton.addEventListener('click', spawnRandomItem);
 
+
 // Very bootleg way to get this to work
 function transitionToFoodEat(frogContainer) {
     if (isAnimationInProgress()) {
@@ -1117,6 +1207,14 @@ applyDarkMode();
             }
         };
 		
+		
+		
+	
+		
+		//coconut.jpg		
+		//"I have no fucking idea who put this here, but when I deleted it the game wouldn’t start. Words cannot describe my fucking confusion." 
+
+
 
     </script>
 </body>
