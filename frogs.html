@@ -44,14 +44,6 @@
         user-drag: none; 
 		}
 	
-        main {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-            margin: 0;
-        }
         .frog-container, .item-container {
             position: absolute;
             width: 145px;
@@ -67,13 +59,20 @@
 		
 		    
 		button {
-		all: unset;
-		cursor: pointer;
+		cursor: pointer !important;
+		padding: 0 !important;
+		margin: 0 !important;
+		background: none !important;
+		border: none !important;
+		outline: none !important;
+		font: inherit !important;
+		color: inherit !important;
 		}
 		
 		.verticalbutton {
 		width: auto;
         height: 65px;
+		cursor: pointer;
 		}
 		
 		.verticalbutton:active {
@@ -160,8 +159,46 @@
         position: absolute;
         top: 5px;
         right: 5px;
-        cursor: pointer;
+		cursor: pointer;
         }
+		
+		
+		.settings-container {
+		position: fixed;
+		bottom: 3px;
+		left: 10px;
+		}
+
+
+.settings-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    bottom: 75px;
+    background-color: white;
+    border-radius: 5px 5px 0px 0px;
+    padding: 10px;
+}
+
+.settings-menu button {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: white;
+    cursor: pointer;
+}
+
+.settings-menu button:hover {
+    background-color: #eee;
+}
+
+.close-menu-button {
+    align-self: flex-end;
+    background-color: #ff0000;
+    color: white;
+    font-weight: bold;
+}
+		
+		
 		
 		body.dark-mode {
 		background-image: url('browserfrog/notepadDark.png');
@@ -180,8 +217,40 @@
 		body.dark-mode .message-bubble {
 		background-color: #00070b !important;
 		}
+		
+		body.dark-mode .settings-menu {
+		bottom: 75px;
+		background-color: #00070b !important;
+		}
+		
 
+		body.streamer-mode {
+		background-image: none;
+		background-color: #00ff00 !important;
+		color: inherit;
+		}
+		
+		body.streamer-mode .footerthing {
+		background-color: #00ff00 !important;
+		}
+		
+		body.streamer-mode .settings-menu {
+		background-color: #00ff00 !important;
+		}
+		
+		/* used an image because light mode has priority over dark */
+	    body.dark-mode.streamer-mode {	
+		background-image: url('browserfrog/magenta.png');		
+		color: #ff00ff !important;
+		}
 
+		body.dark-mode.streamer-mode .footerthing {
+		background-color: #ff00ff !important;
+		}
+		
+		body.dark-mode.streamer-mode .settings-menu {
+		background-color: #ff00ff !important;
+		}
 
 		
 		@media screen and (max-width: 1135px) {
@@ -248,6 +317,12 @@
 			word-wrap: break-word;
 			text-align:center;
 			}
+			
+			.settings-container {
+			position: fixed;
+			bottom: 15px;
+			left: 10px;
+			}
 
 		
 		}
@@ -274,6 +349,12 @@
 			margin-left: 0;
 			margin-right: 0;
 			font-size:10px;
+			}
+			
+			.settings-container {
+			position: fixed;
+			bottom: 20px;
+			left: 10px;
 			}
 
 		
@@ -412,14 +493,34 @@
 			.othericons {
 			display: none;
 			}
+			
+			.settings-container {
+			position: fixed;
+			bottom: 35px;
+			left: 10px;
+			}
 		
 		}
+		
+		@media screen and (max-width: 338px) {
+			.othericonsyt {
+			display: none;
+			}
+			
+		}		
+		
+		
+		
 		
 		@media screen and (max-width: 310px) {
 			
 			.verticalbutton {
 			width: auto;
 			height: 30px;
+			}
+			
+			.othericonsyt {
+			display: none;
 			}
 			
 		}
@@ -429,8 +530,6 @@
 <body>
 
 	<div class=footerthing></div>
-
-   <noscript>This browser does not support enough JavaScript to run this page properly, sorry.</noscript>
 
 	<div class=main>
 	
@@ -454,7 +553,6 @@
 
 		<div class=buttonsleft>
 		<div id="toggleVerticalDragging" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/buttons/ToggleVertical.png"></div>
-		<div id="darkModeToggle" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/buttons/ToggleTheme.png"></div>	
 		<div id="sendMessageButton" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/buttons/FrogMessage.png"></div>
 		<div id="spawnItemButton" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/buttons/AddFood.png"></div>
 		</div>
@@ -468,7 +566,7 @@
 			<div style="padding-left:10px;">
  
 
-						<img class=icons src="image/KingMayro.webp">
+						<img class=icons src="image/KingMayro.jpg">
 		
 				<div class=socialicons>
 				
@@ -476,7 +574,7 @@
 				
 					<a href="https://github.com/KingMayro"><img src="browserfrog/buttons/Github.png" alt="Github" style="width:40px;padding-top:20px;height:auto;"></a>
 					  
-					<a class=othericons href="https://www.youtube.com/@KingMayro"><img src="browserfrog/buttons/YouTube.png" alt="YouTube" style="width:40px;height:auto;padding-left:9px;padding-top:20px;"></a>
+					<a class=othericonsyt href="https://www.youtube.com/@KingMayro"><img src="browserfrog/buttons/YouTube.png" alt="YouTube" style="width:40px;height:auto;padding-left:9px;padding-top:20px;"></a>
 					
 					<a class=othericons href="https://famicomcd.github.io/"><img src="browserfrog/buttons/FamicomCD.png" alt="FamicomCD" style="width:40px;height:auto;padding-left:8px;padding-top:20px;"></a>
 				</div>
@@ -498,7 +596,13 @@
     <div id="refreshButton" style="display:none;" onclick="location.reload()"><img class=verticalbutton src="browserfrog/buttons/Refresh.png"></img></div>
 
 
-
+    <div class="settings-container">
+        <div id="settingsButton"><img class=verticalbutton src="browserfrog/buttons/Settings.png"</div>
+        <div id="settingsMenu" class="settings-menu">
+			<div id="darkModeToggle" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/buttons/ToggleTheme.png"></div>	
+			<div id="streamerModeToggle"><img class=verticalbutton src="browserfrog/buttons/StreamerMode.png"></div>
+        </div>
+    </div>
 
     <script>
 	
@@ -1096,8 +1200,36 @@ function isAnimationInProgress(frog) {
     }
 
 
+
+
 		
-		
+document.addEventListener("DOMContentLoaded", function() {
+    const settingsButton = document.getElementById("settingsButton");
+    const settingsMenu = document.getElementById("settingsMenu");
+
+    settingsButton.addEventListener("click", function() {
+        if (settingsMenu.style.display === "flex") {
+            settingsMenu.style.display = "none";
+        } else {
+            settingsMenu.style.display = "flex";
+        }
+    });
+
+    settingsMenu.addEventListener("click", function(event) {
+        const clickedElement = event.target;
+        const autoClose = clickedElement.getAttribute("data-auto-close");
+        
+        if (autoClose === "true") {
+            settingsMenu.style.display = "none";
+        }
+
+        // Perform any other action based on the clicked option here
+        console.log(clickedElement.textContent + " clicked");
+    });
+});
+
+
+
 		
 		
 		
@@ -1163,7 +1295,27 @@ darkModeToggle.addEventListener('click', () => {
     applyDarkMode();
 });
 
+
 applyDarkMode();
+
+
+let isStreamerMode = localStorage.getItem('isStreamerMode') === 'true';
+const streamerModeToggle = document.getElementById('streamerModeToggle');
+
+function applyStreamerMode() {
+    document.body.classList.toggle('streamer-mode', isStreamerMode);
+}
+
+streamerModeToggle.addEventListener('click', function() {
+    isStreamerMode = !isStreamerMode;
+    localStorage.setItem('isStreamerMode', isStreamerMode);
+    applyStreamerMode();
+});
+
+// Apply the initial state on page load
+applyStreamerMode();
+
+
 
 
         window.onload = () => {
