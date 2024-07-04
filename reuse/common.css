@@ -19,11 +19,31 @@
 		width: 200px;
 		height: auto;
 		float: left;
-		
 		}
 		
 		.boxes{
 		border-radius:10px;
+		}
+		
+		.homebutton{
+		float:right;
+		display:none;
+		}
+
+		.titletext {
+		text-align:center;
+		}	
+		
+		.boxestitle {
+		display:inline-block;
+		width:50%;
+		font-size:24px;
+		}
+		
+		.boxeshome {
+		display:inline-block;
+		float:right;
+		font-size:24px;
 		}
 		
 		.spboxes{
@@ -69,12 +89,23 @@
 		
 		@media screen and (max-width: 1000px) {
 		
-		
 		.icons {
 		width: 50%;
 		height: auto;
 		text-align:center;
 		float:none;
+		}
+		
+
+		
+		.boxeshome {
+		display:none;
+		}		
+		
+		.boxestitle {
+		font-size:26px;
+		display:block;
+		width:auto;
 		}
 		
 		.projecticons {
@@ -114,4 +145,29 @@
 		}
 		
 		
+		}
+		
+		
+		
+		@media screen and (max-width: 500px) {
+			
+			
+		.boxestitle {
+
+		font-size:20px;
+		}
+			
+			
+		}
+		
+		
+		@media screen and (max-width: 400px) {
+			
+			
+		.boxestitle {
+
+		font-size:18px;
+		}
+			
+			
 		}
