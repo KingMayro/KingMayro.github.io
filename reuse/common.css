@@ -44,7 +44,20 @@
 		display:inline-block;
 		float:right;
 		font-size:24px;
+		transition: all 0.1s ease-in-out;	
 		}
+		
+		.boxeshome:hover {
+		transform: scale(1.04);	
+		cursor:pointer;
+		transition: all 0.07s ease-in-out;	
+		}
+		
+		.boxeshome:active {
+		transform: scale(0.95);
+		opacity:0.7;	
+		}
+		
 		
 		.spboxes{
 		border-radius:10px;
