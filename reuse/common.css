@@ -19,6 +19,7 @@
 		width: 200px;
 		height: auto;
 		float: left;
+		display:inline;
 		}
 		
 		.boxes{
@@ -48,12 +49,27 @@
 		}
 		
 		.boxeshome:hover {
-		transform: scale(1.04);	
-		cursor:pointer;
+		transform: scale(1.04);
 		transition: all 0.07s ease-in-out;	
 		}
 		
 		.boxeshome:active {
+		transform: scale(0.95);
+		opacity:0.7;	
+		}
+		
+		.boxesartfight {
+		display:inline-block;
+		font-size:24px;
+		transition: all 0.1s ease-in-out;	
+		}
+		
+		.boxesartfight:hover {
+		transform: scale(1.04);	
+		transition: all 0.07s ease-in-out;	
+		}
+		
+		.boxesartfight:active {
 		transform: scale(0.95);
 		opacity:0.7;	
 		}
@@ -86,6 +102,18 @@
 		
 		.projecticons {
 		width:60%;
+		transition: all 0.1s ease-in-out;	
+		}
+		
+		.projecticons:hover {
+		transform: scale(1.04);	
+		cursor:pointer;
+		transition: all 0.07s ease-in-out;	
+		}
+		
+		.projecticons:active {
+		transform: scale(0.95);
+		opacity:0.7;	
 		}
 		
 		
@@ -107,6 +135,7 @@
 		height: auto;
 		text-align:center;
 		float:none;
+		padding-bottom:10px;
 		}
 		
 

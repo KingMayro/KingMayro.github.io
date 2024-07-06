@@ -2,22 +2,92 @@
 		display:inline-block;
 		width:380px;
 		vertical-align:top;
+		user-select: none;
 		}
 		
 		.art {
 		width:370px;
 		transition: all 0.1s ease-in-out;	
+		display:block;
+		user-select: none;
 		}
 		
 		.art:hover {
-		transform: scale(1.04);	
+		transform: scale(1.05);	
 		cursor:pointer;
-		transition: all 0.07s ease-in-out;
+		transition: all 0.09s ease-in-out;
 		}
 		
 		.art:active {
 		transform: scale(0.95);
 		opacity:0.7;
+		}
+		
+		.gifs {
+		position: relative;
+		display: inline-block;
+		margin:0;
+		}
+
+
+		.gifmark {
+		position: absolute;
+		width:40px;
+		top: 10px;
+		right: 10px;
+		pointer-events: none;
+		padding: 5px;
+		transform: scale(0);
+		transition: all 0.2s ease-in-out;		
+		}
+
+		.gifs:hover .gifmark{	
+		transform: scale(1);	
+		}
+		
+		.gifs:active .gifmark{	
+		transform: scale(0.9);	
+		opacity:0.7;
+		}
+		
+		.infoart {
+		width:65%;
+		}
+		
+		.artfightbuttons {
+		padding-left:10px;
+		}
+		
+		.pushbox {
+		padding-bottom:60px;	
+		}
+
+
+		@media screen and (max-width: 1400px) {
+
+		.infoart {
+		width:50%;
+		}
+		
+		}
+		
+		
+		@media screen and (max-width: 1000px) {
+
+		.infoart {
+		width:97%;
+		}
+		
+		.artfightbuttons {
+		padding-left:0px;
+		display: flex;
+        justify-content: center;
+		}
+		
+		.pushbox {
+		padding-bottom:0;	
+		}
+		
 		}
 
 		
@@ -29,7 +99,8 @@
 		
 		.art {
 		width:300px;
-		}		
+		}
+	
 		
 		
 		}
