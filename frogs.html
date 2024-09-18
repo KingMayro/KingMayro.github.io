@@ -163,27 +163,6 @@
         }
 		
 		
-		.settingsbuttons {
-		display:inline;
-		padding-right:2%;
-		}
-		
-		.schemegrid {
-		display: inline-grid;
-		grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-		width:350px;
-		margin-right:5px;
-		}
-		
-		.schemeselecticon {
-		width:70px;
-		cursor:pointer;
-		}
-		
-		.line {
-		width:350px;
-		}
-		
 		.settings-container {
 		position: fixed;
 		bottom: 3px;
@@ -191,33 +170,33 @@
 		}
 
 
-		.settings-menu {
-		display: none;
-		flex-direction: row;
-		position: absolute;
-		bottom: 75px;
-		background-color: white;
-		border-radius: 5px 5px 0px 0px;
-		padding: 10px;
-		}
+.settings-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    bottom: 75px;
+    background-color: white;
+    border-radius: 5px 5px 0px 0px;
+    padding: 10px;
+}
 
-		.settings-menu button {
-		padding: 10px;
-		margin: 5px 0;
-		background-color: white;
-		cursor: pointer;
-		}
+.settings-menu button {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: white;
+    cursor: pointer;
+}
 
-		.settings-menu button:hover {
-		background-color: #eee;
-		}
+.settings-menu button:hover {
+    background-color: #eee;
+}
 
-		.close-menu-button {
-		align-self: flex-end;
-		background-color: #ff0000;
-		color: white;
-		font-weight: bold;
-		}
+.close-menu-button {
+    align-self: flex-end;
+    background-color: #ff0000;
+    color: white;
+    font-weight: bold;
+}
 		
 		
 		
@@ -237,7 +216,6 @@
 
 		body.dark-mode .message-bubble {
 		background-color: #00070b !important;
-		color:white !important;
 		}
 		
 		body.dark-mode .settings-menu {
@@ -366,26 +344,6 @@
             height: 85px;
 			}
 			
-			.schemegrid {
-			grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-			width:250px;
-			margin-right:0px;
-			}
-			
-			.schemeselecticon {
-			width:50px;
-			}
-			
-			.line {
-			width:250px;
-			}
-			
-			.settings-menu {
-			display: none;
-			flex-direction: column;
-			position: absolute;
-			}
-			
 			.message-box {
 			border-radius: 0;
 			margin-left: 0;
@@ -476,20 +434,6 @@
 			float:left;
 			display:none;
 			}
-			
-			.schemegrid {
-			grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-			width:350px;
-			}
-			
-			.schemeselecticon {
-			width:70px;
-			cursor:pointer;
-			}
-			
-			.line {
-			width:350px;
-			}
 
 		
 		}
@@ -499,19 +443,6 @@
 			.verticalbutton {
 			width: auto;
 			height: 49px;
-			}
-			
-			.schemegrid {
-			grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-			width:300px;
-			}
-			
-			.schemeselecticon {
-			width:60px;
-			}
-			
-			.line {
-			width:300px;
 			}
 			
 		}
@@ -603,15 +534,15 @@
 	<div class=main>
 	
 		<div class="frog-container" id="frog-container-1">
-			<img class="frog" src="browserfrog/colors/default/Idle.png">
+			<img class="frog" src="browserfrog/Idle.png">
 		</div>
 
 		<div class="frog-container" id="frog-container-2">
-			<img class="frog" src="browserfrog/colors/default/Idle.png">
+			<img class="frog" src="browserfrog/Idle.png">
 		</div>
 
 		<div class="frog-container" id="frog-container-3" style="display:none;">
-			<img class="frog" src="browserfrog/colors/default/Idle.png">
+			<img class="frog" src="browserfrog/Idle.png">
 		</div>
 	
     </div>
@@ -621,9 +552,9 @@
 	<div>
 
 		<div class=buttonsleft>
-		<div id="toggleVerticalDragging" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/colors/default/buttons/ToggleVertical.png"></div>
-		<div id="sendMessageButton" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/colors/default/buttons/FrogMessage.png"></div>
-		<div id="spawnItemButton" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/colors/default/buttons/AddFood.png"></div>
+		<div id="toggleVerticalDragging" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/buttons/ToggleVertical.png"></div>
+		<div id="sendMessageButton" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/buttons/FrogMessage.png"></div>
+		<div id="spawnItemButton" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/buttons/AddFood.png"></div>
 		</div>
 
    <div class="message-box" id="messageBox">
@@ -641,11 +572,11 @@
 				
 					<p class=name>King Mayro</p>
 				
-					<a href="https://github.com/KingMayro"><img src="browserfrog/colors/default/buttons/Github.png" alt="Github" style="width:40px;padding-top:20px;height:auto;"></a>
+					<a href="https://github.com/KingMayro"><img src="browserfrog/buttons/Github.png" alt="Github" style="width:40px;padding-top:20px;height:auto;"></a>
 					  
-					<a class=othericonsyt href="https://www.youtube.com/@KingMayro"><img src="browserfrog/colors/default/buttons/YouTube.png" alt="YouTube" style="width:40px;height:auto;padding-left:9px;padding-top:20px;"></a>
+					<a class=othericonsyt href="https://www.youtube.com/@KingMayro"><img src="browserfrog/buttons/YouTube.png" alt="YouTube" style="width:40px;height:auto;padding-left:9px;padding-top:20px;"></a>
 					
-					<a class=othericons href="https://famicomcd.org/"><img src="browserfrog/colors/default/buttons/FamicomCD.png" alt="FamicomCD" style="width:40px;height:auto;padding-left:8px;padding-top:20px;"></a>
+					<a class=othericons href="https://famicomcd.org/"><img src="browserfrog/buttons/FamicomCD.png" alt="FamicomCD" style="width:40px;height:auto;padding-left:8px;padding-top:20px;"></a>
 				</div>
 			</div> 
 		</div>
@@ -657,62 +588,19 @@
     </div>
 
 	<div class=buttonsright>
-		<div onclick="showMessageBox()" style="padding-left:5px;"><img class=verticalbutton src="browserfrog/colors/default/buttons/Info.png"></img></div>	
-	<a href="https://kingmayro.github.io/" style="padding-left:5px;"><img class=verticalbutton src="browserfrog/colors/default/buttons/Home.png"></img></a>	
+		<div onclick="showMessageBox()" style="padding-left:5px;"><img class=verticalbutton src="browserfrog/buttons/Info.png"></img></div>	
+	<a href="https://kingmayro.github.io/" style="padding-left:5px;"><img class=verticalbutton src="browserfrog/buttons/Home.png"></img></a>	
 	</div>
 
 	</div>
-    <div id="refreshButton" style="display:none;" onclick="location.reload()"><img class=verticalbutton src="browserfrog/colors/default/buttons/Refresh.png"></img></div>
+    <div id="refreshButton" style="display:none;" onclick="location.reload()"><img class=verticalbutton src="browserfrog/buttons/Refresh.png"></img></div>
 
 
     <div class="settings-container">
-        <div id="settingsButton"><img class=verticalbutton src="browserfrog/colors/default/buttons/Settings.png"</div>
+        <div id="settingsButton"><img class=verticalbutton src="browserfrog/buttons/Settings.png"</div>
         <div id="settingsMenu" class="settings-menu">
-		
-			<div class="settingsbuttons">
-				<div id="darkModeToggle" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/colors/default/buttons/ToggleTheme.png"></div>	
-				<div id="streamerModeToggle"><img class=verticalbutton src="browserfrog/colors/default/buttons/StreamerMode.png"></div>
-			</div>
-			
-<div>
-<div class="schemegrid">
-	<img class="schemeselecticon" data-scheme="default" src="browserfrog/colors/default/Idle.png">
-	<img class="schemeselecticon" data-scheme="defaultgreen" src="browserfrog/colors/defaultgreen/Idle.png">
-	<img class="schemeselecticon" data-scheme="classic" src="browserfrog/colors/classic/Idle.png">
-	<!-- <img class="schemeselecticon" data-scheme="classicog" src="browserfrog/colors/classicog/Idle.png"> -->
-	<img src="browserfrog/Misc/nothing.png">
-	<img src="browserfrog/Misc/nothing.png">
-	
-	<img class="line" style="margin:6px 0 6px 0;" src="browserfrog/Misc/line.png">
-</div>
-
-<div class="schemegrid">
-	<img class="schemeselecticon" data-scheme="red" src="browserfrog/colors/red/Idle.png">
-	<img class="schemeselecticon" data-scheme="orange" src="browserfrog/colors/orange/Idle.png">
-	<img class="schemeselecticon" data-scheme="yellow" src="browserfrog/colors/yellow/Idle.png">
-	<img class="schemeselecticon" data-scheme="lime" src="browserfrog/colors/lime/Idle.png">
-	<img class="schemeselecticon" data-scheme="teal" src="browserfrog/colors/teal/Idle.png">
-	
-	<img class="schemeselecticon" data-scheme="blue" src="browserfrog/colors/blue/Idle.png">
-	<img class="schemeselecticon" data-scheme="lightblue" src="browserfrog/colors/lightblue/Idle.png">
-	<img class="schemeselecticon" data-scheme="pink" src="browserfrog/colors/pink/Idle.png">
-	<img class="schemeselecticon" data-scheme="magenta" src="browserfrog/colors/magenta/Idle.png">
-	<img class="schemeselecticon" data-scheme="purple" src="browserfrog/colors/purple/Idle.png">
-	
-	<img class="schemeselecticon" data-scheme="lighttan" src="browserfrog/colors/lighttan/Idle.png">
-	<img class="schemeselecticon" data-scheme="tan" src="browserfrog/colors/tan/Idle.png">
-	<img class="schemeselecticon" data-scheme="lightbrown" src="browserfrog/colors/lightbrown/Idle.png">
-	<img class="schemeselecticon" data-scheme="brown" src="browserfrog/colors/brown/Idle.png">
-	<img class="schemeselecticon" data-scheme="crimson" src="browserfrog/colors/crimson/Idle.png">
-	
-	<img class="schemeselecticon" data-scheme="white" src="browserfrog/colors/white/Idle.png">
-	<img class="schemeselecticon" data-scheme="lightgray" src="browserfrog/colors/lightgray/Idle.png">
-	<img class="schemeselecticon" data-scheme="gray" src="browserfrog/colors/gray/Idle.png">
-	<img class="schemeselecticon" data-scheme="darkgray" src="browserfrog/colors/darkgray/Idle.png">
-	<img class="schemeselecticon" data-scheme="black" src="browserfrog/colors/black/Idle.png">
-</div>			
-</div>				
-			
+			<div id="darkModeToggle" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/buttons/ToggleTheme.png"></div>	
+			<div id="streamerModeToggle"><img class=verticalbutton src="browserfrog/buttons/StreamerMode.png"></div>
         </div>
     </div>
 
@@ -730,104 +618,104 @@
 
         const frogContainers = document.querySelectorAll('.frog-container');
         const frames = {
-            facingRight: ['browserfrog/colors/default/Right.png'],
-            facingLeft: ['browserfrog/colors/default/Left.png'],
-            facingViewer: ['browserfrog/colors/default/Idle.png']
+            facingRight: ['browserfrog/Right.png'],
+            facingLeft: ['browserfrog/Left.png'],
+            facingViewer: ['browserfrog/Idle.png']
         };
 
         const animations = {
             TurnLeft: [
-                {src: "browserfrog/colors/default/Idle.png", duration: 100},
-                {src: "browserfrog/colors/default/MidLeft.png", duration: 100},
-                {src: "browserfrog/colors/default/Left.png", duration: 100}
+                {src: "browserfrog/Idle.png", duration: 100},
+                {src: "browserfrog/MidLeft.png", duration: 100},
+                {src: "browserfrog/Left.png", duration: 100}
             ],
             TurnRight: [
-                {src: "browserfrog/colors/default/Idle.png", duration: 100},
-                {src: "browserfrog/colors/default/MidRight.png", duration: 100},
-                {src: "browserfrog/colors/default/Right.png", duration: 100}
+                {src: "browserfrog/Idle.png", duration: 100},
+                {src: "browserfrog/MidRight.png", duration: 100},
+                {src: "browserfrog/Right.png", duration: 100}
             ],
             LeftReturn: [
-                {src: "browserfrog/colors/default/Left.png", duration: 100},
-                {src: "browserfrog/colors/default/MidLeft.png", duration: 100},
-                {src: "browserfrog/colors/default/Idle.png", duration: 100}
+                {src: "browserfrog/Left.png", duration: 100},
+                {src: "browserfrog/MidLeft.png", duration: 100},
+                {src: "browserfrog/Idle.png", duration: 100}
             ],
             RightReturn: [
-                {src: "browserfrog/colors/default/Right.png", duration: 100},
-                {src: "browserfrog/colors/default/MidRight.png", duration: 100},
-                {src: "browserfrog/colors/default/Idle.png", duration: 100}
+                {src: "browserfrog/Right.png", duration: 100},
+                {src: "browserfrog/MidRight.png", duration: 100},
+                {src: "browserfrog/Idle.png", duration: 100}
             ],
             CroakLeft: [
-                {src: "browserfrog/colors/default/Left.png", duration: 100},
-                {src: "browserfrog/colors/default/MidCroakLeft.png", duration: 100},
-                {src: "browserfrog/colors/default/MaxCroakLeft.png", duration: 100},
-                {src: "browserfrog/colors/default/MidCroakLeft.png", duration: 100},
-                {src: "browserfrog/colors/default/Left.png", duration: 100}
+                {src: "browserfrog/Left.png", duration: 100},
+                {src: "browserfrog/MidCroakLeft.png", duration: 100},
+                {src: "browserfrog/MaxCroakLeft.png", duration: 100},
+                {src: "browserfrog/MidCroakLeft.png", duration: 100},
+                {src: "browserfrog/Left.png", duration: 100}
             ],
             CroakRight: [
-                {src: "browserfrog/colors/default/Right.png", duration: 100},
-                {src: "browserfrog/colors/default/MidCroakRight.png", duration: 100},
-                {src: "browserfrog/colors/default/MaxCroakRight.png", duration: 100},
-                {src: "browserfrog/colors/default/MidCroakRight.png", duration: 100},
-                {src: "browserfrog/colors/default/Right.png", duration: 100}
+                {src: "browserfrog/Right.png", duration: 100},
+                {src: "browserfrog/MidCroakRight.png", duration: 100},
+                {src: "browserfrog/MaxCroakRight.png", duration: 100},
+                {src: "browserfrog/MidCroakRight.png", duration: 100},
+                {src: "browserfrog/Right.png", duration: 100}
             ],
             JumpLeft: [
-                {src: "browserfrog/colors/default/Left.png", duration: 50},
-                {src: "browserfrog/colors/default/JumpUpLeft.png", duration: 100},
-                {src: "browserfrog/colors/default/FallDownLeft.png", duration: 100},
-                {src: "browserfrog/colors/default/Left.png", duration: 100}
+                {src: "browserfrog/Left.png", duration: 50},
+                {src: "browserfrog/JumpUpLeft.png", duration: 100},
+                {src: "browserfrog/FallDownLeft.png", duration: 100},
+                {src: "browserfrog/Left.png", duration: 100}
             ],
             JumpRight: [
-                {src: "browserfrog/colors/default/Right.png", duration: 25},
-                {src: "browserfrog/colors/default/JumpUpRight.png", duration: 100},
-                {src: "browserfrog/colors/default/FallDownRight.png", duration: 100},
-                {src: "browserfrog/colors/default/Right.png", duration: 100}
+                {src: "browserfrog/Right.png", duration: 25},
+                {src: "browserfrog/JumpUpRight.png", duration: 100},
+                {src: "browserfrog/FallDownRight.png", duration: 100},
+                {src: "browserfrog/Right.png", duration: 100}
             ],
             Blink: [
-                {src: "browserfrog/colors/default/Idle.png", duration: 100},
-                {src: "browserfrog/colors/default/Blink.png", duration: 100},
-                {src: "browserfrog/colors/default/Idle.png", duration: 100}
+                {src: "browserfrog/Idle.png", duration: 100},
+                {src: "browserfrog/Blink.png", duration: 100},
+                {src: "browserfrog/Idle.png", duration: 100}
             ],
             Croak: [
-                {src: "browserfrog/colors/default/Idle.png", duration: 100},
-                {src: "browserfrog/colors/default/MidCroak.png", duration: 100},
-                {src: "browserfrog/colors/default/MaxCroak.png", duration: 100},
-                {src: "browserfrog/colors/default/MidCroak.png", duration: 100},
-                {src: "browserfrog/colors/default/Idle.png", duration: 100}
+                {src: "browserfrog/Idle.png", duration: 100},
+                {src: "browserfrog/MidCroak.png", duration: 100},
+                {src: "browserfrog/MaxCroak.png", duration: 100},
+                {src: "browserfrog/MidCroak.png", duration: 100},
+                {src: "browserfrog/Idle.png", duration: 100}
             ],
             Tongue: [
-                {src: "browserfrog/colors/default/Idle.png", duration: 70},
-                {src: "browserfrog/colors/default/LipUp.png", duration: 70},
-                {src: "browserfrog/colors/default/TongueBounce.png", duration: 70},
-                {src: "browserfrog/colors/default/Tongue.png", duration: 70}
+                {src: "browserfrog/Idle.png", duration: 70},
+                {src: "browserfrog/LipUp.png", duration: 70},
+                {src: "browserfrog/TongueBounce.png", duration: 70},
+                {src: "browserfrog/Tongue.png", duration: 70}
             ],
             Smile: [
-                {src: "browserfrog/colors/default/Smile.png", duration: 100},
+                {src: "browserfrog/Smile.png", duration: 100},
             ],
             Ribbit: [
-                {src: "browserfrog/colors/default/Idle.png", duration: 100},
-                {src: "browserfrog/colors/default/Smile.png", duration: 50},
-                {src: "browserfrog/colors/default/WideRibbit.png", duration: 100},
-                {src: "browserfrog/colors/default/MidRibbit.png", duration: 100},
-                {src: "browserfrog/colors/default/SmallRibbit.png", duration: 50},
-                {src: "browserfrog/colors/default/Idle.png", duration: 100}
+                {src: "browserfrog/Idle.png", duration: 100},
+                {src: "browserfrog/Smile.png", duration: 50},
+                {src: "browserfrog/WideRibbit.png", duration: 100},
+                {src: "browserfrog/MidRibbit.png", duration: 100},
+                {src: "browserfrog/SmallRibbit.png", duration: 50},
+                {src: "browserfrog/Idle.png", duration: 100}
             ],
             FoodEat: [
-                {src: "browserfrog/colors/default/WideMouth.png", duration: 50},
-                {src: "browserfrog/colors/default/ChompDown.png", duration: 50},
-                {src: "browserfrog/colors/default/Chew1.png", duration: 100},
-                {src: "browserfrog/colors/default/Chew2.png", duration: 100},
-                {src: "browserfrog/colors/default/Chew1.png", duration: 100},
-                {src: "browserfrog/colors/default/Idle.png", duration: 100}
+                {src: "browserfrog/WideMouth.png", duration: 50},
+                {src: "browserfrog/ChompDown.png", duration: 50},
+                {src: "browserfrog/Chew1.png", duration: 100},
+                {src: "browserfrog/Chew2.png", duration: 100},
+                {src: "browserfrog/Chew1.png", duration: 100},
+                {src: "browserfrog/Idle.png", duration: 100}
             ],
 			//keeping this here just in case I can get sleep working properly again
 			Sleep: [
-                {src: "browserfrog/colors/default/Sleep1.png", duration: 700},
-                {src: "browserfrog/colors/default/Sleep2.png", duration: 700},
-                {src: "browserfrog/colors/default/Sleep3.png", duration: 700},
+                {src: "browserfrog/Sleep1.png", duration: 700},
+                {src: "browserfrog/Sleep2.png", duration: 700},
+                {src: "browserfrog/Sleep3.png", duration: 700},
             ]
         };
 
-        let currentStates = ['browserfrog/colors/default/Idle.png', 'browserfrog/colors/default/Idle.png', 'browserfrog/colors/default/Idle.png'];
+        let currentStates = ['browserfrog/Idle.png', 'browserfrog/Idle.png', 'browserfrog/Idle.png'];
         let facings = ['viewer', 'viewer', 'viewer'];
         let currentFrameStarts = [Date.now(), Date.now(), Date.now()];
         let verticalDraggingEnabled = true;
@@ -880,7 +768,7 @@
             const nextFrame = () => {
                 const frame = animation[frameIndex];
                 const newFrogElement = document.createElement('img');
-                newFrogElement.src = isDarkMode ? frame.src.replace('.png', '.png') : frame.src; // Old dark mode stuff. Can't remove it or it breaks things???
+                newFrogElement.src = isDarkMode ? frame.src.replace('.png', 'Dark.png') : frame.src;
                 newFrogElement.className = 'frog';
                 newFrogElement.onload = () => {
                     const oldFrogElement = frogContainers[index].querySelector('.frog');
@@ -983,14 +871,14 @@
         }
 
         function performViewerAction(index) {
-            const viewerActions = ['Blink', 'Croak', 'Tongue', 'Smile', 'Ribbit', 'browserfrog/colors/default/FrogLoad.gif', 'browserfrog/colors/default/TalkMore.gif'];
+            const viewerActions = ['Blink', 'Croak', 'Tongue', 'Smile', 'Ribbit', 'browserfrog/FrogLoad.gif', 'browserfrog/TalkMore.gif'];
 
 // Very bootleg way to get this to work
     const action = Math.random() < 0 ? 'FoodEat' : getRandomElement(viewerActions);
 
-    if (action === 'browserfrog/colors/default/FrogLoad.gif' || action === 'browserfrog/colors/default/TalkMore.gif') {
+    if (action === 'browserfrog/FrogLoad.gif' || action === 'browserfrog/TalkMore.gif') {
         const newFrogElement = document.createElement('img');
-        newFrogElement.src = action.replace('.gif', isDarkMode ? '.gif' : '.gif');  // Old dark mode stuff. Can't remove it or it breaks things???
+        newFrogElement.src = action.replace('.gif', isDarkMode ? 'Dark.gif' : '.gif');
         newFrogElement.className = 'frog';
         newFrogElement.onload = () => {
             const oldFrogElement = frogContainers[index].querySelector('.frog');
@@ -1094,9 +982,9 @@
 		
 		
 		
-const items = ['browserfrog/Misc/Bread.png', 'browserfrog/Misc/Cake.png', 'browserfrog/Misc/Banana.png', 'browserfrog/Misc/Watermelon.png', 'browserfrog/Misc/Apple.png'];
+const items = ['browserfrog/Misc/Bread.png', 'browserfrog/Misc/Cake.png', 'browserfrog/Misc/Banana.png', 'browserfrog/Misc/Watermelon.png'];
 
-const specialItems = ['browserfrog/Misc/notedible/BlackDSi.png','browserfrog/Misc/notedible/WhiteDSi.png','browserfrog/Misc/notedible/BlueDSi.png','browserfrog/Misc/notedible/RedDSi.png','browserfrog/Misc/notedible/MagentaDSi.png','browserfrog/Misc/notedible/YellowDSi.png','browserfrog/Misc/notedible/PinkDSi.png','browserfrog/Misc/notedible/GreenDSi.png','browserfrog/Misc/notedible/FrogDoll.png']; 
+const specialItems = ['browserfrog/Misc/BlackDSi.png','browserfrog/Misc/WhiteDSi.png','browserfrog/Misc/BlueDSi.png','browserfrog/Misc/RedDSi.png','browserfrog/Misc/MagentaDSi.png','browserfrog/Misc/YellowDSi.png','browserfrog/Misc/PinkDSi.png','browserfrog/Misc/GreenDSi.png','browserfrog/Misc/FrogDoll.png']; 
 
 function spawnRandomItem() {
     const spawnSpecial = Math.random() < 0.05; 
@@ -1197,7 +1085,7 @@ function transitionToFoodEat(frogContainer) {
     const frog = frogContainer.querySelector('.frog');
     const frogAnimation = animations.FoodEat;
 
-    currentStates = ['browserfrog/colors/default/Idle.png', 'browserfrog/colors/default/Idle.png', 'browserfrog/colors/default/Idle.png'];
+    currentStates = ['browserfrog/Idle.png', 'browserfrog/Idle.png', 'browserfrog/Idle.png'];
     facings = ['viewer', 'viewer', 'viewer'];
     currentFrameStarts = [Date.now(), Date.now(), Date.now()];
     setAnimationInProgress(true);
@@ -1209,7 +1097,7 @@ function transitionToFoodEat(frogContainer) {
         
         const frame = frogAnimation[frameIndex];
         const newFrogElement = document.createElement('img');
-        newFrogElement.src = isDarkMode ? frame.src.replace('.png', '.png') : frame.src; // Old dark mode stuff. Can't remove it or it breaks things???
+        newFrogElement.src = isDarkMode ? frame.src.replace('.png', 'Dark.png') : frame.src;
         newFrogElement.className = 'frog';
         newFrogElement.onload = () => {
             const oldFrogElement = frogContainers[index].querySelector('.frog');
@@ -1245,14 +1133,14 @@ function transitionToFoodEat(frogContainer) {
         return;
     }
 
-    currentStates = ['browserfrog/colors/default/Idle.png', 'browserfrog/colors/default/Idle.png', 'browserfrog/colors/default/Idle.png'];
+    currentStates = ['browserfrog/Idle.png', 'browserfrog/Idle.png', 'browserfrog/Idle.png'];
     facings = ['viewer', 'viewer', 'viewer'];
     currentFrameStarts = [Date.now(), Date.now(), Date.now()];
 
     const nextFrame = (index, frameIndex) => {
         const frame = frogAnimation[frameIndex];
         const newFrogElement = document.createElement('img');
-        newFrogElement.src = isDarkMode ? frame.src.replace('.png', '.png') : frame.src; // Old dark mode stuff. Can't remove it or it breaks things???
+        newFrogElement.src = isDarkMode ? frame.src.replace('.png', 'Dark.png') : frame.src;
         newFrogElement.className = 'frog';
         newFrogElement.onload = () => {
             const oldFrogElement = frogContainers[index].querySelector('.frog');
@@ -1335,138 +1223,15 @@ document.addEventListener("DOMContentLoaded", function() {
             settingsMenu.style.display = "none";
         }
 
+        // Perform any other action based on the clicked option here
+        console.log(clickedElement.textContent + " clicked");
     });
 });
 
 
 
-// This is janky, but it could be worse.
 		
-document.addEventListener("DOMContentLoaded", function() {
-    const schemes = {
-        "default": "default",
-        "defaultgreen": "defaultgreen",
-        "classic": "classic",
-		"classicog": "classicog",
-		"red": "red",
-		"orange": "orange",
-		"yellow": "yellow",
-		"lime": "lime",
-		"teal": "teal",
-		"blue": "blue",
-		"lightblue": "lightblue",
-		"pink": "pink",
-		"magenta": "magenta",
-		"purple": "purple",
-		"lighttan": "lighttan",
-		"tan": "tan",
-		"lightbrown": "lightbrown",
-		"brown": "brown",
-		"crimson": "crimson",
-		"white": "white",
-		"lightgray": "lightgray",
-		"gray": "gray",
-		"darkgray": "darkgray",
-		"black": "black",
-    };
-
-    let currentScheme = localStorage.getItem('scheme') || "default";
-    const cache = {};
-    const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-    function preloadSchemeImages(scheme) {
-        const imageUrls = Array.from(document.querySelectorAll("img:not(.schemeselecticon)"))
-            .map(img => img.src)
-            .filter(src => src.includes('/colors/') || src.includes('/buttons/'))
-            .map(src => {
-                return src.replace(/(\/colors\/|\/buttons\/)[^\/]+(?=\/)/, `$1${schemes[scheme] || schemes["default"]}`);
-            });
-
-        imageUrls.forEach(url => preloadImage(url));
-    }
-
-    function preloadImage(src) {
-        if (cache[src]) return;
-
-        const tempImg = new Image();
-        tempImg.onload = function() {
-            cache[src] = tempImg.src;
-        };
-        tempImg.onerror = function() {
-            console.error(`Failed to load image: ${src}`);
-        };
-        tempImg.src = src;
-    }
-
-    function updateFrogImages() {
-        const frogImgs = document.querySelectorAll("img:not(.schemeselecticon)");
-
-        frogImgs.forEach(frogImg => {
-            const imgSrc = frogImg.src;
-            if (imgSrc.includes('/colors/') || imgSrc.includes('/buttons/')) {
-                const newSrc = imgSrc.replace(/(\/colors\/|\/buttons\/)[^\/]+(?=\/)/, `$1${schemes[currentScheme] || schemes["default"]}`);
-                const darkModeSuffix = darkModeMediaQuery.matches ? "Dark" : "";
-
-                if (imgSrc !== newSrc) {
-                    if (cache[newSrc]) {
-                        frogImg.src = cache[newSrc];
-                    } else {
-                        frogImg.src = newSrc;
-                        preloadImage(newSrc);
-                    }
-                }
-            }
-        });
-    }
-
-    function handleSchemeToggle(scheme) {
-        if (scheme && schemes[scheme] !== undefined) {
-            currentScheme = scheme;
-            localStorage.setItem('scheme', scheme);
-            preloadSchemeImages(scheme);
-            updateFrogImages();
-        }
-    }
-
-    function handleClick(event) {
-        const scheme = event.target.getAttribute('data-scheme');
-        if (scheme) {
-            handleSchemeToggle(scheme);
-        }
-    }
-
-    const clickableElements = document.querySelectorAll('[data-scheme]');
-    clickableElements.forEach(el => {
-        el.addEventListener('click', handleClick);
-    });
-
-    preloadSchemeImages(currentScheme);
-    updateFrogImages();
-
-    const observerCallback = function(mutationsList) {
-        mutationsList.forEach(mutation => {
-            if (mutation.type === 'childList') {
-                updateFrogImages();
-            }
-        });
-    };
-
-    const observer = new MutationObserver(observerCallback);
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    darkModeMediaQuery.addEventListener('change', function(event) {
-        updateFrogImages();
-    });
-});
-
-
-
-
-
-
-
-
-
+		
 		
 
 
@@ -1499,40 +1264,27 @@ function applyDarkMode() {
     images.forEach(image => {
         const originalSrc = image.dataset.originalSrc || image.src;
         let newSrc = originalSrc;
-        
+        if (isDarkMode) {
+            if (originalSrc.includes('Dark')) {
+                newSrc = originalSrc;
+            } else {
+                newSrc = originalSrc.replace('.png', 'Dark.png');
+            }
+        } else {
+            if (originalSrc.includes('Dark')) {
+                newSrc = originalSrc.replace('Dark.png', '.png');
+            } else {
+                newSrc = originalSrc;
+            }
+        }
+        image.src = newSrc;
+        if (isDarkMode) {
+            image.dataset.originalSrc = originalSrc;
+        } else {
+            image.removeAttribute('data-original-src');
+        }
     });
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    const darkModeToggle = document.querySelector("#darkModeToggle img");
-
-    function updateDarkModeImage() {
-        const isDarkMode = document.body.classList.contains("dark-mode");
-
-        if (isDarkMode) {
-            darkModeToggle.src = "browserfrog/colors/default/buttons/ToggleThemeDark.png";
-        } else {
-            darkModeToggle.src = "browserfrog/colors/default/buttons/ToggleTheme.png";
-        }
-    }
-
-    updateDarkModeImage();
-
-
-    const observerCallback = function(mutationsList) {
-        mutationsList.forEach(mutation => {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                updateDarkModeImage();
-            }
-        });
-    };
-
-    const observer = new MutationObserver(observerCallback);
-    observer.observe(document.body, { attributes: true });
-
-    const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
-    mediaQueryList.addEventListener('change', updateDarkModeImage);
-});
 
 
 
