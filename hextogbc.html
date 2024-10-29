@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>HEX to GBC RGB</title>
+	<link rel="tab icon" href="https://kingmayro.github.io/image/PFPCurvySmall.png">
+	<link rel="icon" href="https://kingmayro.github.io/image/PFPCurvySmall.ico">
+	
+	<meta property="og:title" content="HEX to GBC RGB"/>
+	<meta property="og:description" content="Calculate GBC RGB values using HEX codes or 15-bit RGB values."/>
+	<meta property="og:url" content="https://kingmayro.github.io/hextogbc"/>
+	<meta data-react-helmet="true" name="theme-color" content="#693cbd"/>
+
+	<link rel="stylesheet" href="https://famicomcd.org/reuse/common.css">
+	<link rel="stylesheet" href="https://kingmayro.github.io/reuse/common.css">
+	<style>
+
+		#palette {
+		margin-left: auto;
+		margin-right: auto;
+		display:block;
+		width:90%;
+		}
+
+		.palette-slot {
+		margin-right: 5px;
+		display:inline;
+		}
+		
+		input {
+		font-family:inherit;
+		border: 0;
+		border-radius: 8px;
+		text-align:center;
+		}
+
+		.palette-slot input {
+		width: 70px;
+		}
+		
+		.storesloticon {
+		width:35px;
+		margin:0;
+		vertical-align:middle;
+		}
+
+		.button, .buttonpalcreator {
+		padding: 8px 12px;
+		margin: 0;
+		cursor: pointer;
+		background-color: #5b4a97;
+		color: white;
+		border: none;
+		border-radius: 8px;
+		font-family:inherit;
+		}
+		
+		.buttonpalcreator {
+		width:100%;
+		margin-bottom:20px;
+		}
+
+		.button:hover, .buttonpalcreator:hover {
+		background-color: #6e5bb0;
+		transform: scale(1.04);
+		}
+		
+		.button:active, .buttonpalcreator:active {
+		background-color: #5b4a97;
+		transform: scale(0.96);
+		}
+
+		.container {
+		width: 700px;
+		margin-left: auto;
+		margin-right: auto;
+		}
+		
+		#nameInput {
+		margin-left: auto;
+		margin-right: auto;
+		width:10%;
+		}
+		
+		.colorpreview {
+		background-color:#fff;
+		width:200px;
+		height:50px;
+		margin-left: auto;
+		margin-right: auto;
+		border: 4px solid #231242;
+		border-radius: 8px;
+		}
+		
+		.colorcal {
+		font-size:20px;
+		margin-bottom:0;
+		}
+		
+		.sidebyside {
+		display:inline-block;
+		width:auto;
+		}
+		
+		.listpret {
+		background-color:#231242;
+		border-radius: 8px 0 0 8px;
+		width:80%;
+		display:inline-block;
+		height:auto;
+		}
+		
+		.copypret {
+		display:inline-block;
+		width:10%;
+		background-color:#231242;
+		height:auto;
+		border-radius: 0 8px 8px 0;
+		cursor:pointer;
+		}
+		
+		.checkbox {
+		user-select: none;
+		}
+		
+		.palettespret {
+		height:auto;
+		margin:20px 0 20px 0;
+		}
+		
+		.palcreator {
+		display:none;
+		}
+		
+	</style>
+</head>
+<body class="mainpage">
+
+
+<div class=mainboxes style="background-color:#231242;">
+
+	<div class=boxes style="text-align:center;border-radius:10px;background-color:#2e1757;padding:20px 20px 1px 20px;">
+
+		<input type="text" id="colorInput" placeholder="Enter HEX or RGB value">
+		<button class="button" onclick="convertColor()">Calculate</button>
+
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" id="colorCorrectionCheckbox" onchange="toggleCorrection('gbc')"> GBC Color Correction
+			</label>
+			<label>
+				<input type="checkbox" id="sgbCorrectionCheckbox" onchange="toggleCorrection('sgb')"> SGB Color Correction
+			</label>
+		</div>
+
+		<div class="sidebyside">
+			<p class="colorcal">Original Color:</p>
+			<div id="originalColorPreview" class="colorpreview"></div>
+		</div>	
+
+		<div class="sidebyside">
+			<p class="colorcal">Calculated Color:</p>
+			<div id="gbcColorPreview" class="colorpreview"></div>
+		</div>
+		
+		<p id="gbcColorCode">Calculated RGB: (00, 00, 00)</p>
+			
+	</div>
+	
+	<div style="padding-top:20px;"></div>
+	
+	<div class=boxes style="text-align:center;border-radius:10px;background-color:#2e1757;padding:20px 20px 1px 20px;">
+
+		<button class="buttonpalcreator" id="toggleButton" onclick="togglePalette()">Pret pokered Palette Creator ▼</button>
+		
+<div class="palcreator">		
+		<div id="palette">
+			<div class="palette-slot">
+				<input type="text" id="rgb1" placeholder="00,00,00" value="31,31,31" onkeypress="handleInputChange(event, 1)">
+				<button class="button" onclick="sendToPalette(1)"><img class="storesloticon" src="hextogbc/storeslot1.png"></button>
+			</div>
+			<div class="palette-slot">
+				<input type="text" id="rgb2" placeholder="00,00,00" onkeypress="handleInputChange(event, 2)">
+				<button class="button" onclick="sendToPalette(2)"><img class="storesloticon" src="hextogbc/storeslot2.png"></button>
+			</div>
+			<div class="palette-slot">
+				<input type="text" id="rgb3" placeholder="00,00,00" onkeypress="handleInputChange(event, 3)">
+				<button class="button" onclick="sendToPalette(3)"><img class="storesloticon" src="hextogbc/storeslot3.png"></button>
+			</div>
+			<div class="palette-slot">
+				<input type="text" id="rgb4" placeholder="00,00,00" value="03,03,03" onkeypress="handleInputChange(event, 4)">
+				<button class="button" onclick="sendToPalette(4)"><img class="storesloticon" src="hextogbc/storeslot4.png"></button>
+			</div>
+		</div>
+		
+		<p>Hit enter on the text box to store your manual value. Hit the store button to store the currently loaded color to the palette.</p>
+		
+		<!-- <input type="text" id="nameInput" placeholder="Constant name" onkeypress="handleNameChange(event)"> -->
+
+	<div class="palettespret">
+		<div class="listpret">
+			<p id="paletteList">RGB 31,31,31, 00,00,00, 00,00,00, 03,03,03 ; PAL_</p>
+		</div>
+		
+		<div class="copypret" onclick="copyToClipboard()">
+			<p id="copybutton">Copy</p>
+		</div>
+	</div>
+</div>		
+	
+	</div>
+</div>
+
+	<div style="padding-top:20px;"></div>
+
+<div class=boxes style="background-color:#231242;padding:20px;">
+	© 2023 - 2024 King Mayro
+</div>
+
+
+<script>
+
+	function toggleCorrection(type) {
+		const gbcCheckbox = document.getElementById('colorCorrectionCheckbox');
+		const sgbCheckbox = document.getElementById('sgbCorrectionCheckbox');
+
+		if (type === 'gbc') {
+			sgbCheckbox.checked = false;
+		} else if (type === 'sgb') {
+			gbcCheckbox.checked = false;
+		}
+		
+		convertColor();
+	}
+
+	let currentName = "PAL_";
+	let currentRgb = [0, 0, 0];
+
+	function formatNumber(num) {
+		return num < 10 ? `0${num}` : `${num}`;
+	}
+
+	function convertToGbcRange(value) {
+		return Math.round((value / 255) * 31);
+	}
+
+	function convertToPreviewColor(gbcValue) {
+		return Math.round((gbcValue / 31) * 255);
+	}
+
+	function applyGbcColorCorrection(r, g, b) {
+		r = Math.pow(r / 255, 2.2) * 0.8 + 0.1;
+		g = Math.pow(g / 255, 2.0) * 0.7 + 0.15;
+		b = Math.pow(b / 255, 1.8) * 0.9 + 0.05;
+		return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+	}
+
+	function applySgbColorCorrection(r, g, b) {
+		r = Math.min(r * 1.2, 255);
+		g = Math.min(g * 1.15, 255);
+		b = Math.min(b * 1.1, 255);
+		return [Math.round(r), Math.round(g), Math.round(b)];
+	}
+
+	function convertColor() {
+		let colorInput = document.getElementById('colorInput').value.trim();
+		let r, g, b;
+
+		if (/^[a-fA-F0-9]{6}$/.test(colorInput)) {
+			colorInput = "#" + colorInput.toUpperCase();
+		}
+
+		if (colorInput.startsWith('#') && colorInput.length === 7) {
+			r = parseInt(colorInput.slice(1, 3), 16);
+			g = parseInt(colorInput.slice(3, 5), 16);
+			b = parseInt(colorInput.slice(5, 7), 16);
+		} else if (/^(\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})$/.test(colorInput)) {
+			const rgbValues = colorInput.match(/\d+/g);
+			r = parseInt(rgbValues[0]);
+			g = parseInt(rgbValues[1]);
+			b = parseInt(rgbValues[2]);
+		} else {
+			alert("Please enter a valid HEX (e.g. FF5733 or #FF5733) or RGB (e.g. 255,87,51) value.");
+			return;
+		}
+
+		document.getElementById('originalColorPreview').style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+
+		const gbcR = convertToGbcRange(r);
+		const gbcG = convertToGbcRange(g);
+		const gbcB = convertToGbcRange(b);
+
+		const applyGbcCorrection = document.getElementById('colorCorrectionCheckbox').checked;
+		const applySgbCorrection = document.getElementById('sgbCorrectionCheckbox').checked;
+
+		if (applyGbcCorrection) {
+			currentRgb = applyGbcColorCorrection(r, g, b).map(color => convertToGbcRange(color));
+		} else if (applySgbCorrection) {
+			currentRgb = applySgbColorCorrection(r, g, b).map(color => convertToGbcRange(color));
+		} else {
+			currentRgb = [gbcR, gbcG, gbcB];
+		}
+
+		const gbcColorPreviewR = convertToPreviewColor(currentRgb[0]);
+		const gbcColorPreviewG = convertToPreviewColor(currentRgb[1]);
+		const gbcColorPreviewB = convertToPreviewColor(currentRgb[2]);
+
+		document.getElementById('gbcColorPreview').style.backgroundColor = `rgb(${gbcColorPreviewR}, ${gbcColorPreviewG}, ${gbcColorPreviewB})`;
+		document.getElementById('gbcColorCode').innerText = `Calculated RGB: (${formatNumber(currentRgb[0])}, ${formatNumber(currentRgb[1])}, ${formatNumber(currentRgb[2])})`;
+	}
+
+	function sendToPalette(slot) {
+		const rgbInput = document.getElementById(`rgb${slot}`);
+		const r = formatNumber(currentRgb[0]);
+		const g = formatNumber(currentRgb[1]);
+		const b = formatNumber(currentRgb[2]);
+		rgbInput.value = `${r},${g},${b}`;
+		updatePaletteList();
+	}
+
+	function updatePaletteList() {
+		const paletteEntries = [];
+		for (let i = 1; i <= 4; i++) {
+			const rgbValue = document.getElementById(`rgb${i}`).value || "00,00,00";
+			paletteEntries.push(rgbValue);
+		}
+		const paletteString = `RGB ${paletteEntries.join(', ')} ; ${currentName}`;
+		document.getElementById('paletteList').innerText = paletteString;
+	}
+
+	function handleNameChange(event) {
+		if (event.key === "Enter") {
+			currentName = event.target.value.trim().toUpperCase() || "PAL_";
+			updatePaletteList();
+		}
+	}
+
+	function handleInputChange(event, slot) {
+		if (event.key === "Enter") {
+			const input = event.target.value.trim();
+			const regex = /^(0?[0-9]|[1-2][0-9]|3[0-1]),(0?[0-9]|[1-2][0-9]|3[0-1]),(0?[0-9]|[1-2][0-9]|3[0-1])$/;
+			if (regex.test(input)) {
+				updatePaletteList();
+			} else {
+				alert("Please enter a valid RGB value (e.g. 00,00,00).");
+			}
+		}
+	}
+	
+	
+		function updatePaletteList() {
+		const paletteEntries = [];
+		for (let i = 1; i <= 4; i++) {
+			const rgbValue = document.getElementById(`rgb${i}`).value || "00,00,00";
+			paletteEntries.push(rgbValue);
+		}
+		document.getElementById('paletteList').innerText = `RGB ${paletteEntries.join(', ')} ; ${currentName}`;
+	}
+
+	function copyToClipboard() {
+		const paletteText = document.getElementById('paletteList').innerText;
+		navigator.clipboard.writeText(paletteText)
+			.then(() => alert("Palette copied to clipboard!"))
+			.catch(err => alert("Failed to copy: " + err));
+	}
+	
+	    function togglePalette() {
+        const paletteSection = document.querySelector('.palcreator');
+        const button = document.getElementById('toggleButton');
+
+        // Toggle the display and button text
+        if (paletteSection.style.display === "none" || paletteSection.style.display === "") {
+            paletteSection.style.display = "block";
+            button.innerText = "Pret pokered Palette Creator ▼";
+        } else {
+            paletteSection.style.display = "none";
+            button.innerText = "Pret pokered Palette Creator ▲";
+        }
+    }
+	
+</script>
+
+</body>
+</html>
