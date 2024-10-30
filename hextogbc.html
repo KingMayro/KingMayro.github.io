@@ -53,6 +53,7 @@
 		border: none;
 		border-radius: 8px;
 		font-family:inherit;
+		transition: ease-in 0.07s;
 		}
 		
 		.buttonpalcreator {
@@ -62,12 +63,14 @@
 
 		.button:hover, .buttonpalcreator:hover {
 		background-color: #6e5bb0;
-		transform: scale(1.04);
+		transform: scale(1.03);
+		transition: ease-in 0.07s;
 		}
 		
 		.button:active, .buttonpalcreator:active {
 		background-color: #5b4a97;
 		transform: scale(0.96);
+		transition: ease-in 0.07s;
 		}
 
 		.container {
@@ -117,6 +120,17 @@
 		height:auto;
 		border-radius: 0 8px 8px 0;
 		cursor:pointer;
+		transition: ease-in 0.07s;
+		}
+		
+		.copypret:hover {
+		transform: scale(1.05);
+		transition: ease-in 0.07s;
+		}
+		
+		.copypret:active {
+		transform: scale(0.96);
+		transition: ease-in 0.07s;
 		}
 		
 		.checkbox {
@@ -130,6 +144,10 @@
 		
 		.palcreator {
 		display:none;
+		}
+
+		#toggleButton {
+		font-size:20px;
 		}
 		
 	</style>
@@ -152,6 +170,7 @@
 				<input type="checkbox" id="sgbCorrectionCheckbox" onchange="toggleCorrection('sgb')"> SGB Color Correction
 			</label>
 		</div>
+		<p>Color correction is not accurate, as such you may still need to manually tweak any corrected colors.</p>
 
 		<div class="sidebyside">
 			<p class="colorcal">Original Color:</p>
