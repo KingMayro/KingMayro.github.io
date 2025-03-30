@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+	<html lang="en">
+	
+	<head>
+	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+    <title>Browser Flipnote Frogs</title>
+	<link rel="tab icon" href="https://kingmayro.github.io/Frog.png">
+	<link rel="icon" href="https://kingmayro.github.io/Frog.ico">
+	
+	<meta property="og:title" content="Browser Flipnote Frogs - King Mayro"/>
+	<meta property="og:description" content="A small little project to ''recreate'' the Flipnote frogs from the title screen of Flipnote Studio for the most part."/>
+	<meta property="og:url" content="https://kingmayro.github.io/frogs"/>
+	<meta property="og:image" content="https://kingmayro.github.io/image/frogembed.png"/>
+	<meta name="twitter:card" content="summary_large_image">
+	<meta data-react-helmet="true" name="theme-color" content="#cd532d"/>
+	
+    <style>
+	
+		@font-face {
+		font-family: "Moving Flipbook Gallery";
+		src: url("browserfrog/fonts/Moving Notepad Large UI Font.otf");
+		}
+		
+		html {
+		cursor: url('browserfrog/Misc/hand/idle.png') 8 18, auto;
+		height:100%;
+		}
+	
+		body {
+		margin:0;
+		image-rendering: -moz-crisp-edges;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+        -ms-interpolation-mode: nearest-neighbor;
+		image-rendering: pixelated;
+		background-image: url('browserfrog/notepad.png');
+		font-family:"Moving Flipbook Gallery";
+		background-color: white;
+		color: #cd532d;
+		overflow: hidden;
+		user-select: none;
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-select: none;
+        -moz-user-drag: none; 
+        -ms-user-select: none; 
+        user-drag: none;
+		cursor: url('browserfrog/Misc/hand/idle.png') 8 18, auto;
+		}
+	
+        .frog-container, .item-container {
+            position: absolute;
+            width: 145px;
+            height: 112px;
+            top: 50%;
+            transform: translateY(-50%);
+			cursor: url('browserfrog/Misc/hand/hover.png') 10 40, grab;
+        }
+        .frog {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+			
+        }
+		
+		.frog-container:active, .item-container:active {
+		cursor: url('browserfrog/Misc/hand/pinch.png') 30 80, grabbing;
+        }
+		
+		    
+		button {
+		cursor: pointer !important;
+		padding: 0 !important;
+		margin: 0 !important;
+		background: none !important;
+		border: none !important;
+		outline: none !important;
+		font: inherit !important;
+		color: inherit !important;
+		}
+		
+		.verticalbutton {
+		width: auto;
+        height: 65px;
+		cursor: url('browserfrog/Misc/hand/pointer.png') 8 18, pointer;
+		}
+		
+		.verticalbutton:active {
+		filter: brightness(77%);
+		}
+		
+		.footerthing{
+		position:fixed;
+		bottom:0;
+		background-color:white;
+		width:100%;
+		height: 87px;
+		cursor: url('browserfrog/Misc/hand/idle.png') 8 18, auto;
+		}
+
+		.icons {
+		border-radius: 600px;
+		width: 200px;
+		height: auto;
+		float: left;
+		}
+
+		.name {
+		font-size:20px;
+		float: left;
+		margin-bottom:0;
+		}
+		
+		.socialicons {
+		display: inline-flex;
+		float: left;
+		padding-top:50px;
+		padding-left:50px;
+		}
+		
+		.message-box {
+        position: fixed;
+        margin-left: 17%;
+        margin-right: 17%;
+        background-color: #cd532d;
+        padding: 10px 20px;
+        display: none;
+		border-radius: 5px;
+		color:white;
+        }
+		
+        .message-box.show {
+        display: block;
+        }
+		
+        .message-box p {
+        margin: 20px;
+        }
+		
+		.message-bubble {
+        position: absolute;
+        top: -90px;
+        left: 50%; 
+        transform: translateX(-50%);
+        background-color: white;
+		border-radius: 5px;		
+        padding: 10px;
+        z-index: 1; 
+        width: 500px; 
+		word-wrap: break-word;
+		text-align:center;
+		font-size:14px;
+		}
+		
+		.buttonsleft {
+		float:left;
+		display:flex;
+		}
+		
+		.buttonsright {
+		float:right;
+		display:flex;
+		}
+		
+		.credittext {
+		padding-top:190px;
+		}
+		
+        .close-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+		cursor: pointer;
+        }
+		
+		
+		.settingsbuttons {
+		display:inline;
+		padding-right:2%;
+		}
+		
+		.schemegrid {
+		display: inline-grid;
+		grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+		width:350px;
+		margin-right:5px;
+		}
+		
+		.schemeselecticon {
+		width:70px;
+		cursor:pointer;
+		}
+		
+		.line {
+		width:350px;
+		}
+		
+		.settings-container {
+		position: fixed;
+		bottom: 3px;
+		left: 10px;
+		}
+
+
+		.settings-menu {
+		display: none;
+		flex-direction: row;
+		position: absolute;
+		bottom: 75px;
+		background-color: white;
+		border-radius: 5px 5px 0px 0px;
+		padding: 10px;
+		}
+
+		.settings-menu button {
+		padding: 10px;
+		margin: 5px 0;
+		background-color: white;
+		cursor: pointer;
+		}
+
+		.settings-menu button:hover {
+		background-color: #eee;
+		}
+
+		.close-menu-button {
+		align-self: flex-end;
+		background-color: #ff0000;
+		color: white;
+		font-weight: bold;
+		}
+		
+		
+		
+		body.dark-mode {
+		background-image: url('browserfrog/notepadDark.png');
+		background-color: #00070b !important;
+		color: #4abc23 !important;
+		}
+
+		body.dark-mode .footerthing {
+		background-color: #00070b !important;
+		}
+
+		body.dark-mode .message-box {
+		background-color: #4abc23 !important;
+		}
+
+		body.dark-mode .message-bubble {
+		background-color: #00070b !important;
+		color:white !important;
+		}
+		
+		body.dark-mode .settings-menu {
+		bottom: 75px;
+		background-color: #00070b !important;
+		}
+		
+
+		body.streamer-mode {
+		background-image: none;
+		background-color: #00ff00 !important;
+		color: inherit;
+		}
+		
+		body.streamer-mode .footerthing {
+		background-color: #00ff00 !important;
+		}
+		
+		body.streamer-mode .settings-menu {
+		background-color: #00ff00 !important;
+		}
+		
+		/* used an image because light mode has priority over dark */
+	    body.dark-mode.streamer-mode {	
+		background-image: url('browserfrog/magenta.png');		
+		color: #ff00ff !important;
+		}
+
+		body.dark-mode.streamer-mode .footerthing {
+		background-color: #ff00ff !important;
+		}
+		
+		body.dark-mode.streamer-mode .settings-menu {
+		background-color: #ff00ff !important;
+		}
+
+		
+		@media screen and (max-width: 1135px) {
+		
+			.footerthing{
+			height: 94px;
+			}
+
+		
+			body {
+			
+				background-image: url('browserfrog/notepadsmall.png');
+			}
+			
+			body.dark-mode {
+			background-image: url('browserfrog/notepadsmallDark.png');
+			}	
+			
+			.verticalbutton {
+			width: auto;
+			height: 50px;
+			}
+			
+			.frog-container {
+            width: 125px;
+            height: 99px;
+			}
+			
+			.message-box {
+			border-radius: 0;
+			margin-left: 0;
+			margin-right: 0;
+			font-size:13px;
+			}
+			
+			.icons {
+			width: 100px;
+			height: auto;
+			}
+			
+			.credittext {
+			padding-top:135px;
+			}
+
+			.name {
+			font-size:15px;
+			}
+
+			
+			.icons {
+			width: 150px;
+			height: auto;
+			}
+			
+			.name {
+			font-size:18px;
+			padding-left:20px;
+			}
+			
+
+			
+			.message-bubble {
+			width: 400px; 
+			word-wrap: break-word;
+			text-align:center;
+			}
+			
+			.settings-container {
+			position: fixed;
+			bottom: 15px;
+			left: 10px;
+			}
+
+		
+		}
+		
+		
+		@media screen and (max-width: 900px) {
+				
+			.footerthing{
+			height: 99px;
+			}
+
+			.verticalbutton {
+			width: auto;
+			height: 45px;
+			}
+			
+			.frog-container {
+            width: 110px;
+            height: 85px;
+			}
+			
+			.schemegrid {
+			grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+			width:250px;
+			margin-right:0px;
+			}
+			
+			.schemeselecticon {
+			width:50px;
+			}
+			
+			.line {
+			width:250px;
+			}
+			
+			.settings-menu {
+			display: none;
+			flex-direction: column;
+			position: absolute;
+			}
+			
+			.message-box {
+			border-radius: 0;
+			margin-left: 0;
+			margin-right: 0;
+			font-size:10px;
+			}
+			
+			.settings-container {
+			position: fixed;
+			bottom: 20px;
+			left: 10px;
+			}
+
+		
+		}
+			
+		
+		@media screen and (max-width: 795px) {
+				
+			.footerthing{
+			height: 99px;
+			}
+			
+			.verticalbutton {
+			width: auto;
+			height: 40px;
+			}
+			
+			.frog-container {
+            width: 100px;
+            height: 80px;
+			}
+			
+			.message-bubble {
+			width: 300px; 
+			word-wrap: break-word;
+			text-align:center;
+			font-size:10px;
+			}
+			
+			.buttonsleft {
+			float:left;
+			display:block;
+			}
+		
+			.buttonsright {
+			float:right;
+			display:block;
+			}
+		
+		}
+		
+		
+			@media screen and (max-width: 650px) {
+			
+			.verticalbutton {
+			width: auto;
+			height: 53px;
+			}
+			
+			.message-box {
+			font-size:11px;
+			}
+			
+			.socialicons {
+			display: flex;
+			padding-top:0px;
+			padding-left:0px;
+			}
+			
+			.name {
+			font-size:15px;
+			padding-top:0px;
+			padding-left:0px;
+			display:flex;
+			}
+			
+			.icons {
+			width: 70px;
+			height: auto;
+			}
+			
+			.credittext {
+			padding-top:65px;
+			}
+			
+			.refreshButton{
+			float:left;
+			display:none;
+			}
+			
+			.schemegrid {
+			grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+			width:350px;
+			}
+			
+			.schemeselecticon {
+			width:70px;
+			cursor:pointer;
+			}
+			
+			.line {
+			width:350px;
+			}
+
+		
+		}
+		
+		@media screen and (max-width: 476px) {
+			
+			.verticalbutton {
+			width: auto;
+			height: 49px;
+			}
+			
+			.schemegrid {
+			grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+			width:300px;
+			}
+			
+			.schemeselecticon {
+			width:60px;
+			}
+			
+			.line {
+			width:300px;
+			}
+			
+		}
+		
+		
+		@media screen and (max-width: 446px) {
+
+			
+			.verticalbutton {
+			width: auto;
+			height: 41px;
+			}
+			
+			.icons {
+			width: 100px;
+			height: auto;
+			margin-left:35%;
+			}
+			
+			.credittext {
+			padding-top:155px;
+			}
+
+		
+		}
+		
+		@media screen and (max-width: 381px) {
+				
+			.footerthing{
+			height: 111px;
+			}
+			
+			.verticalbutton {
+			width: auto;
+			height: 34px;
+			}
+			
+			.frog-container {
+            width: 60px;
+            height: 50px;
+			}
+			
+			.socialicons {
+			display: block;
+			float: left;
+			}			
+			
+			.othericons {
+			display: none;
+			}
+			
+			.settings-container {
+			position: fixed;
+			bottom: 35px;
+			left: 10px;
+			}
+		
+		}
+		
+		@media screen and (max-width: 338px) {
+			.othericonsyt {
+			display: none;
+			}
+			
+		}		
+		
+		
+		
+		
+		@media screen and (max-width: 310px) {
+			
+			.verticalbutton {
+			width: auto;
+			height: 30px;
+			}
+			
+			.othericonsyt {
+			display: none;
+			}
+			
+		}
+		
+    </style>
+	</head>
+<body>
+
+	<div class=footerthing></div>
+
+	<div class=main>
+	
+		<div class="frog-container" id="frog-container-1">
+			<img class="frog" src="browserfrog/colors/default/Idle.png">
+		</div>
+
+		<div class="frog-container" id="frog-container-2">
+			<img class="frog" src="browserfrog/colors/default/Idle.png">
+		</div>
+
+		<div class="frog-container" id="frog-container-3" style="display:none;">
+			<img class="frog" src="browserfrog/colors/default/Idle.png">
+		</div>
+	
+    </div>
+
+
+
+	<div>
+
+		<div class=buttonsleft>
+		<div id="toggleVerticalDragging" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/colors/default/buttons/ToggleVertical.png"></div>
+		<div id="sendMessageButton" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/colors/default/buttons/FrogMessage.png"></div>
+		<div id="spawnItemButton" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/colors/default/buttons/AddFood.png"></div>
+		</div>
+
+   <div class="message-box" id="messageBox">
+        <span class="close-btn" onclick="hideMessageBox()" style="white-space:pre-wrap;">X</span>
+        <p>A small little project to ''recreate'' the Flipnote frogs from the title screen of Flipnote Studio for the most part. <br><br>Created by :</p>
+
+		<!-- Would've made this way cleaner if my code didn't want the screen to flash on page load.-->
+	 <div>
+			<div style="padding-left:10px;">
+ 
+
+						<img class=icons src="../image/KingMayro.jpg">
+		
+				<div class=socialicons>
+				
+					<p class=name>King Mayro</p>
+				
+					<a href="https://github.com/KingMayro"><img src="browserfrog/colors/default/buttons/Github.png" alt="Github" style="width:40px;padding-top:20px;height:auto;"></a>
+					  
+					<a class=othericonsyt href="https://www.youtube.com/@KingMayro"><img src="browserfrog/colors/default/buttons/YouTube.png" alt="YouTube" style="width:40px;height:auto;padding-left:9px;padding-top:20px;"></a>
+					
+					<a class=othericons href="https://famicomcd.org/"><img src="browserfrog/colors/default/buttons/FamicomCD.png" alt="FamicomCD" style="width:40px;height:auto;padding-left:8px;padding-top:20px;"></a>
+				</div>
+			</div> 
+		</div>
+
+			<div class=credittext>
+			<p>Frog Graphics, General graphics, and font by King Mayro <br>Flipnote Studio by Nintendo</p>
+			</div>
+			
+    </div>
+
+	<div class=buttonsright>
+		<div onclick="showMessageBox()" style="padding-left:5px;"><img class=verticalbutton src="browserfrog/colors/default/buttons/Info.png"></img></div>	
+	<a href="https://kingmayro.github.io/" style="padding-left:5px;"><img class=verticalbutton src="browserfrog/colors/default/buttons/Home.png"></img></a>	
+	</div>
+
+	</div>
+    <div id="refreshButton" style="display:none;" onclick="location.reload()"><img class=verticalbutton src="browserfrog/colors/default/buttons/Refresh.png"></img></div>
+
+
+    <div class="settings-container">
+        <div id="settingsButton"><img class=verticalbutton src="browserfrog/colors/default/buttons/Settings.png"</div>
+        <div id="settingsMenu" class="settings-menu">
+		
+			<div class="settingsbuttons">
+				<div id="darkModeToggle" style="padding-right:5px;"><img class=verticalbutton src="browserfrog/colors/default/buttons/ToggleTheme.png"></div>	
+				<div id="streamerModeToggle"><img class=verticalbutton src="browserfrog/colors/default/buttons/StreamerMode.png"></div>
+			</div>
+			
+			<div>
+				<div class="schemegrid">
+					<img class="schemeselecticon" data-scheme="default" src="browserfrog/colors/default/Idle.png">
+					<img class="schemeselecticon" data-scheme="defaultgreen" src="browserfrog/colors/defaultgreen/Idle.png">
+					<img class="schemeselecticon" data-scheme="classic" src="browserfrog/colors/classic/Idle.png">
+					<!-- <img class="schemeselecticon" data-scheme="classicog" src="browserfrog/colors/classicog/Idle.png"> -->
+					<img src="browserfrog/Misc/nothing.png">
+					<img src="browserfrog/Misc/nothing.png">
+					
+					<img class="line" style="margin:6px 0 6px 0;" src="browserfrog/Misc/line.png">
+				</div>
+
+				<div class="schemegrid">
+					<img class="schemeselecticon" data-scheme="red" src="browserfrog/colors/red/Idle.png">
+					<img class="schemeselecticon" data-scheme="orange" src="browserfrog/colors/orange/Idle.png">
+					<img class="schemeselecticon" data-scheme="yellow" src="browserfrog/colors/yellow/Idle.png">
+					<img class="schemeselecticon" data-scheme="lime" src="browserfrog/colors/lime/Idle.png">
+					<img class="schemeselecticon" data-scheme="teal" src="browserfrog/colors/teal/Idle.png">
+					
+					<img class="schemeselecticon" data-scheme="blue" src="browserfrog/colors/blue/Idle.png">
+					<img class="schemeselecticon" data-scheme="lightblue" src="browserfrog/colors/lightblue/Idle.png">
+					<img class="schemeselecticon" data-scheme="pink" src="browserfrog/colors/pink/Idle.png">
+					<img class="schemeselecticon" data-scheme="magenta" src="browserfrog/colors/magenta/Idle.png">
+					<img class="schemeselecticon" data-scheme="purple" src="browserfrog/colors/purple/Idle.png">
+					
+					<img class="schemeselecticon" data-scheme="lighttan" src="browserfrog/colors/lighttan/Idle.png">
+					<img class="schemeselecticon" data-scheme="tan" src="browserfrog/colors/tan/Idle.png">
+					<img class="schemeselecticon" data-scheme="lightbrown" src="browserfrog/colors/lightbrown/Idle.png">
+					<img class="schemeselecticon" data-scheme="brown" src="browserfrog/colors/brown/Idle.png">
+					<img class="schemeselecticon" data-scheme="crimson" src="browserfrog/colors/crimson/Idle.png">
+					
+					<img class="schemeselecticon" data-scheme="white" src="browserfrog/colors/white/Idle.png">
+					<img class="schemeselecticon" data-scheme="lightgray" src="browserfrog/colors/lightgray/Idle.png">
+					<img class="schemeselecticon" data-scheme="gray" src="browserfrog/colors/gray/Idle.png">
+					<img class="schemeselecticon" data-scheme="darkgray" src="browserfrog/colors/darkgray/Idle.png">
+					<img class="schemeselecticon" data-scheme="black" src="browserfrog/colors/black/Idle.png">
+				</div>			
+			</div>				
+			
+        </div>
+    </div>
+
+    <script>
+	
+        function showMessageBox() {
+            const messageBox = document.getElementById("messageBox");
+            messageBox.classList.add("show");
+        }
+
+        function hideMessageBox() {
+            const messageBox = document.getElementById("messageBox");
+            messageBox.classList.remove("show");
+        }
+
+        const frogContainers = document.querySelectorAll('.frog-container');
+        const frames = {
+            facingRight: ['browserfrog/colors/default/Right.png'],
+            facingLeft: ['browserfrog/colors/default/Left.png'],
+            facingViewer: ['browserfrog/colors/default/Idle.png']
+        };
+
+        const animations = {
+            TurnLeft: [
+                {src: "browserfrog/colors/default/Idle.png", duration: 100},
+                {src: "browserfrog/colors/default/MidLeft.png", duration: 100},
+                {src: "browserfrog/colors/default/Left.png", duration: 100}
+            ],
+            TurnRight: [
+                {src: "browserfrog/colors/default/Idle.png", duration: 100},
+                {src: "browserfrog/colors/default/MidRight.png", duration: 100},
+                {src: "browserfrog/colors/default/Right.png", duration: 100}
+            ],
+            LeftReturn: [
+                {src: "browserfrog/colors/default/Left.png", duration: 100},
+                {src: "browserfrog/colors/default/MidLeft.png", duration: 100},
+                {src: "browserfrog/colors/default/Idle.png", duration: 100}
+            ],
+            RightReturn: [
+                {src: "browserfrog/colors/default/Right.png", duration: 100},
+                {src: "browserfrog/colors/default/MidRight.png", duration: 100},
+                {src: "browserfrog/colors/default/Idle.png", duration: 100}
+            ],
+            CroakLeft: [
+                {src: "browserfrog/colors/default/Left.png", duration: 100},
+                {src: "browserfrog/colors/default/MidCroakLeft.png", duration: 100},
+                {src: "browserfrog/colors/default/MaxCroakLeft.png", duration: 100},
+                {src: "browserfrog/colors/default/MidCroakLeft.png", duration: 100},
+                {src: "browserfrog/colors/default/Left.png", duration: 100}
+            ],
+            CroakRight: [
+                {src: "browserfrog/colors/default/Right.png", duration: 100},
+                {src: "browserfrog/colors/default/MidCroakRight.png", duration: 100},
+                {src: "browserfrog/colors/default/MaxCroakRight.png", duration: 100},
+                {src: "browserfrog/colors/default/MidCroakRight.png", duration: 100},
+                {src: "browserfrog/colors/default/Right.png", duration: 100}
+            ],
+            JumpLeft: [
+                {src: "browserfrog/colors/default/Left.png", duration: 50},
+                {src: "browserfrog/colors/default/JumpUpLeft.png", duration: 100},
+                {src: "browserfrog/colors/default/FallDownLeft.png", duration: 100},
+                {src: "browserfrog/colors/default/Left.png", duration: 100}
+            ],
+            JumpRight: [
+                {src: "browserfrog/colors/default/Right.png", duration: 25},
+                {src: "browserfrog/colors/default/JumpUpRight.png", duration: 100},
+                {src: "browserfrog/colors/default/FallDownRight.png", duration: 100},
+                {src: "browserfrog/colors/default/Right.png", duration: 100}
+            ],
+            Blink: [
+                {src: "browserfrog/colors/default/Idle.png", duration: 100},
+                {src: "browserfrog/colors/default/Blink.png", duration: 100},
+                {src: "browserfrog/colors/default/Idle.png", duration: 100}
+            ],
+            Croak: [
+                {src: "browserfrog/colors/default/Idle.png", duration: 100},
+                {src: "browserfrog/colors/default/MidCroak.png", duration: 100},
+                {src: "browserfrog/colors/default/MaxCroak.png", duration: 100},
+                {src: "browserfrog/colors/default/MidCroak.png", duration: 100},
+                {src: "browserfrog/colors/default/Idle.png", duration: 100}
+            ],
+            Tongue: [
+                {src: "browserfrog/colors/default/Idle.png", duration: 70},
+                {src: "browserfrog/colors/default/LipUp.png", duration: 70},
+                {src: "browserfrog/colors/default/TongueBounce.png", duration: 70},
+                {src: "browserfrog/colors/default/Tongue.png", duration: 70}
+            ],
+            Smile: [
+                {src: "browserfrog/colors/default/Smile.png", duration: 100},
+            ],
+            Ribbit: [
+                {src: "browserfrog/colors/default/Idle.png", duration: 100},
+                {src: "browserfrog/colors/default/Smile.png", duration: 50},
+                {src: "browserfrog/colors/default/WideRibbit.png", duration: 100},
+                {src: "browserfrog/colors/default/MidRibbit.png", duration: 100},
+                {src: "browserfrog/colors/default/SmallRibbit.png", duration: 50},
+                {src: "browserfrog/colors/default/Idle.png", duration: 100}
+            ],
+            FoodEat: [
+                {src: "browserfrog/colors/default/WideMouth.png", duration: 50},
+                {src: "browserfrog/colors/default/ChompDown.png", duration: 50},
+                {src: "browserfrog/colors/default/Chew1.png", duration: 100},
+                {src: "browserfrog/colors/default/Chew2.png", duration: 100},
+                {src: "browserfrog/colors/default/Chew1.png", duration: 100},
+                {src: "browserfrog/colors/default/Idle.png", duration: 100}
+            ],
+			//keeping this here just in case I can get sleep working properly again
+			Sleep: [
+                {src: "browserfrog/colors/default/Sleep1.png", duration: 700},
+                {src: "browserfrog/colors/default/Sleep2.png", duration: 700},
+                {src: "browserfrog/colors/default/Sleep3.png", duration: 700},
+            ]
+        };
+
+        let currentStates = ['browserfrog/colors/default/Idle.png', 'browserfrog/colors/default/Idle.png', 'browserfrog/colors/default/Idle.png'];
+        let facings = ['viewer', 'viewer', 'viewer'];
+        let currentFrameStarts = [Date.now(), Date.now(), Date.now()];
+        let verticalDraggingEnabled = true;
+
+        Object.values(animations).flat().forEach(frame => {
+            const img = new Image();
+            img.src = frame.src;
+        });
+
+        const numberOfFrogs = Math.random() < 0.2 ? 3 : 2;
+
+        const verticalPosition = Math.max(window.innerHeight - 129, 0);
+        frogContainers.forEach((container, index) => {
+            if (index < numberOfFrogs) {
+                let horizontalPosition;
+                let attempts = 0;
+                do {
+                    horizontalPosition = Math.random() * Math.max(window.innerWidth - 150, 0);
+                    attempts++;
+                } while (isTooCloseToOtherFrog(horizontalPosition, index) && attempts < 100);
+                container.style.left = `${horizontalPosition}px`;
+                container.style.top = `${verticalPosition}px`;
+                container.style.display = 'block';
+                container.addEventListener('mousedown', (event) => {
+                    startDrag(event, container);
+                });
+                        }
+        });
+
+        function isTooCloseToOtherFrog(position, currentIndex) {
+            const minDistance = 150;
+            for (let i = 0; i < currentIndex; i++) {
+                const rect = frogContainers[i].getBoundingClientRect();
+                const distance = Math.abs(position - rect.left);
+                if (distance < minDistance) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function getRandomElement(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function transitionTo(index, animation) {
+            currentStates[index] = animation[0].src;
+            let frameIndex = 0;
+
+            const nextFrame = () => {
+                const frame = animation[frameIndex];
+                const newFrogElement = document.createElement('img');
+                newFrogElement.src = isDarkMode ? frame.src.replace('.png', '.png') : frame.src; // Old dark mode stuff. Can't remove it or it breaks things???
+                newFrogElement.className = 'frog';
+                newFrogElement.onload = () => {
+                    const oldFrogElement = frogContainers[index].querySelector('.frog');
+                    if (oldFrogElement) {
+                        frogContainers[index].removeChild(oldFrogElement);
+                    }
+                    frogContainers[index].appendChild(newFrogElement);
+                };
+
+                if (frameIndex < animation.length - 1) {
+                    frameIndex++;
+                    setTimeout(nextFrame, frame.duration);
+                }
+            };
+
+            nextFrame();
+        }
+
+        function moveFrog(index) {
+            const actions = ['faceRight', 'faceLeft', 'doViewerAction'];
+            const action = getRandomElement(actions);
+
+            if (action === 'faceRight' && facings[index] !== 'right') {
+                if (facings[index] === 'left') {
+                    transitionTo(index, animations.LeftReturn);
+                    setTimeout(() => {
+                        transitionTo(index, animations.TurnRight);
+                        facings[index] = 'right';
+                        setTimeout(() => {
+                            const rightActions = ['CroakRight', 'JumpRight'];
+                            const nextAction = getRandomElement(rightActions);
+                            transitionTo(index, animations[nextAction]);
+                            if (nextAction === 'JumpRight') {
+                                jumpFrog(index, 10, 'right');
+                            }
+                        }, 300);
+                    }, 300);
+                } else {
+                    transitionTo(index, animations.TurnRight);
+                    facings[index] = 'right';
+                    setTimeout(() => {
+                        const rightActions = ['CroakRight', 'JumpRight'];
+                        const nextAction = getRandomElement(rightActions);
+                        transitionTo(index, animations[nextAction]);
+                        if (nextAction === 'JumpRight') {
+                            jumpFrog(index, 10, 'right');
+                        }
+                    }, 300);
+                }
+            }
+
+            if (action === 'faceLeft' && facings[index] !== 'left') {
+                if (facings[index] === 'right') {
+                    transitionTo(index, animations.RightReturn);
+                    setTimeout(() => {
+                        transitionTo(index, animations.TurnLeft);
+                        facings[index] = 'left';
+                        setTimeout(() => {
+                            const leftActions = ['CroakLeft', 'JumpLeft'];
+                            const nextAction = getRandomElement(leftActions);
+                            transitionTo(index, animations[nextAction]);
+                            if (nextAction === 'JumpLeft') {
+                                jumpFrog(index, 10, 'left');
+                            }
+                        }, 300);
+                    }, 300);
+                } else {
+                    transitionTo(index, animations.TurnLeft);
+                    facings[index] = 'left';
+                    setTimeout(() => {
+                        const leftActions = ['CroakLeft', 'JumpLeft'];
+                        const nextAction = getRandomElement(leftActions);
+                        transitionTo(index, animations[nextAction]);
+                        if (nextAction === 'JumpLeft') {
+                            jumpFrog(index, 10, 'left');
+                        }
+                    }, 300);
+                }
+            }
+
+            if (action === 'doViewerAction') {
+                if (facings[index] === 'right') {
+                    transitionTo(index, animations.RightReturn);
+                    setTimeout(() => {
+                        performViewerAction(index);
+                        facings[index] = 'viewer';
+                    }, 300);
+                } else if (facings[index] === 'left') {
+                    transitionTo(index, animations.LeftReturn);
+                    setTimeout(() => {
+                        performViewerAction(index);
+                        facings[index] = 'viewer';
+                    }, 300);
+                } else {
+                    performViewerAction(index);
+                }
+            }
+
+            setTimeout(() => moveFrog(index), Math.random() * 2000 + 2000);
+        }
+
+        function performViewerAction(index) {
+            const viewerActions = ['Blink', 'Croak', 'Tongue', 'Smile', 'Ribbit', 'browserfrog/colors/default/FrogLoad.gif', 'browserfrog/colors/default/TalkMore.gif'];
+
+// Very bootleg way to get this to work
+    const action = Math.random() < 0 ? 'FoodEat' : getRandomElement(viewerActions);
+
+    if (action === 'browserfrog/colors/default/FrogLoad.gif' || action === 'browserfrog/colors/default/TalkMore.gif') {
+        const newFrogElement = document.createElement('img');
+        newFrogElement.src = action.replace('.gif', isDarkMode ? '.gif' : '.gif');  // Old dark mode stuff. Can't remove it or it breaks things???
+        newFrogElement.className = 'frog';
+        newFrogElement.onload = () => {
+            const oldFrogElement = frogContainers[index].querySelector('.frog');
+            if (oldFrogElement) {
+                frogContainers[index].removeChild(oldFrogElement);
+            }
+            frogContainers[index].appendChild(newFrogElement);
+        };
+    } else {
+        transitionTo(index, animations[action]);
+    }
+}
+
+        function jumpFrog(index, pixels, direction) {
+            let movedPixels = 0;
+            const interval = setInterval(() => {
+                if (movedPixels < pixels) {
+                    const currentLeft = parseInt(frogContainers[index].style.left, 10);
+                    if (direction === 'right') {
+                        frogContainers[index].style.left = `${currentLeft + 3}px`;
+                    } else {
+                        frogContainers[index].style.left = `${currentLeft - 3}px`;
+                    }
+                    movedPixels++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 10);
+        }
+
+        function startDrag(event, container) {
+            const containerRect = container.getBoundingClientRect();
+            const initialX = event.clientX || event.touches[0].clientX;
+            const initialY = event.clientY || event.touches[0].clientY;
+            const offsetX = initialX - containerRect.left;
+            const offsetY = initialY - (containerRect.top + containerRect.height / 2);
+            let originalTop = parseInt(container.style.top) || containerRect.top;
+
+            function handleDragMove(event) {
+                const moveX = event.clientX || event.touches[0].clientX;
+                const moveY = event.clientY || event.touches[0].clientY;
+
+                const newX = moveX - offsetX;
+                let newY = moveY - offsetY;
+
+                if (!verticalDraggingEnabled) {
+                    newY = originalTop;
+                } else {
+                    originalTop = newY;
+                }
+
+                const maxX = window.innerWidth - containerRect.width;
+                const maxY = window.innerHeight - containerRect.height;
+                const clampedX = Math.min(Math.max(newX, 0), maxX);
+                const clampedY = Math.min(Math.max(newY, 0), maxY);
+
+                container.style.left = clampedX + 'px';
+                container.style.top = clampedY + 'px';
+
+                event.preventDefault();
+            }
+
+            function handleDragEnd() {
+                document.removeEventListener('mousemove', handleDragMove);
+                document.removeEventListener('mouseup', handleDragEnd);
+                document.removeEventListener('touchmove', handleDragMove);
+                document.removeEventListener('touchend', handleDragEnd);
+            }
+
+            document.addEventListener('mousemove', handleDragMove);
+            document.addEventListener('mouseup', handleDragEnd);
+            document.addEventListener('touchmove', handleDragMove);
+            document.addEventListener('touchend', handleDragEnd);
+
+            event.preventDefault();
+        }
+
+        frogContainers.forEach((container) => {
+            container.addEventListener('mousedown', (event) => {
+                startDrag(event, container);
+            });
+            container.addEventListener('touchstart', (event) => {
+                startDrag(event, container);
+            });
+        });
+
+        window.onload = () => {
+            for (let i = 0; i < numberOfFrogs; i++) {
+                moveFrog(i);
+            }
+            applyDarkMode();
+        };
+
+        document.getElementById('toggleVerticalDragging').addEventListener('click', () => {
+            verticalDraggingEnabled = !verticalDraggingEnabled;
+            frogContainers.forEach((container, index) => {
+                container.style.top = `${verticalPosition}px`;
+            });
+        });
+		
+		
+		
+		
+const items = ['browserfrog/Misc/Bread.png', 'browserfrog/Misc/Cake.png', 'browserfrog/Misc/Banana.png', 'browserfrog/Misc/Watermelon.png', 'browserfrog/Misc/Apple.png', 'browserfrog/Misc/Pickle.png'];
+
+const specialItems = ['browserfrog/Misc/notedible/BlackDSi.png','browserfrog/Misc/notedible/WhiteDSi.png','browserfrog/Misc/notedible/BlueDSi.png','browserfrog/Misc/notedible/RedDSi.png','browserfrog/Misc/notedible/MagentaDSi.png','browserfrog/Misc/notedible/YellowDSi.png','browserfrog/Misc/notedible/PinkDSi.png','browserfrog/Misc/notedible/GreenDSi.png','browserfrog/Misc/notedible/FrogDoll.png']; 
+
+function spawnRandomItem() {
+    const spawnSpecial = Math.random() < 0.05; 
+    const randomItemName = spawnSpecial ? specialItems[Math.floor(Math.random() * specialItems.length)] : items[Math.floor(Math.random() * items.length)];
+    const randomItem = document.createElement('img');
+    randomItem.classList.add('random-item');
+    randomItem.src = randomItemName;
+    randomItem.style.position = 'absolute';
+    randomItem.style.width = window.innerWidth < 1000 ? '50px' : '100px'; 
+    randomItem.style.height = window.innerWidth < 1000 ? '50px' : '100px'; 
+    randomItem.style.left = `${Math.random() * (window.innerWidth - (window.innerWidth < 700 ? 50 : 100))}px`; 
+    randomItem.style.top = `${Math.random() * (window.innerHeight - 50)}px`;
+    document.body.appendChild(randomItem);
+
+    let initialX, initialY, offsetX, offsetY;
+    let originalTop = parseInt(randomItem.style.top) || randomItem.offsetTop;
+    let originalLeft = parseInt(randomItem.style.left) || randomItem.offsetLeft;
+    let dragging = false;
+
+
+
+    randomItem.addEventListener('mousedown', startDrag);
+    randomItem.addEventListener('touchstart', startDrag);
+
+    function startDrag(event) {
+        dragging = true;
+        const eventX = event.clientX || event.touches[0].clientX;
+        const eventY = event.clientY || event.touches[0].clientY;
+        initialX = eventX - randomItem.offsetLeft;
+        initialY = eventY - randomItem.offsetTop;
+        offsetX = eventX - initialX;
+        offsetY = eventY - initialY;
+
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', stopDrag);
+
+        document.addEventListener('touchmove', drag);
+        document.addEventListener('touchend', stopDrag);
+
+        event.preventDefault();
+    }
+
+    function drag(event) {
+        if (dragging) {
+            const eventX = event.clientX || event.touches[0].clientX;
+            const eventY = event.clientY || event.touches[0].clientY;
+            randomItem.style.left = eventX - initialX + 'px';
+            randomItem.style.top = eventY - initialY + 'px';
+            event.preventDefault();
+        }
+    }
+
+    function stopDrag(event) {
+        dragging = false;
+        const eventX = event.clientX || event.changedTouches[0].clientX;
+        const eventY = event.clientY || event.changedTouches[0].clientY;
+        const newLeft = eventX - initialX;
+        const newTop = eventY - initialY;
+
+
+        const frogs = document.querySelectorAll('.frog-container');
+        frogs.forEach(frog => {
+            const frogRect = frog.getBoundingClientRect();
+            if (eventX >= frogRect.left && eventX <= frogRect.right && eventY >= frogRect.top && eventY <= frogRect.bottom) {
+                if (!spawnSpecial) {
+
+                    transitionToFoodEat(frog);
+
+                    randomItem.remove();
+                }
+
+            }
+        });
+
+        randomItem.style.left = newLeft + 'px';
+        randomItem.style.top = newTop + 'px';
+
+        document.removeEventListener('mousemove', drag);
+        document.removeEventListener('mouseup', stopDrag);
+
+        document.removeEventListener('touchmove', drag);
+        document.removeEventListener('touchend', stopDrag);
+
+        event.preventDefault();
+    }
+}
+
+const spawnItemButton = document.getElementById('spawnItemButton');
+spawnItemButton.addEventListener('click', spawnRandomItem);
+
+
+// Very bootleg way to get this to work
+function transitionToFoodEat(frogContainer) {
+    if (isAnimationInProgress()) {
+        return;
+    }
+    
+    const frog = frogContainer.querySelector('.frog');
+    const frogAnimation = animations.FoodEat;
+
+    currentStates = ['browserfrog/colors/default/Idle.png', 'browserfrog/colors/default/Idle.png', 'browserfrog/colors/default/Idle.png'];
+    facings = ['viewer', 'viewer', 'viewer'];
+    currentFrameStarts = [Date.now(), Date.now(), Date.now()];
+    setAnimationInProgress(true);
+
+    const nextFrame = (index, frameIndex) => {
+        if (!isAnimationInProgress()) {
+            return;
+        }
+        
+        const frame = frogAnimation[frameIndex];
+        const newFrogElement = document.createElement('img');
+        newFrogElement.src = isDarkMode ? frame.src.replace('.png', '.png') : frame.src; // Old dark mode stuff. Can't remove it or it breaks things???
+        newFrogElement.className = 'frog';
+        newFrogElement.onload = () => {
+            const oldFrogElement = frogContainers[index].querySelector('.frog');
+            if (oldFrogElement) {
+                frogContainers[index].removeChild(oldFrogElement);
+            }
+            frogContainers[index].appendChild(newFrogElement);
+        };
+
+        if (frameIndex < frogAnimation.length - 1) {
+            frameIndex++;
+            setTimeout(() => nextFrame(index, frameIndex), frame.duration);
+        } else {
+            setAnimationInProgress(false);
+        }
+    };
+
+    const frogIndex = Array.from(frogContainers).indexOf(frogContainer);
+    if (frogIndex !== -1) {
+        nextFrame(frogIndex, 0);
+    }
+}
+
+function isAnimationInProgress() {
+    return animationInProgress;
+}
+
+function transitionToFoodEat(frogContainer) {
+    const frog = frogContainer.querySelector('.frog');
+    const frogAnimation = animations.FoodEat;
+
+    if (isAnimationInProgress(frog)) {
+        return;
+    }
+
+    currentStates = ['browserfrog/colors/default/Idle.png', 'browserfrog/colors/default/Idle.png', 'browserfrog/colors/default/Idle.png'];
+    facings = ['viewer', 'viewer', 'viewer'];
+    currentFrameStarts = [Date.now(), Date.now(), Date.now()];
+
+    const nextFrame = (index, frameIndex) => {
+        const frame = frogAnimation[frameIndex];
+        const newFrogElement = document.createElement('img');
+        newFrogElement.src = isDarkMode ? frame.src.replace('.png', '.png') : frame.src; // Old dark mode stuff. Can't remove it or it breaks things???
+        newFrogElement.className = 'frog';
+        newFrogElement.onload = () => {
+            const oldFrogElement = frogContainers[index].querySelector('.frog');
+            if (oldFrogElement) {
+                frogContainers[index].removeChild(oldFrogElement);
+            }
+            frogContainers[index].appendChild(newFrogElement);
+        };
+
+        if (frameIndex < frogAnimation.length - 1) {
+            frameIndex++;
+            setTimeout(() => nextFrame(index, frameIndex), frame.duration);
+        }
+    };
+
+    const frogIndex = Array.from(frogContainers).indexOf(frogContainer);
+    if (frogIndex !== -1) {
+        nextFrame(frogIndex, 0);
+    }
+}
+
+function isAnimationInProgress(frog) {
+    const frames = frog.querySelectorAll('.frog');
+    for (const frame of frames) {
+        if (frame.classList.length > 1) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
+
+    const sendMessageButton = document.getElementById('sendMessageButton');
+    sendMessageButton.addEventListener('click', sendMessage);
+
+    function sendMessage() {
+        let message = prompt('Ribbit Ribbit! (100 Char. limit)');
+        if (message) {
+            message = message.substring(0, 100);
+            const randomFrogIndex = Math.floor(Math.random() * numberOfFrogs);
+            const frogContainer = frogContainers[randomFrogIndex];
+            const messageBubble = createMessageBubble(message);
+            frogContainer.appendChild(messageBubble);
+            setTimeout(() => {
+                messageBubble.remove();
+            }, 5500);
+        }
+    }
+
+    function createMessageBubble(message) {
+        const messageBubble = document.createElement('div');
+        messageBubble.classList.add('message-bubble');
+        messageBubble.textContent = message;
+        return messageBubble;
+    }
+
+
+
+
+		
+document.addEventListener("DOMContentLoaded", function() {
+    const settingsButton = document.getElementById("settingsButton");
+    const settingsMenu = document.getElementById("settingsMenu");
+
+    settingsButton.addEventListener("click", function() {
+        if (settingsMenu.style.display === "flex") {
+            settingsMenu.style.display = "none";
+        } else {
+            settingsMenu.style.display = "flex";
+        }
+    });
+
+    settingsMenu.addEventListener("click", function(event) {
+        const clickedElement = event.target;
+        const autoClose = clickedElement.getAttribute("data-auto-close");
+        
+        if (autoClose === "true") {
+            settingsMenu.style.display = "none";
+        }
+
+    });
+});
+
+
+
+// This is janky, but it could be worse.
+		
+document.addEventListener("DOMContentLoaded", function() {
+    const schemes = {
+        "default": "default",
+        "defaultgreen": "defaultgreen",
+        "classic": "classic",
+		"classicog": "classicog",
+		"red": "red",
+		"orange": "orange",
+		"yellow": "yellow",
+		"lime": "lime",
+		"teal": "teal",
+		"blue": "blue",
+		"lightblue": "lightblue",
+		"pink": "pink",
+		"magenta": "magenta",
+		"purple": "purple",
+		"lighttan": "lighttan",
+		"tan": "tan",
+		"lightbrown": "lightbrown",
+		"brown": "brown",
+		"crimson": "crimson",
+		"white": "white",
+		"lightgray": "lightgray",
+		"gray": "gray",
+		"darkgray": "darkgray",
+		"black": "black",
+    };
+
+    let currentScheme = localStorage.getItem('scheme') || "default";
+    const cache = {};
+    const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    function preloadSchemeImages(scheme) {
+        const imageUrls = Array.from(document.querySelectorAll("img:not(.schemeselecticon)"))
+            .map(img => img.src)
+            .filter(src => src.includes('/colors/') || src.includes('/buttons/'))
+            .map(src => {
+                return src.replace(/(\/colors\/|\/buttons\/)[^\/]+(?=\/)/, `$1${schemes[scheme] || schemes["default"]}`);
+            });
+
+        imageUrls.forEach(url => preloadImage(url));
+    }
+
+    function preloadImage(src) {
+        if (cache[src]) return;
+
+        const tempImg = new Image();
+        tempImg.onload = function() {
+            cache[src] = tempImg.src;
+        };
+        tempImg.onerror = function() {
+            console.error(`Failed to load image: ${src}`);
+        };
+        tempImg.src = src;
+    }
+
+    function updateFrogImages() {
+        const frogImgs = document.querySelectorAll("img:not(.schemeselecticon)");
+
+        frogImgs.forEach(frogImg => {
+            const imgSrc = frogImg.src;
+            if (imgSrc.includes('/colors/') || imgSrc.includes('/buttons/')) {
+                const newSrc = imgSrc.replace(/(\/colors\/|\/buttons\/)[^\/]+(?=\/)/, `$1${schemes[currentScheme] || schemes["default"]}`);
+                const darkModeSuffix = darkModeMediaQuery.matches ? "Dark" : "";
+
+                if (imgSrc !== newSrc) {
+                    if (cache[newSrc]) {
+                        frogImg.src = cache[newSrc];
+                    } else {
+                        frogImg.src = newSrc;
+                        preloadImage(newSrc);
+                    }
+                }
+            }
+        });
+    }
+
+    function handleSchemeToggle(scheme) {
+        if (scheme && schemes[scheme] !== undefined) {
+            currentScheme = scheme;
+            localStorage.setItem('scheme', scheme);
+            preloadSchemeImages(scheme);
+            updateFrogImages();
+        }
+    }
+
+    function handleClick(event) {
+        const scheme = event.target.getAttribute('data-scheme');
+        if (scheme) {
+            handleSchemeToggle(scheme);
+        }
+    }
+
+    const clickableElements = document.querySelectorAll('[data-scheme]');
+    clickableElements.forEach(el => {
+        el.addEventListener('click', handleClick);
+    });
+
+    preloadSchemeImages(currentScheme);
+    updateFrogImages();
+
+    const observerCallback = function(mutationsList) {
+        mutationsList.forEach(mutation => {
+            if (mutation.type === 'childList') {
+                updateFrogImages();
+            }
+        });
+    };
+
+    const observer = new MutationObserver(observerCallback);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    darkModeMediaQuery.addEventListener('change', function(event) {
+        updateFrogImages();
+    });
+});
+
+
+
+
+
+
+
+
+
+		
+
+
+let initialScreenWidth = window.innerWidth;
+let initialScreenHeight = window.innerHeight;
+let screenSizeChanged = false;
+
+function checkScreenSize() {
+    const newWidth = window.innerWidth;
+    const newHeight = window.innerHeight;
+    if (newWidth !== initialScreenWidth || newHeight !== initialScreenHeight) {
+        screenSizeChanged = true;
+        document.getElementById('refreshButton').style.display = 'block';
+    } else {
+        screenSizeChanged = false;
+        document.getElementById('refreshButton').style.display = 'none';
+    }
+}
+
+window.addEventListener('resize', checkScreenSize);
+
+
+let isDarkMode = localStorage.getItem('isDarkMode') === 'true';
+const darkModeToggle = document.getElementById('darkModeToggle');
+
+function applyDarkMode() {
+    document.body.classList.toggle('dark-mode', isDarkMode);
+
+    const images = document.querySelectorAll('img:not(.random-item)');
+    images.forEach(image => {
+        const originalSrc = image.dataset.originalSrc || image.src;
+        let newSrc = originalSrc;
+        
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const darkModeToggle = document.querySelector("#darkModeToggle img");
+
+    function updateDarkModeImage() {
+        const isDarkMode = document.body.classList.contains("dark-mode");
+
+        if (isDarkMode) {
+            darkModeToggle.src = "browserfrog/colors/default/buttons/ToggleThemeDark.png";
+        } else {
+            darkModeToggle.src = "browserfrog/colors/default/buttons/ToggleTheme.png";
+        }
+    }
+
+    updateDarkModeImage();
+
+
+    const observerCallback = function(mutationsList) {
+        mutationsList.forEach(mutation => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                updateDarkModeImage();
+            }
+        });
+    };
+
+    const observer = new MutationObserver(observerCallback);
+    observer.observe(document.body, { attributes: true });
+
+    const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
+    mediaQueryList.addEventListener('change', updateDarkModeImage);
+});
+
+
+
+
+darkModeToggle.addEventListener('click', () => {
+    isDarkMode = !isDarkMode;
+    localStorage.setItem('isDarkMode', isDarkMode);
+    applyDarkMode();
+});
+
+
+applyDarkMode();
+
+
+let isStreamerMode = localStorage.getItem('isStreamerMode') === 'true';
+const streamerModeToggle = document.getElementById('streamerModeToggle');
+
+function applyStreamerMode() {
+    document.body.classList.toggle('streamer-mode', isStreamerMode);
+}
+
+streamerModeToggle.addEventListener('click', function() {
+    isStreamerMode = !isStreamerMode;
+    localStorage.setItem('isStreamerMode', isStreamerMode);
+    applyStreamerMode();
+});
+
+// Apply the initial state on page load
+applyStreamerMode();
+
+
+
+
+        window.onload = () => {
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+            }
+            for (let i = 0; i < numberOfFrogs; i++) {
+                moveFrog(i);
+            }
+        };
+		
+		
+		
+	
+		
+		//coconut.jpg		
+		//"I have no fucking idea who put this here, but when I deleted it the game wouldn’t start. Words cannot describe my fucking confusion." 
+
+
+
+    </script>
+</body>
+</html>
