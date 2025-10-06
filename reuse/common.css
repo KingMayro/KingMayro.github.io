@@ -1,6 +1,6 @@
 		@font-face {
 		font-family: "Seurat Pro";
-		src: url(https://famicomcd.github.io/fonts/FOT-Seurat-ProB.otf);
+		src: url(/fonts/seuratpro.woff2);
 		}
 		
 		body {
@@ -8,22 +8,17 @@
 		}
 
 		.mainpage {
-		margin-left:20%;
-		margin-right:20%;
 		color:white;
 		font-family: "Seurat Pro";
+		margin:0 auto;
+		max-width: 1100px;
 		}
 
 		.icons {
 		border-radius: 600px;
 		width: 200px;
-		height: auto;
-		float: left;
-		display:inline;
-		}
-		
-		.boxes{
-		border-radius:10px;
+		flex-shrink:0;
+		align-self:center;
 		}
 		
 		.homebutton{
@@ -75,13 +70,40 @@
 		}
 		
 		
-		.spboxes{
+		.boxes {
 		border-radius:10px;
+		background-color:#2e1757;
+		padding:20px;
+		}
+		
+		.projects {
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+		gap: 15px;
+		}
+		
+		.heading {
+		font-size:30px;
+		margin:0;
+		padding-bottom:20px;
+		text-align:center;	
+		}
+		
+		.flex {
+		display:flex;
+		}
+		
+		.infoboxes {
+		flex-direction: column;
+		gap: 15px;
 		}
 		
 		.mainboxes{
 		border-radius:10px;
 		padding:20px;
+		margin-top:20px;
+		background-color:#231242;
 		}
 		
 		.padneed {
@@ -90,14 +112,15 @@
 
 		.name {
 		font-size:30px;
-		padding-left:30px;
 		margin:0;
 		}
 		
+		.namecard {
+		gap:15px;
+		}
+		
 		.socialicons {
-		display: inline-flex;
-		float: left;
-		padding-left:32px;
+		gap:10px;
 		}
 		
 		.socials {
@@ -123,31 +146,19 @@
 		opacity:0.7;
 		box-shadow: 0px 4px 1px rgba(11, 4, 60, 0.0);
 		}
-		
 
 		
 		
-		@media screen and (max-width: 1400px) {
-		
-		.mainpage {
-		margin-left:10%;
-		margin-right:10%;
-		}
-		
-		}
-		
-		
-		@media screen and (max-width: 1000px) {
+		@media screen and (max-width: 750px) {
 		
 		.icons {
 		width: 50%;
-		height: auto;
 		text-align:center;
-		float:none;
-		padding-bottom:10px;
 		}
 		
-
+		.namecard {
+		flex-direction: column;
+		}
 		
 		.boxeshome {
 		display:none;
@@ -163,13 +174,13 @@
 		width:100%;
 		}
 		
-		.spboxes{
+		.boxes{
 		text-align:center;
 		}
 		
 		.socialicons {
-		float: none;
-		padding-left:0px;
+		margin:0 auto;
+		width: fit-content;
 		}
 		
 		.name {
@@ -183,7 +194,6 @@
 		}
 		
 		.mainboxes{
-		border-radius:10px;
 		padding:10px;
 		}
 		
