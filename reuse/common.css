@@ -1,6 +1,6 @@
 		@font-face {
 		font-family: "Seurat Pro";
-		src: url(https://kingmayro.famicomcd.org/fonts/seuratpro.woff2);
+		src: url("https://kingmayro.famicomcd.org/fonts/seuratpro.woff2");
 		}
 		
 		body {
